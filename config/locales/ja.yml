@@ -1,0 +1,12 @@
+ja:
+  enums:
+    user:
+      sex:
+        men: "男性"
+        women: "女性"
+        others: "その他"
+    post:
+      shooting_availability:
+        shooting_not_possible: "撮影不可"
+        shooting_allowed: "撮影可"
+        unknown: "不明"
