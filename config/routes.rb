@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     patch '/users/leave' => 'users#leave' #退会
     
     #posts
-    resources :posts, only: [:index, :show, :create, :edit, :update, :destroy]
+    resources :posts, only: [:new, :index, :show, :create, :edit, :update, :destroy]
     
   end
   

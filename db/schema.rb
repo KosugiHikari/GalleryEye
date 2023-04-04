@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_04_024614) do
+ActiveRecord::Schema.define(version: 2023_04_04_125739) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -41,7 +41,6 @@ ActiveRecord::Schema.define(version: 2023_04_04_024614) do
     t.integer "user_id"
     t.string "art_exhibition_name"
     t.string "gallery_name"
-    t.date "sitting"
     t.integer "admission"
     t.integer "prefectures"
     t.string "address"
@@ -53,6 +52,8 @@ ActiveRecord::Schema.define(version: 2023_04_04_024614) do
     t.string "comment"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.date "start_date"
+    t.date "end_date"
   end
 
   create_table "tags", force: :cascade do |t|
