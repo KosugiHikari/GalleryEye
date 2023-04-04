@@ -7,4 +7,7 @@ class User < ApplicationRecord
   # enum設定
   enum sex: { men:0, women:1, others:2 }
   
+  validates :name, presence: true
+  validates :email, presence: true
+
 end

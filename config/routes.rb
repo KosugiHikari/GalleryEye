@@ -14,12 +14,12 @@ Rails.application.routes.draw do
     get '/about' => 'homes#about'
     
     #users
-    resources :user, only: [:index, :edit, :show, :update]
-    get '/user/leavecheck' => 'users#leave_check' #退会確認
-    patch '/user/leave' => 'users#leave' #退会
+    resources :users, only: [:index, :edit, :show, :update]
+    get '/users/leavecheck' => 'users#leave_check' #退会確認
+    patch '/users/leave' => 'users#leave' #退会
     
     #posts
-    resources :post, only: [:index, :show, :create, :edit, :update, :destroy]
+    resources :posts, only: [:index, :show, :create, :edit, :update, :destroy]
     
   end
   
@@ -33,10 +33,10 @@ Rails.application.routes.draw do
   namespace :admin do
     
     #users
-    resources :user, only: [:index, :edit, :show, :update]
+    resources :users, only: [:index, :edit, :show, :update]
     
     #posts
-    resources :post, only: [:index, :show, :edit, :update, :destroy]
+    resources :posts, only: [:index, :show, :edit, :update, :destroy]
     
   end
   
