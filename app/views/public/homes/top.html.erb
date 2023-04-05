@@ -1,12 +1,11 @@
 <div class="conteiner">
   <h1>TOP投稿一覧（仮）</h1>
   <div class="row">
-    <div class="col-4 text-center">
-      <% @posts.each do |post| %>
-
+    <% @posts.each do |post| %>
+      <div class="col-md-3 text-center">
         <div class="image-conteiner">
           <% if post.image.attached? %>
-            <%= image_tag post.image.variant(resize: "300x200") %><br>
+            <%= image_tag post.image.variant(resize: "300x300") %><br>
           <% else %>
             <%= image_tag 'noimage', size: "300x300" %><br>
           <% end %>
@@ -15,7 +14,7 @@
         <%= post.gallery_name %><br>
         <%= post.start_date %> ~ <%= post.end_date %><br>
         <%= post.point %>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
   </div>
 </div>

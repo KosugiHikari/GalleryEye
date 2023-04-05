@@ -5,9 +5,12 @@ class Public::PostsController < ApplicationController
   end
   
   def create
-    post = Post.new(post_params)
-    post.save
-    redirect_to 'posts_path'
+    @post = Post.new(post_params)
+    if @post.save
+    redirect_to root_path
+    else
+      render :new
+    end
   end
   
   def index
@@ -25,6 +28,12 @@ class Public::PostsController < ApplicationController
     post = Post.find(params[:id])
     post.update(post_params)
     redirect_to post_path(post.id)
+  end
+  
+  def destroy
+    post = Post.find(params[:id])
+    post.destroy
+    redirect_to user_path(current_user.id)
   end
   
   private
