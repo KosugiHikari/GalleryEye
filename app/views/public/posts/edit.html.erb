@@ -1,0 +1,56 @@
+<h1>編集画面</h1>
+<div class="image-conteiner">
+  <% if @post.image %>
+    <%= image_tag @post.image.variant(resize: "300x200"), class: "card img-square" %>
+  <% else %>
+    <%= image_pack_tag 'noimage', size: "300x300" %>
+  <% end %>
+</div>
+  <div class="row">
+    <div class="col-md-6">
+      <%= form_with model: @post, url:post_path(@post.id), method: :patch do |f| %>
+        <%= f.file_field :image, id: "image", accept: "image/*" %>
+        <h4>美術展情報</h4>
+        <%= f.text_field :art_exhibition_name, placeholder: "美術展名" %><br>
+        <%= f.text_field :gallery_name, placeholder: "美術館名" %><br>
+
+        <!--会期選択-->
+        <%= f.date_field :start_date %> ~ <%= f.date_field :end_date %><br>
+
+        <%= f.number_field :admission, placeholder: "入場料" %>円<br>
+        <%= f.text_field :address, placeholder: "住所" %><br>
+
+        <!--撮影可否選択のラジオボタン-->
+        <!--撮影不可-->
+        <%= f.radio_button :shooting_availability, Post.shooting_availabilities.key(0) %>
+        <%= f.label :shooting_availability_shooting_not_possible, Post.shooting_availabilities_i18n[:shooting_not_possible] %>
+        <!--撮影可-->
+        <%= f.radio_button :shooting_availability, Post.shooting_availabilities.key(1) %>
+        <%= f.label :shooting_availability_shooting_allowed, Post.shooting_availabilities_i18n[:shooting_allowed] %>
+        <!--不明-->
+        <%= f.radio_button :shooting_availability, Post.shooting_availabilities.key(2) %>
+        <%= f.label :shooting_availability_unknown, Post.shooting_availabilities_i18n[:unknown] %>
+    </div>
+    <div class="col-md-6">
+      <h4>レビュー内容</h4>
+      <%= f.text_field :point, placeholder: "注目ポイント" %><br>
+      <%= f.text_area :body, placeholder: "本文" %><br>
+      <%= f.submit '保存' %>
+    </div>
+    <% end %>
+  </div>
+  
+<script>
+  $(function() {
+    $('#image').on('change', function() {
+      var selectedFile = this.files[0];
+      var fileReader = new FileReader();
+
+      fileReader.onload = function(event) {
+        var loadedImageUri = event.target.result;
+        $('.img-square').attr('src', loadedImageUri);
+      };
+      fileReader.readAsDataURL(selectedFile);
+    });
+  });
+</script>

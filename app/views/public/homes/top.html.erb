@@ -3,11 +3,14 @@
   <div class="row">
     <div class="col-4 text-center">
       <% @posts.each do |post| %>
-        <% if post.image.attached? %>
-          <%= image_tag post.image, size: "300x200" %><br>
-        <% else %>
-          <%= image_tag 'noimage', size: "300x200" %><br>
-        <% end %>
+
+        <div class="image-conteiner">
+          <% if post.image.attached? %>
+            <%= image_tag post.image.variant(resize: "300x200") %><br>
+          <% else %>
+            <%= image_tag 'noimage', size: "300x300" %><br>
+          <% end %>
+        </div>
         <%= post.art_exhibition_name %><br>
         <%= post.gallery_name %><br>
         <%= post.start_date %> ~ <%= post.end_date %><br>
