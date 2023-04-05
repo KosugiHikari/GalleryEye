@@ -14,6 +14,7 @@ class Public::PostsController < ApplicationController
   end
   
   def show
+    @post = Post.find(params[:id])
   end
   
   def edit
@@ -22,6 +23,6 @@ class Public::PostsController < ApplicationController
   private
   
   def post_params
-    params.require(:post).permit(:art_exhibition_name, :gallery_name, :start_date, :end_date, :admission, :address, :shooting_availability, :point, :body)
+    params.require(:post).permit(:art_exhibition_name, :gallery_name, :start_date, :end_date, :admission, :address, :shooting_availability, :point, :body, :image)
   end
 end

@@ -1,0 +1,28 @@
+<div class="conteiner">
+  <h1>投稿詳細</h1>
+  <div class="row">
+    <div class="col text-right">
+      <% if @post.image.attached? %>
+        <%= image_tag @post.image, size: "300x200" %>
+      <% else %>
+        <%= image_tag 'noimage', size: "300x200" %>
+      <% end %>
+    </div>
+    <div class="col">
+      <h4>美術展情報</h4>
+      美術展名：<%= @post.art_exhibition_name %><br>
+      美術館名<%= @post.gallery_name %><br>
+      会期：<%= @post.start_date %> ~ <%= @post.end_date %><br>
+      入場料：<%= @post.admission %>円<br>
+      住所：<%= @post.address %><br>
+      撮影可否：<%= @post.shooting_availability_i18n %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col text-center">
+    <p>ここに注目</p>
+    <%= @post.point %><br>
+    <%= @post.body %>
+    </div>
+  </div>
+</div>
