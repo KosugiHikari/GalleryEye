@@ -1,11 +1,4 @@
-<div class="container m-5">
-  <h1>マイページ</h1>
-  <div class="row">
-    <div class="col-3">
-      <%= image_tag @user.get_profile_image(100,100) %>
-      <%= @user.name %>
-    </div>
-    <% @posts.each do |post| %>
+  <% posts.each do |post| %>
     <div class="col-md-3 text-center">
       <div class="image-conteiner">
         <% if post.image.attached? %>
@@ -20,5 +13,3 @@
       <%= post.point %>
     </div>
   <% end %>
-  </div>
-</div>
