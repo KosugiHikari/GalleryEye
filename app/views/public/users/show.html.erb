@@ -5,20 +5,18 @@
       <%= image_tag @user.get_profile_image(100,100) %>
       <%= @user.name %>
     </div>
-    <% @posts.each do |post| %>
-    <div class="col-md-3 text-center">
-      <div class="image-conteiner">
-        <% if post.image.attached? %>
-          <%= image_tag post.image.variant(resize: "300x300") %><br>
-        <% else %>
-          <%= image_tag 'noimage', size: "300x300" %><br>
+
+      <div class="col-3 text-center">
+        <% @posts.each do |post| %>
+          <%= link_to post_path(post.id) do %>
+            <%= image_tag post.get_image %>
+          <% end %>
+        <%= post.art_exhibition_name %><br>
+        <%= post.gallery_name %><br>
+        <%= post.start_date %> ~ <%= post.end_date %><br>
+        <%= post.point %>
         <% end %>
       </div>
-      <%= post.art_exhibition_name %><br>
-      <%= post.gallery_name %><br>
-      <%= post.start_date %> ~ <%= post.end_date %><br>
-      <%= post.point %>
-    </div>
-  <% end %>
+
   </div>
 </div>

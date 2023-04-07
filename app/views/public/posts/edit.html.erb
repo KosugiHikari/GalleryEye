@@ -1,26 +1,23 @@
 <div class="container m-5">
   <h1>編集画面</h1>
+  <%= render 'errors', post: @post %>
   <div class="image-conteiner">
-    <% if @post.image %>
-      <%= image_tag @post, class: "card img-square", size: "300x300" %>
-    <% else %>
-      <%= image_pack_tag 'noimage', size: "300x300" %>
-    <% end %>
+    <%= attachment_image_tag @post, :post_image, class: "card img-square", fallback: "noimage.png", size: "300x300" %>
   </div>
     <div class="row">
       <div class="col-md-6">
         <%= form_with model: @post, url:post_path(@post.id), method: :patch do |f| %>
-          <%= f.file_field :image, id: "image", accept: "image/*" %>
+          <%= f.file_field :post_image, id: "image", accept: "image/*" %>
           <h4>美術展情報</h4>
           <%= f.text_field :art_exhibition_name, placeholder: "美術展名" %><br>
           <%= f.text_field :gallery_name, placeholder: "美術館名" %><br>
-  
+
           <!--会期選択-->
           <%= f.date_field :start_date %> ~ <%= f.date_field :end_date %><br>
-  
+
           <%= f.number_field :admission, placeholder: "入場料" %>円<br>
           <%= f.text_field :address, placeholder: "住所" %><br>
-  
+
           <!--撮影可否選択のラジオボタン-->
           <!--撮影不可-->
           <%= f.radio_button :shooting_availability, Post.shooting_availabilities.key(0) %>
