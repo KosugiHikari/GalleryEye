@@ -3,17 +3,29 @@
   <div class="row">
     <% @posts.each do |post| %>
       <div class="col-md-3 text-center">
+
+        <!--投稿画像-->
         <div class="image-conteiner">
-          <% if post.image.attached? %>
-            <%= image_tag post.image.variant(resize: "300x300") %><br>
-          <% else %>
-            <%= image_tag 'noimage', size: "300x300" %><br>
+          <%= link_to post_path(post.id) do %>
+            <% if post.image.attached? %>
+              <%= image_tag post.image.variant(resize: "300x300") %><br>
+            <% else %>
+              <%= image_tag 'noimage', size: "300x300" %><br>
+            <% end %>
           <% end %>
         </div>
-        <%= post.art_exhibition_name %><br>
+        <!--美術展情報-->
+        <%= link_to post_path(post.id) do %>
+          <%= post.art_exhibition_name %><br>
+        <% end %>
         <%= post.gallery_name %><br>
         <%= post.start_date %> ~ <%= post.end_date %><br>
-        <%= post.point %>
+        <%= post.point %><br>
+        <!--投稿したユーザーアイコン・名前-->
+        <%= link_to user_path(post.user) do %>
+          <%= image_tag post.user.get_profile_image(100,100), class: "rounded-circle" %>
+          <%= post.user.name %>
+        <% end %>
       </div>
     <% end %>
   </div>

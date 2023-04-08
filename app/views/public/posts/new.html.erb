@@ -1,11 +1,12 @@
 <div class="container m-5">
   <h1>New Review</h1>
   <%= render 'errors', post: @post %>
-  <%= attachment_image_tag @post, :post_image, class: "card img-square", fallback: "noimage.png", size: "300x300" %>
-  <div class="row">
-    <div class="col-md-6">
-      <%= form_with model: @post do |f| %>
-        <%= f.file_field :post_image, id: "image", accept: "image/*" %>
+  <!--<%#= attachment_image_tag @post, :image_attachment, class: "card img-square", fallback: "noimage.png", size: "300x300" %>-->
+  <%= form_with model: @post do |f| %>
+    <div class="row">
+      <div class="col-md-6">
+        <%= f.hidden_field :id, :value => "user_id" %>
+        <%= f.file_field :image, id: "image", accept: "image/*" %>
         <h4>美術展情報</h4>
         <%= f.text_field :art_exhibition_name, placeholder: "美術展名" %><br>
         <%= f.text_field :gallery_name, placeholder: "美術館名" %><br>
@@ -26,14 +27,15 @@
         <!--不明-->
         <%= f.radio_button :shooting_availability, Post.shooting_availabilities.key(2) %>
         <%= f.label :shooting_availability_unknown, Post.shooting_availabilities_i18n[:unknown] %>
+      </div>
+      <div class="col-md-6">
+        <h4>レビュー内容</h4>
+        <%= f.text_field :point, placeholder: "注目ポイント" %><br>
+        <%= f.text_area :body, placeholder: "本文" %><br>
+        <%= f.submit '投稿' %>
+      </div>
     </div>
-    <div class="col-md-6">
-      <h4>レビュー内容</h4>
-      <%= f.text_field :point, placeholder: "注目ポイント" %><br>
-      <%= f.text_area :body, placeholder: "本文" %><br>
-      <%= f.submit '投稿' %>
-    </div>
-    <% end %>
+   <% end %>
   </div>
 
   <script>
@@ -50,5 +52,4 @@
       });
     });
   </script>
-</div>
 

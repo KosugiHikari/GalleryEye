@@ -5,7 +5,7 @@ class Public::PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
+    @post = current_user.posts.new(post_params)
     if @post.save
     redirect_to root_path
     else
@@ -27,7 +27,7 @@ class Public::PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     if @post.update(post_params)
-      redirect_to post_path(post.id)
+      redirect_to post_path(@post.id)
     else
       render :edit
     end
@@ -42,6 +42,7 @@ class Public::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:user_id, :art_exhibition_name, :gallery_name, :start_date, :end_date, :admission, :address, :shooting_availability, :point, :body, :post_image_id, :image)
+    params.require(:post).permit(:art_exhibition_name, :gallery_name, :start_date, :end_date, :admission, :address, :shooting_availability, :point, :body, :post_image_id, :image, :post_image)
+    # params.merge(user_id: current_user.id)
   end
 end

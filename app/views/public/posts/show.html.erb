@@ -19,10 +19,21 @@
     </div>
   </div>
   <div class="row">
-    <div class="col text-center">
+    <div class="col-6 text-right">
+      <%= link_to user_path(@post.user) do %>
+      <%= image_tag @post.user.get_profile_image(100,100) %><br>
+      <p><%= @post.user.name %></p>
+      <% end %>
+    </div>
+    <div class="col-6 text-center">
     <p>ここに注目</p>
     <%= @post.point %><br>
     <%= @post.body %>
     </div>
+  </div>
+  <div class="text-center">
+    <% if @post.user == current_user %>
+      <%= link_to '編集', edit_post_path(@post.id) %>
+    <% end %>
   </div>
 </div>

@@ -2,7 +2,7 @@ class CreatePosts < ActiveRecord::Migration[6.1]
   def change
     create_table :posts do |t|
       
-      t.integer :user_id #外部キー
+      t.integer :user_id   #外部キー
       t.string :art_exhibition_name #美術展名
       t.string :gallery_name #美術館名
       t.date :sitting #会期
@@ -18,5 +18,7 @@ class CreatePosts < ActiveRecord::Migration[6.1]
       
       t.timestamps
     end
+    
+    
   end
 end
