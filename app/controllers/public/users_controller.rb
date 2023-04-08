@@ -20,6 +20,18 @@ class Public::UsersController < ApplicationController
       render "edit"
     end
   end
+  
+  def leave_check
+    @user = current_user
+  end
+  
+  def leave
+    @user = current_user
+    @user.update(is_deleted: true)
+    reset_session
+    flash[:notice] = "退会処理が完了しました。ご利用ありがとうございました。"
+    redirect_to root_path
+  end
 
   private
 
