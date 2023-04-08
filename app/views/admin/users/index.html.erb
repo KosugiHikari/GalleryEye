@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+    <h3>Users</h3>
+    <table class="table w-100 table-hover text-center">
+      <thead>
+        <tr>
+          <th>ユーザーID</th>
+          <th>ユーザーネーム</th>
+          <th>メールアドレス</th>
+          <th>ステータス</th>
+        </tr>
+      </thead>
+      <% @users.each do |user| %>
+        <tbody>
+          <td><%= user.id %></td>
+          <td><%= user.name %></td>
+          <td><%= user.email %></td>
+          <td>
+            <% if user.is_deleted == false %>
+              <strong><p class="text-success">有効</p></strong>
+            <% elsif %>
+              <strong><p class="text-secondary">退会</p></strong>
+            <% end %>
+          </td>
+        </tbody>
+      <% end %>
+    </table>
+  </div>
+</div>

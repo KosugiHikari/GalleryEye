@@ -1,6 +1,7 @@
 class Public::UsersController < ApplicationController
 
   def index
+    @users = User.all
   end
 
   def show
@@ -20,11 +21,11 @@ class Public::UsersController < ApplicationController
       render "edit"
     end
   end
-  
+
   def leave_check
     @user = current_user
   end
-  
+
   def leave
     @user = current_user
     @user.update(is_deleted: true)

@@ -1,1 +1,10 @@
 <h1>users</h1>
+<% @users.each do |user| %>
+  <%= link_to user_path(user.id) do %>
+    <!--退会しているユーザーは表示させない↓-->
+    <% if user.is_deleted == false %>
+      <%= image_tag user.get_profile_image(100,100), class: "rounded-circle" %>
+      <%= user.name %><br>
+    <% end %>
+  <% end %>
+<% end %>

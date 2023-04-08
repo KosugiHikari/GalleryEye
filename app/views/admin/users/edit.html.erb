@@ -1,0 +1,10 @@
+<h1>user編集</h1>
+<%= form_with model: @user, url:admin_user_path, method: :patch do |f| %>
+  <%= @user.id %>
+  <%= f.text_field :name %>
+    <%= f.radio_button :is_deleted, false %>
+    <%= f.label :is_deleted, '有効' %>
+    <%= f.radio_button :is_deleted, true %>
+    <%= f.label :is_deleted, '退会' %>
+  <%= f.submit '変更を保存', class: "btn btn-success" %>
+<% end %>
