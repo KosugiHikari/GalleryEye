@@ -9,6 +9,9 @@ class User < ApplicationRecord
   # 投稿のアソシエーション
   has_many :posts, dependent: :destroy
   
+  # いいねのアソシエーション
+  has_many :likes, dependent: :destroy
+  
   # フォロー関係のアソシエーション
   # フォローをした、されたの関係
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy

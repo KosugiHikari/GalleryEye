@@ -2,6 +2,7 @@ class Post < ApplicationRecord
 
   has_one_attached :image
   belongs_to :user, optional: true
+  has_many :likes, dependent: :destroy
 
   attachment :post_image
 
@@ -12,4 +13,10 @@ class Post < ApplicationRecord
   validates :gallery_name, presence: true
   validates :point, presence: true
   validates :body, presence: true
+  
+  # ログイン中のユーザーがその投稿に対していいねをしているかを判断するメソッド
+  def liked?(user)
+    likes.where(user_id: user.id).exists?
+  end
+  
 end

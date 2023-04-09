@@ -1,1 +1,34 @@
-<h1>index</h1>
+<div class="conteiner">
+  <h1>TOP投稿一覧（仮）</h1>
+  <div class="row">
+    <% @posts.each do |post| %>
+      <div class="col-md-3 text-center">
+
+        <!--投稿画像-->
+        <div class="image-conteiner">
+          <%= link_to post_path(post.id) do %>
+            <% if post.image.attached? %>
+              <%= image_tag post.image.variant(resize: "300x300") %><br>
+            <% else %>
+              <%= image_tag 'noimage', size: "300x300" %><br>
+            <% end %>
+          <% end %>
+        </div>
+        <!--美術展情報-->
+        <%= link_to post_path(post.id) do %>
+          <%= post.art_exhibition_name %><br>
+        <% end %>
+        <%= post.gallery_name %><br>
+        <%= post.start_date %> ~ <%= post.end_date %><br>
+        <%= post.point %><br>
+        <!--投稿したユーザーアイコン・名前-->
+        <%= link_to user_path(post.user) do %>
+          <%= image_tag post.user.get_profile_image(100,100), class: "rounded-circle" %>
+          <%= post.user.name %>
+        <% end %>
+        <!--いいねボタン-->
+        <%= render "like", post: post %>
+      </div>
+    <% end %>
+  </div>
+</div>

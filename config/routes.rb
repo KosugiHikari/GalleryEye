@@ -12,23 +12,26 @@ Rails.application.routes.draw do
 
   # ユーザー側のルーティング設定
   scope module: :public do
-
+    
+    root to: 'posts#index'
+    
     #homes
-    root to: 'homes#top'
     get '/about' => 'homes#about'
 
     #users
     resources :users, only: [:index, :edit, :show, :update, :leave_check] do
       resource :relationships, only: [:create, :destroy]
-      get 'followings' => 'relationships#followings', as: 'followings'
-      get 'followers' => 'relationships#followers', as: 'followers'
+      get '/:id/followings' => 'relationships#followings', as: 'followings'
+      get '/:id/followers' => 'relationships#followers', as: 'followers'
     end
-      
+
     get '/users/:id/leavecheck' => 'users#leave_check', as: 'leavecheck' #退会確認
     patch '/users/:id/leave' => 'users#leave', as: 'leave' #退会
 
     #posts
-    resources :posts, only: [:new, :index, :show, :create, :edit, :update, :destroy]
+    resources :posts, only: [:new, :index, :show, :create, :edit, :update, :destroy] do
+      resource :likes, only: [:create, :destroy]
+    end
 
   end
 

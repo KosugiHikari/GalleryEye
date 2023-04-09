@@ -1,0 +1,11 @@
+<% if post.liked?(current_user) %>
+  <%= link_to post_likes_path(post.id), method: :delete do %>
+    <i class="fas fa-heart" style="color: red;"></i>
+    <%= post.likes.count %>
+  <% end %>
+<% else %>
+  <%= link_to post_likes_path(post.id), method: :post do %>
+    <i class="fas fa-heart" style="color: gray;"></i>
+    <%= post.likes.count %>
+  <% end %>
+<% end %>

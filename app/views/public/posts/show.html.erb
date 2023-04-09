@@ -10,6 +10,7 @@
     </div>
     <div class="col">
       <h4>美術展情報</h4>
+      <%= render 'like', post: @post %><br>
       美術展名：<%= @post.art_exhibition_name %><br>
       美術館名<%= @post.gallery_name %><br>
       会期：<%= @post.start_date %> ~ <%= @post.end_date %><br>
