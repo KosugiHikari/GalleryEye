@@ -16,7 +16,7 @@ class Post < ApplicationRecord
 
   # ログイン中のユーザーがその投稿に対していいねをしているかを判断するメソッド
   def liked?(user)
-    likes.exists?(user_id: user.id)
+    likes.exists?(user_id: user_id)
   end
 
 end

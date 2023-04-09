@@ -11,7 +11,7 @@
     <div class="col">
       <h4>美術展情報</h4>
       <!--いいねボタン-->
-      <div id="like_buttons">
+      <div id="like_buttons_<%= @post.id %>">
         <%= render 'public/likes/like', post: @post %><br>
       </div>
       美術展名：<%= @post.art_exhibition_name %><br>
