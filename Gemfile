@@ -59,3 +59,4 @@ gem 'devise'
 gem "enum_help"
 gem 'mini_magick'
 gem 'refile', require: 'refile/rails', github: 'refile/refile'
+gem 'jquery-rails'

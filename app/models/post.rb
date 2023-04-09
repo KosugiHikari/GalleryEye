@@ -13,10 +13,10 @@ class Post < ApplicationRecord
   validates :gallery_name, presence: true
   validates :point, presence: true
   validates :body, presence: true
-  
+
   # ログイン中のユーザーがその投稿に対していいねをしているかを判断するメソッド
   def liked?(user)
-    likes.where(user_id: user.id).exists?
+    likes.exists?(user_id: user.id)
   end
-  
+
 end
