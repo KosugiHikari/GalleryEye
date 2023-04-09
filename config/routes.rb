@@ -18,7 +18,12 @@ Rails.application.routes.draw do
     get '/about' => 'homes#about'
 
     #users
-    resources :users, only: [:index, :edit, :show, :update, :leave_check]
+    resources :users, only: [:index, :edit, :show, :update, :leave_check] do
+      resource :relationships, only: [:create, :destroy]
+      get 'followings' => 'relationships#followings', as: 'followings'
+      get 'followers' => 'relationships#followers', as: 'followers'
+    end
+      
     get '/users/:id/leavecheck' => 'users#leave_check', as: 'leavecheck' #退会確認
     patch '/users/:id/leave' => 'users#leave', as: 'leave' #退会
 
