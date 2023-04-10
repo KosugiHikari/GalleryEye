@@ -16,10 +16,15 @@
       <%= f.file_field :profile_image, accept: "image/*" %>
     </div>
 
-    <div class="UserName">
-      <label for="inputName">UserName</label>
-      <%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"名前" %>
-    </div>
+    <!--ゲストユーザーでログインした場合には編集できない-->
+    <% if @user.name == "guestuser" %>
+      UserName：<%= @user.name %>
+    <% elsif %>
+      <div class="UserName">
+        <label for="inputName">UserName</label>
+        <%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"名前" %>
+      </div>
+    <% end %>
 
     <div class="Int">
       <label for="Introduction">Introduction</label>

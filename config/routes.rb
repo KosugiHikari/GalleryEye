@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-
+  
+  devise_scope :user do
+    post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
+  end
+  
   namespace :public do
     get 'relationships/followings'
     get 'relationships/followers'
@@ -12,9 +16,9 @@ Rails.application.routes.draw do
 
   # ユーザー側のルーティング設定
   scope module: :public do
-
+    
     root to: 'posts#index'
-
+    
     #homes
     get '/about' => 'homes#about'
 
