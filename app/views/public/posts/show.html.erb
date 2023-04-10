@@ -45,32 +45,12 @@
     <% end %>
   </div>
 
-  <!--コメント表示-->
-  <p>コメント件数：<%= @post.comments.count %></p>
-  <div class="text-center">
-    <div class="row">
-      <% @post.comments.each do |comment| %>
-        <div class="col">
-          <%= link_to user_path(comment.user) do %>
-            <%= image_tag comment.user.get_profile_image(100,100) %>
-            <%= comment.user.name %>
-          <% end %>
-        </div>
-        <div class="col text-relt">
-          <p><%= comment.created_at.strftime('%Y/%m/%d') %></p>
-          <p><%= comment.comment %></p>
-          <% if comment.user == current_user %>
-            <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete, "data-confirm" => "本当に削除しますか？" %>
-          <% end %>
-        </div>
-      <% end %>
+    <!--コメント表示-->
+    <div id="comments">
+      <%= render 'public/comments/comment', post: @post %>
     </div>
+
     <!--コメントボックス-->
-    <div>
-      <%= form_with model: [@post, @comment] do |f| %>
-        <%= f.text_area :comment, rows: '5', cols:'40', placeholder: "コメントを記入" %><br>
-        <%= f.submit "送信する" %>
-      <% end %>
-    </div>
+    <%= render 'public/comments/comment_form', post: @post, comment: @comment %>
   </div>
 </div>
