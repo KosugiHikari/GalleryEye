@@ -32,14 +32,15 @@
 
     </div>
     <% @posts.each do |post| %>
-      <div class="col-9">
+      <div class="col-9 text-center">
         <%= link_to post_path(post.id) do %>
           <%= image_tag post.image, size:'300x300' %><br>
         <% end %>
-        <%= post.art_exhibition_name %><br>
-        <%= post.gallery_name %><br>
-        <%= post.start_date %> ~ <%= post.end_date %><br>
-        <%= post.point %>
+        <h3><%= post.art_exhibition_name %></h3>
+        <p><%= post.gallery_name %></p>
+        <p><%= post.start_date %> ~ <%= post.end_date %></p>
+        <p><%= post.point %></p>
+        <p><%= link_to "#{post.comments.count}コメント", post_path(post.id) %></p>
       </div>
     <% end %>
   </div>

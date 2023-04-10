@@ -8,6 +8,9 @@ class User < ApplicationRecord
 
   # 投稿のアソシエーション
   has_many :posts, dependent: :destroy
+  
+  # コメントのアソシエーション
+  has_many :comments, dependent: :destroy
 
   # いいねのアソシエーション
   has_many :likes, dependent: :destroy
