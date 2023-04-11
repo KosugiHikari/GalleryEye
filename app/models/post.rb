@@ -1,15 +1,15 @@
 class Post < ApplicationRecord
 
   has_one_attached :image
-  
+
   belongs_to :user, optional: true
-  
+
   # コメントのアソシエーション
   has_many :comments, dependent: :destroy
-  
+
   # いいねのアソシエーション
   has_many :likes, dependent: :destroy
-  
+
   attachment :post_image
 
   # enum設定
