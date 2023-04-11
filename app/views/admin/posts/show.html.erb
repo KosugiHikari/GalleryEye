@@ -33,4 +33,8 @@
   <div class="text-center">
     <%= link_to '削除', admin_post_path(@post.id), method: :delete, class: "btn btn-danger", "data-confirm" => "本当に削除しますか？" %>
   </div>
+  <!--コメント表示-->
+    <div class="comments">
+      <%= render 'public/comments/comment', post: @post %>
+    </div>
 </div>

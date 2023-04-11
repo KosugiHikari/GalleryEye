@@ -1,5 +1,5 @@
 <% if post.comments.present? %>
-3  <%= flash[:notice] %>
+  <%= flash[:notice] %>
   <p>コメント件数：<%= post.comments.count %></p>
   <div class="text-center">
     <div class="row">
@@ -13,8 +13,11 @@
         <div class="col text-relt">
           <p><%= comment.created_at.strftime('%Y/%m/%d') %></p>
           <p><%= comment.comment %></p>
+          <!--コメントしたユーザーか管理人が削除可能-->
           <% if comment.user == current_user %>
-            <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete, remote: true, "data-confirm" => "本当に削除しますか？" %>
+            <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete, remote: true, class: "btn btn-danger", "data-confirm" => "本当に削除しますか？" %>
+          <% elsif admin_signed_in? %>
+            <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete, remote: true, class: "btn btn-danger", "data-confirm" => "本当に削除しますか？" %>
           <% end %>
         </div>
       <% end %>

@@ -37,7 +37,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       t.date :birthdate #生年月日
       t.integer :sex #性別
       t.string :profile_image #プロフィール画像
-      # t.boolean :is_deleted #退会ステータス
+      t.boolean :is_deleted #退会ステータス
       # ここまで
       
       t.timestamps null: false

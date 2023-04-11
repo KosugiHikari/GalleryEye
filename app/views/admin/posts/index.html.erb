@@ -16,6 +16,7 @@
           <th>ユーザーネーム</th>
           <th>サムネイル</th>
           <th>投稿本文</th>
+          <th>コメント数</th>
         </tr>
       </thead>
       <% if @posts.exists? %>
@@ -24,7 +25,7 @@
             <!--投稿ID-->
             <td class="align-middle"><%= post.id %></td>
             <!--投稿日-->
-            <td class="align-middle"><%= post.created_at %></td>
+            <td class="align-middle"><%= post.created_at.strftime('%Y/%m/%d %H:%M:%S') %></td>
             <!--ユーザーアイコン-->
             <td class="align-middle">
               <%= image_tag post.user.get_profile_image(50,50), class: "rounded-circle" %>
@@ -50,6 +51,9 @@
               <%= link_to admin_post_path(post.id) do %>
                 <%= truncate(post.body, length: 10) %>
               <% end %>
+            </td>
+            <td class="align-middle">
+              <%= post.comments.count %>件
             </td>
           </tbody>
         <% end %>
