@@ -54,6 +54,8 @@ Rails.application.routes.draw do
 
     root to: 'users#index'
 
+    get 'users/:user_id/posts' => 'posts#index', as: 'user_posts'
+
     #users
     resources :users, only: [:index, :edit, :show, :update]
 

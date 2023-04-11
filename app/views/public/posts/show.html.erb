@@ -3,11 +3,7 @@
   <div class="row">
     <!--投稿画像-->
     <div class="col text-right">
-      <% if @post.image.attached? %>
-        <%= image_tag @post.image.variant(resize: "300x300") %>
-      <% else %>
-        <%= image_tag 'noimage', size: "300x300" %>
-      <% end %>
+      <%= render 'post_image', post: @post %>
     </div>
     <div class="col">
       <h4>美術展情報</h4>

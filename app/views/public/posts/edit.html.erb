@@ -33,7 +33,7 @@
         <%= f.text_area :body, placeholder: "本文" %><br>
         <%= f.submit '保存' %>
         <% if @post.user == current_user %>
-          <%= link_to '削除', post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+          <%= link_to '削除', post_path(@post.id), method: :delete, class: "btn btn-outline-danger btn-block", "data-confirm" => "本当に削除しますか？" %>
         <% end %>
       </div>
     </div>

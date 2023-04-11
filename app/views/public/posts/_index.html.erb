@@ -3,11 +3,7 @@
     <!--投稿画像-->
     <div class="image-conteiner">
       <%= link_to post_path(post.id) do %>
-        <% if post.image.attached? %>
-          <%= image_tag post.image.variant(resize: "300x300") %><br>
-        <% else %>
-          <%= image_tag 'noimage', size: "300x300" %><br>
-        <% end %>
+        <%= render 'post_image', post: post %>
       <% end %>
     </div>
     <!--美術展情報-->

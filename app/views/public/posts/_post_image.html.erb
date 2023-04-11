@@ -1,0 +1,5 @@
+<% if post.image.attached? %>
+  <%= image_tag post.image.variant(resize: "200x200") %>
+<% else %>
+  <%= image_tag 'noimage', size: "200x200" %>
+<% end %>

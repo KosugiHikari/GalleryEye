@@ -1,0 +1,63 @@
+<div class="container">
+  <h3>
+		<% if params[:user_id] %>
+			<%= @user.name %>さんの投稿履歴一覧
+		<% else %>
+			<h3>Posts</h3>
+		<% end %>
+	</h3>
+  <div class="row">
+    <table class="table w-100 table-hover text-center">
+      <thead>
+        <tr>
+          <th>投稿ID</th>
+          <th>投稿日</th>
+          <th>ユーザーアイコン</th>
+          <th>ユーザーネーム</th>
+          <th>サムネイル</th>
+          <th>投稿本文</th>
+        </tr>
+      </thead>
+      <% if @posts.exists? %>
+        <% @posts.each do |post| %>
+          <tbody>
+            <!--投稿ID-->
+            <td class="align-middle"><%= post.id %></td>
+            <!--投稿日-->
+            <td class="align-middle"><%= post.created_at %></td>
+            <!--ユーザーアイコン-->
+            <td class="align-middle">
+              <%= image_tag post.user.get_profile_image(50,50), class: "rounded-circle" %>
+            </td>
+            <!--ユーザーネーム-->
+            <td class="align-middle">
+              <%= link_to admin_user_path(post.user.id) do %>
+                <%= post.user.name %>
+              <% end %>
+            </td>
+            <!--投稿サムネイル-->
+            <td class="align-middle">
+              <%= link_to admin_post_path(post.id) do %>
+                <% if post.image.attached? %>
+                  <%= image_tag post.image.variant(resize: "100x100") %>
+                <% else %>
+                  <%= image_tag 'noimage', size: "100x100" %>
+                <% end %>
+              <% end %>
+            </td>
+            <!--投稿本文-->
+            <td class="align-middle">
+              <%= link_to admin_post_path(post.id) do %>
+                <%= truncate(post.body, length: 10) %>
+              <% end %>
+            </td>
+          </tbody>
+        <% end %>
+      <% else %>
+        <tbody>
+          <td colspan="6" class="align-middle"><h5>投稿はありません</h5></td>
+        </tbody>
+      <% end %>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+<div class="conteiner">
+  <h1>投稿詳細</h1>
+  <div class="row">
+    <!--投稿画像-->
+    <div class="col text-right">
+      <%= render 'public/posts/post_image', post: @post %>
+    </div>
+    <div class="col">
+      <h4>美術展情報</h4>
+      美術展名：<%= @post.art_exhibition_name %><br>
+      美術館名<%= @post.gallery_name %><br>
+      会期：<%= @post.start_date %> ~ <%= @post.end_date %><br>
+      入場料：<%= @post.admission %>円<br>
+      住所：<%= @post.address %><br>
+      撮影可否：<%= @post.shooting_availability_i18n %>
+    </div>
+  </div>
+  <!--ユーザー情報-->
+  <div class="row">
+    <div class="col-6 text-right">
+      <%= link_to user_path(@post.user) do %>
+      <%= image_tag @post.user.get_profile_image(100,100) %><br>
+      <p><%= @post.user.name %></p>
+      <% end %>
+    </div>
+    <!--ユーザーによる感想-->
+    <div class="col-6 text-center">
+    <p>ここに注目</p>
+    <%= @post.point %><br>
+    <%= @post.body %>
+    </div>
+  </div>
+  <div class="text-center">
+    <%= link_to '削除', admin_post_path(@post.id), method: :delete, class: "btn btn-danger", "data-confirm" => "本当に削除しますか？" %>
+  </div>
+</div>

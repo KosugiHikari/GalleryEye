@@ -36,7 +36,7 @@
     <% @posts.each do |post| %>
       <div class="col-9 text-center">
         <%= link_to post_path(post.id) do %>
-          <%= image_tag post.image, size:'300x300' %><br>
+          <%= render 'public/posts/post_image', post: post %>
         <% end %>
         <h3><%= post.art_exhibition_name %></h3>
         <p><%= post.gallery_name %></p>
