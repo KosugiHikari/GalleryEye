@@ -45,6 +45,5 @@ class Public::PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:art_exhibition_name, :gallery_name, :start_date, :end_date, :admission, :address, :shooting_availability, :point, :body, :post_image_id, :image, :post_image)
-    # params.merge(user_id: current_user.id)
   end
 end
