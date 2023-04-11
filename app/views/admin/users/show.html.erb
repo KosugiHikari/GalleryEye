@@ -1,1 +1,38 @@
-<h1>ユーザー詳細ページ</h1>
+<div class="container mt-5 mb-5">
+  <strong><%= flash[:notice] %></strong>
+  <h3>ユーザー詳細ページ</h3>
+  <div class="row">
+    <div class="col-9">
+      <table class="table text-left">
+        <tbody>
+          <%= image_tag @user.get_profile_image(100,100), class: "rounded-circle" %>
+          <tr>
+            <th>会員ID</th>
+            <td><%= @user.id %></td>
+          </tr>
+            <tr>
+              <th>ユーザーネーム</th>
+              <td><%= @user.name %></td>
+              </tr>
+            <tr>
+              <th>自己紹介文</th>
+              <td><%= @user.introduction %></td>
+            </tr>
+            <tr>
+              <th>会員ステータス</th>
+                <td>
+                  <% if @user.is_deleted == false %>
+                    <strong><p class="text-success">有効</p></strong></td>
+                  <% elsif %>
+                    <strong><p class="text-secondary">退会</p></strong>
+                  <% end %>
+                </td>
+           </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <%= link_to edit_admin_user_path(@user.id) do %>
+    <button class="btn btn-success" type="submit">編集する</button>
+  <% end %>
+</div>

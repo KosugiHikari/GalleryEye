@@ -47,16 +47,18 @@
 
   </nav>
 
-  <!--固定表示リンク-->
-  <div class="row text-center">
-    <div class="col-5">
-      <%= link_to 'Top', root_path, class: 'nav-link text-dark' %>
+  <!--固定表示リンク但し管理者側は非表示-->
+  <% unless admin_signed_in? %>
+    <div class="row text-center">
+      <div class="col-5">
+        <%= link_to 'Top', root_path, class: 'nav-link text-dark' %>
+      </div>
+      <div class="col">
+        <%= link_to 'Users', users_path, class: 'nav-link text-dark' %>
+      </div>
+      <div class="col-5">
+        <%= link_to 'About', about_path, class: 'nav-link text-dark' %>
+      </div>
     </div>
-    <div class="col">
-      <%= link_to 'Users', users_path, class: 'nav-link text-dark' %>
-    </div>
-    <div class="col-5">
-      <%= link_to 'About', about_path, class: 'nav-link text-dark' %>
-    </div>
-  </div>
+  <% end %>
 </div>
