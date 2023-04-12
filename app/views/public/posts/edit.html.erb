@@ -26,6 +26,10 @@
         <!--不明-->
         <%= f.radio_button :shooting_availability, Post.shooting_availabilities.key(2) %>
         <%= f.label :shooting_availability_unknown, Post.shooting_availabilities_i18n[:unknown] %>
+
+        <!--登録タグ-->
+        <%= f.label :tag_list %>
+        <%= f.text_field :tag_list, value: @post.tag_list.join(',') %>
       </div>
       <div class="col-md-6">
         <h4>レビュー内容</h4>

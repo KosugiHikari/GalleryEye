@@ -1,0 +1,6 @@
+<% if @posts.present? %>
+  <h3><%= @keyword %>に関連するレビュー</h3>
+  <%= render 'public/posts/index', posts: @posts %>
+<% else %>
+  <p>関連するレビューはありません</p>
+<% end %>

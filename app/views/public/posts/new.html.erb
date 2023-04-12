@@ -30,9 +30,10 @@
           <%= f.label :shooting_availability_unknown, Post.shooting_availabilities_i18n[:unknown] %>
         </div>
 
-        <!--タグ追加-->
-        <%= f.label :tag_list %>
-        <%= f.text_field :tag_list, value: @post.tag_list.join(',') %>
+          <!--タグ追加-->
+          <%= f.label :tag_list %>
+          <%= f.text_field :tag_list, value: @post.tag_list.join(',') %>
+        </div>
 
       </div>
       <div class="col-md-6">
@@ -66,5 +67,7 @@
         fileReader.readAsDataURL(selectedFile);
       });
     });
+
+
   </script>
 

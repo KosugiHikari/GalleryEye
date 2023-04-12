@@ -14,14 +14,17 @@
     <header>
       <%= render 'layouts/header' %>
     </header>
-    
+
     <main>
+      <div>
+        <%= render 'public/searches/search', keyword: @keyword %>
+      </div>
       <%= yield %>
     </main>
-    
+
     <footer>
       <%= render 'layouts/footer' %>
     </footer>
-    
+
   </body>
 </html>
