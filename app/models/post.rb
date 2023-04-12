@@ -11,6 +11,9 @@ class Post < ApplicationRecord
   has_many :likes, dependent: :destroy
 
   attachment :post_image
+  
+  # acts_as_taggable_on :tags の省略
+  acts_as_taggable
 
   # enum設定
   enum shooting_availability: {shooting_not_possible:0, shooting_allowed:1, unknown:2}

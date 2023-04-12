@@ -12,11 +12,11 @@
         <tr>
           <th>投稿ID</th>
           <th>投稿日</th>
-          <th>ユーザーアイコン</th>
-          <th>ユーザーネーム</th>
           <th>サムネイル</th>
           <th>投稿本文</th>
           <th>コメント数</th>
+          <th>ユーザーアイコン</th>
+          <th>ユーザーネーム</th>
         </tr>
       </thead>
       <% if @posts.exists? %>
@@ -26,24 +26,10 @@
             <td class="align-middle"><%= post.id %></td>
             <!--投稿日-->
             <td class="align-middle"><%= post.created_at.strftime('%Y/%m/%d %H:%M:%S') %></td>
-            <!--ユーザーアイコン-->
-            <td class="align-middle">
-              <%= image_tag post.user.get_profile_image(50,50), class: "rounded-circle" %>
-            </td>
-            <!--ユーザーネーム-->
-            <td class="align-middle">
-              <%= link_to admin_user_path(post.user.id) do %>
-                <%= post.user.name %>
-              <% end %>
-            </td>
             <!--投稿サムネイル-->
             <td class="align-middle">
               <%= link_to admin_post_path(post.id) do %>
-                <% if post.image.attached? %>
-                  <%= image_tag post.image.variant(resize: "100x100") %>
-                <% else %>
-                  <%= image_tag 'noimage', size: "100x100" %>
-                <% end %>
+                <%= attachment_image_tag post, :post_image, fallback: "noimage.png", size: "100x100" %>
               <% end %>
             </td>
             <!--投稿本文-->
@@ -54,6 +40,16 @@
             </td>
             <td class="align-middle">
               <%= post.comments.count %>件
+            </td>
+            <!--ユーザーアイコン-->
+            <td class="align-middle">
+              <%= image_tag post.user.get_profile_image(50,50), class: "rounded-circle" %>
+            </td>
+            <!--ユーザーネーム-->
+            <td class="align-middle">
+              <%= link_to admin_user_path(post.user.id) do %>
+                <%= post.user.name %>
+              <% end %>
             </td>
           </tbody>
         <% end %>

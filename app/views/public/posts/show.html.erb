@@ -17,6 +17,13 @@
       入場料：<%= @post.admission %>円<br>
       住所：<%= @post.address %><br>
       撮影可否：<%= @post.shooting_availability_i18n %>
+      <% if @tags.present? %>
+        <% @tags.each do |tag| %>
+          <%= link_to "#{tag.name}(#{tag.taggings_count})", tags_path(tag: tag.name) %>
+        <% end %>
+      <% else %>
+        <p>登録されているタグはありません</p>
+      <% end %>
     </div>
   </div>
   <!--ユーザー情報-->

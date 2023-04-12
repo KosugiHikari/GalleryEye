@@ -19,14 +19,21 @@
 
         <!--撮影可否選択のラジオボタン-->
         <!--撮影不可-->
-        <%= f.radio_button :shooting_availability, Post.shooting_availabilities.key(0) %>
-        <%= f.label :shooting_availability_shooting_not_possible, Post.shooting_availabilities_i18n[:shooting_not_possible] %>
-        <!--撮影可-->
-        <%= f.radio_button :shooting_availability, Post.shooting_availabilities.key(1) %>
-        <%= f.label :shooting_availability_shooting_allowed, Post.shooting_availabilities_i18n[:shooting_allowed] %>
-        <!--不明-->
-        <%= f.radio_button :shooting_availability, Post.shooting_availabilities.key(2) %>
-        <%= f.label :shooting_availability_unknown, Post.shooting_availabilities_i18n[:unknown] %>
+        <div>
+          <%= f.radio_button :shooting_availability, Post.shooting_availabilities.key(0) %>
+          <%= f.label :shooting_availability_shooting_not_possible, Post.shooting_availabilities_i18n[:shooting_not_possible] %>
+          <!--撮影可-->
+          <%= f.radio_button :shooting_availability, Post.shooting_availabilities.key(1) %>
+          <%= f.label :shooting_availability_shooting_allowed, Post.shooting_availabilities_i18n[:shooting_allowed] %>
+          <!--不明-->
+          <%= f.radio_button :shooting_availability, Post.shooting_availabilities.key(2) %>
+          <%= f.label :shooting_availability_unknown, Post.shooting_availabilities_i18n[:unknown] %>
+        </div>
+
+        <!--タグ追加-->
+        <%= f.label :tag_list %>
+        <%= f.text_field :tag_list, value: @post.tag_list.join(',') %>
+
       </div>
       <div class="col-md-6">
         <h4>レビュー内容</h4>
@@ -40,12 +47,20 @@
 
   <script>
     $(function() {
+      // 画像が選択された時に発火
       $('#image').on('change', function() {
+        // this.files[0]は、選択された画像のこと
+        // selectedFileに、選択された画像を格納を宣言
         var selectedFile = this.files[0];
+        // FileReaderを起動
         var fileReader = new FileReader();
-
+        // selectedFile(選択された画像)をbase64文字列に変換
+        // HTML上で画像を表示するには画像を文字列に変換する必要があるため
+        // .onloadは、処理が成功したら次に行く記述
         fileReader.onload = function(event) {
+          // 画像ファイルが文字列に変換成功したらイベントが発火
           var loadedImageUri = event.target.result;
+          // loadedImageUriに、文字列化した画像ファイルを格納
           $('.img-square').attr('src', loadedImageUri);
         };
         fileReader.readAsDataURL(selectedFile);

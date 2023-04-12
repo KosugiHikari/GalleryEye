@@ -1,0 +1,4 @@
+<% if @post.present? %>
+  <h3><%= @tag %>に関連する投稿</h3>
+  <%= render 'public/posts/index', posts: @post %>
+<% end %>

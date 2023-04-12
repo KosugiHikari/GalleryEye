@@ -1,30 +1,32 @@
-<% posts.each do |post| %>
-  <div class="col-md-3 text-center">
-    <!--投稿画像-->
-    <div class="image-conteiner">
-      <%= link_to post_path(post.id) do %>
-        <%= render 'post_image', post: post %>
+<div class="row">
+  <% posts.each do |post| %>
+    <div class="col-md-3 text-center">
+      <!--投稿画像-->
+      <div class="image-conteiner">
+        <%= link_to post_path(post.id) do %>
+          <%= render 'public/posts/post_image', post: post %>
+        <% end %>
+      </div>
+      <!--美術展情報-->
+      <h3>
+        <%= link_to post_path(post.id) do %>
+          <%= post.art_exhibition_name %>
+        <% end %>
+      </h3>
+      <!--いいねボタン-->
+      <div id="like_buttons_<%= post.id %>">
+        <%= render "public/likes/like", post: post %>
+      </div>
+      <%= post.gallery_name %><br>
+      <%= post.start_date %> ~ <%= post.end_date %><br>
+      <%= post.point %><br>
+      <!--コメント数-->
+      <p><%= link_to "#{post.comments.count}コメント", post_path(post.id) %></p>
+      <!--投稿したユーザーアイコン・名前-->
+      <%= link_to user_path(post.user) do %>
+        <%= image_tag post.user.get_profile_image(100,100), class: "rounded-circle" %>
+        <%= post.user.name %>
       <% end %>
     </div>
-    <!--美術展情報-->
-    <h3>
-      <%= link_to post_path(post.id) do %>
-        <%= post.art_exhibition_name %>
-      <% end %>
-    </h3>
-    <!--いいねボタン-->
-    <div id="like_buttons_<%= post.id %>">
-      <%= render "public/likes/like", post: post %>
-    </div>
-    <%= post.gallery_name %><br>
-    <%= post.start_date %> ~ <%= post.end_date %><br>
-    <%= post.point %><br>
-    <!--コメント数-->
-    <p><%= link_to "#{post.comments.count}コメント", post_path(post.id) %></p>
-    <!--投稿したユーザーアイコン・名前-->
-    <%= link_to user_path(post.user) do %>
-      <%= image_tag post.user.get_profile_image(100,100), class: "rounded-circle" %>
-      <%= post.user.name %>
-    <% end %>
-  </div>
-<% end %>
+  <% end %>
+</div>
