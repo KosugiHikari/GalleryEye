@@ -8,7 +8,7 @@ class User < ApplicationRecord
 
   # 投稿のアソシエーション
   has_many :posts, dependent: :destroy
-  
+
   # コメントのアソシエーション
   has_many :comments, dependent: :destroy
 
@@ -56,12 +56,20 @@ class User < ApplicationRecord
   def following?(user)
     followings.include?(user)
   end
-  
+
+  # Userモデルで使用できるゲストログインのguestメソッド
+  # find_or_create_byは、データの検索と作成を自動的に判断して処理を行う
+  # SecureRandom.urlsafe_base64は、ランダムな文字列を生成する
   def self.guest
     find_or_create_by!(name: 'guestuser', email: 'guest@example.com') do |user|
       user.password = SecureRandom.urlsafe_base64
       user.name = "guestuser"
     end
   end
-  
+
+  # 検索分岐（ユーザーネームを検索可能）
+  def self.search(keyword)
+    where(["name like?", "%#{keyword}%"])
+  end
+
 end

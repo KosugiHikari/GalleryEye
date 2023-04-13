@@ -1,7 +1,8 @@
 <div class="search_form" style="border-radius: 0!important;">
-  <%= form_with url: search_path, method: :get do |f| %>
+  <%= form_with url:admin_search_path, method: :get do |f| %>
     <div class="input-group no-border">
-      <%= f.text_field :keyword, class: "form-control search-control", placeholder: 'レビュー検索' %>
+      <%= f.text_field :keyword %>
+      <%= f.select :model, options_for_select([["Post"], ["User"]]) %>
       <%= button_tag type: "submit", class: "btn btn-info search-btn" do %>
         <i class="fas fa-search"></i>
       <% end %>

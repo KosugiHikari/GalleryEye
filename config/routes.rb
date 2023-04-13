@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     get 'relationships/followings'
     get 'relationships/followers'
   end
-  
+
   # ユーザー側（コントローラーの記述を変更してもその処理が実行されるようにするため）
   devise_for :users,skip: [:passwords], controllers: {
     registrations: "public/registrations",
@@ -41,10 +41,10 @@ Rails.application.routes.draw do
       resource :likes, only: [:create, :destroy]
       resources :comments, only: [:create, :destroy]
     end
-    
+
     # tags
     resources :tags
-    
+
     # searches
     get 'search' => 'searches#search'
 
@@ -60,7 +60,7 @@ Rails.application.routes.draw do
   namespace :admin do
 
     root to: 'users#index'
-    
+
     # ユーザーごとの投稿のルーティング
     get 'users/:user_id/posts' => 'posts#index', as: 'user_posts'
 
@@ -69,6 +69,9 @@ Rails.application.routes.draw do
 
     #posts
     resources :posts, only: [:index, :show, :edit, :update, :destroy]
+
+    # searches
+    get 'search' => 'searches#search'
 
   end
 

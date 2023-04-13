@@ -1,0 +1,38 @@
+<table class="table w-100 table-hover text-center">
+  <thead>
+    <tr>
+      <th>ユーザーID</th>
+      <th>アイコン</th>
+      <th>ユーザーネーム</th>
+      <th>メールアドレス</th>
+      <th>ステータス</th>
+    </tr>
+  </thead>
+  <% if users.exists? %>
+    <% users.each do |user| %>
+      <tbody>
+        <td><%= user.id %></td>
+        <td>
+          <%= image_tag user.get_profile_image(50,50), class: "rounded-circle" %>
+        </td>
+        <td>
+          <%= link_to admin_user_path(user.id) do %>
+            <%= user.name %>
+          <% end %>
+        </td>
+        <td><%= user.email %></td>
+        <td>
+          <% if user.is_deleted == false %>
+            <strong><p class="text-success">有効</p></strong>
+          <% elsif %>
+            <strong><p class="text-secondary">退会</p></strong>
+          <% end %>
+        </td>
+      </tbody>
+    <% end %>
+  <% else %>
+    <tbody>
+      <td colspan="6" class="align-middle"><h5>関連するユーザーはいません</h5></td>
+    </tbody>
+  <% end %>
+</table>

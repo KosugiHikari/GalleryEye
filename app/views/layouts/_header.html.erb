@@ -1,64 +1,72 @@
-<!--会員用リンク-->
-<div class="container">
-  <nav class="navbar navbar-expand-lg navbar-light">
-      <a class="navbar-brand p-3" href="/"><%= image_tag 'logo.png', width: '50%', height: '50%' %></a>
+<header>
+  <!--会員用リンク-->
+  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand p-3" href="/"><%= image_tag 'logo.png', width: '50%', height: '50%' %></a>
 
-      <!--ハンバーガーアイコン-->
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+        <!--ハンバーガーアイコン-->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav ml-auto">
-          <% if admin_signed_in? %>
-            <li class="nav-item">
-              <%= link_to '会員一覧', admin_users_path, class: 'nav-link text-dark' %>
-            </li>
-            <li class="nav-item">
-              <%= link_to '投稿一覧', admin_posts_path, class: 'nav-link text-dark' %>
-            </li>
-            <li class="nav-item">
-            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'nav-link text-dark' %>
-            </li>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav ml-auto">
+            <% if admin_signed_in? %>
+              <li class="nav-item">
+                <%= link_to '会員一覧', admin_users_path, class: 'nav-link text-dark' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to '投稿一覧', admin_posts_path, class: 'nav-link text-dark' %>
+              </li>
+              <li class="nav-item">
+              <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'nav-link text-dark' %>
+              </li>
 
-          <% elsif user_signed_in? %>
-            <li class="nav-item">
-              <%= link_to 'マイページ', user_path(current_user.id), class: 'nav-link text-dark' %>
-            </li>
-            <li class="nav-item">
-              <%= link_to '投稿する', new_post_path, class: 'nav-link text-dark' %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link text-dark' %>
-            </li>
-          <% else %>
-            <li class="nav-item">
-              <%= link_to "新規登録", new_user_registration_path, class: 'nav-link text-dark' %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "ログイン", new_user_session_path, class: 'nav-link text-dark' %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "ゲストログイン", users_guest_sign_in_path, class: 'nav-link text-dark', method: :post %>
-            </li>
-          <% end %>
-        </ul>
+            <% elsif user_signed_in? %>
+              <li class="nav-item">
+                <%= link_to 'マイページ', user_path(current_user.id), class: 'nav-link text-dark' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to '投稿する', new_post_path, class: 'nav-link text-dark' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link text-dark' %>
+              </li>
+            <% else %>
+              <li class="nav-item">
+                <%= link_to "新規登録", new_user_registration_path, class: 'nav-link text-dark' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "ログイン", new_user_session_path, class: 'nav-link text-dark' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "ゲストログイン", users_guest_sign_in_path, class: 'nav-link text-dark', method: :post %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+    </nav>
+
+    <!--固定表示リンク但し管理者側は非表示-->
+    <% unless admin_signed_in? %>
+      <div class="row text-center">
+        <div class="col-5">
+          <%= link_to 'Top', root_path, class: 'nav-link text-dark' %>
+        </div>
+        <div class="col">
+          <%= link_to 'Users', users_path, class: 'nav-link text-dark' %>
+        </div>
+        <div class="col-5">
+          <%= link_to 'About', about_path, class: 'nav-link text-dark' %>
+        </div>
       </div>
-
-  </nav>
-
-  <!--固定表示リンク但し管理者側は非表示-->
-  <% unless admin_signed_in? %>
-    <div class="row text-center">
-      <div class="col-5">
-        <%= link_to 'Top', root_path, class: 'nav-link text-dark' %>
-      </div>
-      <div class="col">
-        <%= link_to 'Users', users_path, class: 'nav-link text-dark' %>
-      </div>
-      <div class="col-5">
-        <%= link_to 'About', about_path, class: 'nav-link text-dark' %>
-      </div>
+    <% end %>
+    <div>
+    <% if admin_signed_in? %>
+      <%= render 'admin/searches/search' %>
+    <% else %>
+      <%= render 'public/searches/search' %>
+    <% end %>
     </div>
-  <% end %>
-</div>
+  </div>
+</header>
