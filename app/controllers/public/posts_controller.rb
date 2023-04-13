@@ -6,37 +6,32 @@ class Public::PostsController < ApplicationController
 
   def create
     @post = current_user.posts.new(post_params)
-    # 投稿ボタンを押下したとき
-    if params[:post]
-      # (context: :publicize):バリデーションをある状況では実行して、ある状況では実行しない場合に使用する
-      # publicizeというcontextが指定されている時に、バリデーションを適用する
-      # 今回は下書きの際にはバリデーションは不要のため
+    if @post.is_draft == false
       if @post.save(context: :publicize)
-      redirect_to post_path(@post), notice: "レビューを投稿しました！"
+        redirect_to root_path
       else
-        render :new, alert: "投稿できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください。"
+        render :new
       end
-    # 下書きボタンを押下したとき
     else
-      if @post.update(is_draft: true)
-        redirect_to user_path(current_user), notice: "レビューを下書き保存しました！"
+      if @post.is_draft == true
+      @post.save
+      redirect_to root_path
       else
-        render :new, alert: "保存できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください。"
+        render :new
       end
     end
   end
 
   def index
+    # 投稿の新しい順
     if params[:new_post]
-      @posts = Post.new_post
+      @posts = Post.where(is_draft: :false).new_post
+    # 投稿の古い順
     elsif params[:old_post]
-      @posts = Post.old_post
-    elsif params[:like_many]
-      @posts = Post.like_many
-    elsif params[:like_few]
-      @posts = Post.like_few
+      @posts = Post.where(is_draft: :false).old_post
+    # いいねの多い順
     else
-      @posts = Post.all
+      @posts = Post.where(is_draft: :false).includes(:liked_users).sort {|a,b| b.liked_users.size <=> a.liked_users.size}
     end
 
     # 全タグ取得↓
@@ -61,32 +56,10 @@ class Public::PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    # ①下書きレシピの更新（公開）の場合
-    if params[:publicize_draft]
-      @post.attributes = post_params.merge(is_draft: false)
-      if @post.save(context: :publicize)
-        redirect_to post_path(@post.id), notice: "下書きのレビューを公開しました！"
-      else
-        @post.is_draft = true
-        render :edit, alert: "レビューを公開できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
-      end
-
-    # ②公開済みレシピの更新の場合
-    elsif params[:update_post]
-      @post.attributes = post_params
-      if @post.save(context: :publicize)
-        redirect_to post_path(@post.id), notice: "レビューを更新しました！"
-      else
-        render :edit, alert: "レビューを更新できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
-      end
-
-    # ③下書きレシピの更新（非公開）の場合
+    if @post.update(post_params)
+      redirect_to post_path(@post.id)
     else
-      if @post.update(post_params)
-        redirect_to post_path(@post.id), notice: "下書きのレビューを更新しました！"
-      else
-        render :edit, alert: "レビューを更新できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
-      end
+      render :edit
     end
   end
 

@@ -6,7 +6,12 @@ class Public::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @posts = @user.posts
+    @posts = @user.posts.where(is_draft: :false)
+  end
+
+  def confirm
+    @user = User.find(params[:id])
+    @posts = @user.posts.where(is_draft: :true)
   end
 
   def edit

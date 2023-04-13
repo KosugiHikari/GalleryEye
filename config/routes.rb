@@ -26,7 +26,8 @@ Rails.application.routes.draw do
     #users
     resources :users, only: [:index, :edit, :show, :update, :leave_check] do
       member do
-      get :likes
+        get :likes
+        get :confirm
       end
       resource :relationships, only: [:create, :destroy]
       get '/:id/followings' => 'relationships#followings', as: 'followings'

@@ -14,6 +14,7 @@ class User < ApplicationRecord
 
   # いいねのアソシエーション
   has_many :likes, dependent: :destroy
+  has_many :liked_posts, through: :likes, source: :post
 
   # フォロー関係のアソシエーション
   # フォローをした、されたの関係

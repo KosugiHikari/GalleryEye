@@ -1,0 +1,73 @@
+<div class="container m-5">
+  <%= render 'errors', post: post %>
+  <%= attachment_image_tag post, :post_image, class: "card img-square", fallback: "noimage.png", size: "300x300" %>
+  <%= form_with model: post, local: true do |f| %>
+    <div class="row">
+      <div class="col-md-6">
+        <%= f.file_field :post_image, id: "image", accept: "image/*" %>
+        <h4>美術展情報</h4>
+        <%= f.text_field :art_exhibition_name, placeholder: "美術展名" %><br>
+        <%= f.text_field :gallery_name, placeholder: "美術館名" %><br>
+
+        <!--会期選択-->
+        <%= f.date_field :start_date %> ~ <%= f.date_field :end_date %><br>
+
+        <%= f.number_field :admission, placeholder: "入場料" %>円<br>
+        <%= f.text_field :address, placeholder: "住所" %><br>
+
+        <!--撮影可否選択のラジオボタン-->
+          <!--撮影不可-->
+        <%= f.radio_button :shooting_availability, Post.shooting_availabilities.key(0) %>
+        <%= f.label :shooting_availability_shooting_not_possible, Post.shooting_availabilities_i18n[:shooting_not_possible] %>
+        <!--撮影可-->
+        <%= f.radio_button :shooting_availability, Post.shooting_availabilities.key(1) %>
+        <%= f.label :shooting_availability_shooting_allowed, Post.shooting_availabilities_i18n[:shooting_allowed] %>
+        <!--不明-->
+        <%= f.radio_button :shooting_availability, Post.shooting_availabilities.key(2) %>
+        <%= f.label :shooting_availability_unknown, Post.shooting_availabilities_i18n[:unknown] %>
+
+        <!--登録タグ-->
+        <%= f.label :tag_list %>
+        <%= f.text_field :tag_list, value: post.tag_list.join(',') %>
+      </div>
+      <div class="col-md-6">
+        <h4>レビュー内容</h4>
+        <%= f.text_field :point, placeholder: "注目ポイント" %><br>
+        <%= f.text_area :body, placeholder: "本文" %><br>
+        <div>
+          <%= f.label :"公開範囲" %>
+          <%= f.radio_button :is_draft, :false %>
+          <%= f.label :is_draft, "公開", { value: :false } %>
+          <%= f.radio_button :is_draft, :true %>
+          <%= f.label :is_draft, "下書き保存", { value: :true } %>
+        </div>
+
+          <%= f.submit 'レビューを投稿', class: 'btn btn-sm btn-warning text-light' %>
+          <%= link_to "下書き一覧", confirm_user_path(current_user) %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<script>
+  $(function() {
+      // 画像が選択された時に発火
+      $('#image').on('change', function() {
+        // this.files[0]は、選択された画像のこと
+        // selectedFileに、選択された画像を格納を宣言
+        var selectedFile = this.files[0];
+        // FileReaderを起動
+        var fileReader = new FileReader();
+        // selectedFile(選択された画像)をbase64文字列に変換
+        // HTML上で画像を表示するには画像を文字列に変換する必要があるため
+        // .onloadは、処理が成功したら次に行く記述
+        fileReader.onload = function(event) {
+          // 画像ファイルが文字列に変換成功したらイベントが発火
+          var loadedImageUri = event.target.result;
+          // loadedImageUriに、文字列化した画像ファイルを格納
+          $('.img-square').attr('src', loadedImageUri);
+        };
+        fileReader.readAsDataURL(selectedFile);
+      });
+    });
+</script>

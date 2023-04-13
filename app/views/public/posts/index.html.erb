@@ -15,8 +15,7 @@
       <!--ソートリンク-->
       <%= link_to '新しい順', posts_path(new_post: "true") %>
       |<%= link_to '古い順', posts_path(old_post: "true") %>
-      |<%= link_to 'いいねが多い順', posts_path(like_many: "true") %>
-      |<%= link_to 'いいねが少ない順', posts_path(like_few: "true") %>
+      |<%= link_to 'いいねが多い順', posts_path(@posts) %>
       <%= render 'index', posts: @posts %>
     </div>
   </div>

@@ -9,6 +9,7 @@ class Post < ApplicationRecord
 
   # いいねのアソシエーション
   has_many :likes, dependent: :destroy
+  has_many :liked_users, through: :likes, source: :user
 
   attachment :post_image
 
@@ -19,8 +20,6 @@ class Post < ApplicationRecord
   # order：データの取り出し　desc：昇順　asc：降順
   scope :new_post, -> {order(created_at: :desc)}
   scope :old_post, -> {order(created_at: :asc)}
-  scope :like_many, -> {order(created_at: :desc)}
-  scope :like_few, -> {order(created_at: :asc)}
 
 
   # enum設定
@@ -39,7 +38,7 @@ class Post < ApplicationRecord
 
   # ログイン中のユーザーがその投稿に対していいねをしているかを判断するメソッド
   def liked?(user)
-    likes.exists?(user_id: user_id)
+    likes.exists?(user_id: user.id)
   end
 
   # 検索分岐（美術展名・美術館名・住所・注目ポイント・本文から検索可能）
