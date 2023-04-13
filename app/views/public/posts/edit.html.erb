@@ -35,9 +35,17 @@
         <h4>レビュー内容</h4>
         <%= f.text_field :point, placeholder: "注目ポイント" %><br>
         <%= f.text_area :body, placeholder: "本文" %><br>
-        <%= f.submit '保存' %>
+
+        <% if @post.is_draft == true %>
+          <%= f.submit 'レビューを投稿', :name => 'publicize_draft', class: 'mr-5 btn btn-sm btn-warning' %>
+          <%= f.submit '下書きを更新', :name => 'update_draft', class: 'mr-5 btn btn-sm btn-outline-secondary' %>
+        <% else %>
+          <%= f.submit 'レシピを更新', :name => 'update_draft', class: 'btn btn-sm btn-warning text-light' %>
+        <% end %>
+
+
         <% if @post.user == current_user %>
-          <%= link_to '削除', post_path(@post.id), method: :delete, class: "btn btn-outline-danger btn-block", "data-confirm" => "本当に削除しますか？" %>
+          <%= link_to '削除', post_path(@post.id), method: :delete, class: "btn btn-outline-danger", "data-confirm" => "本当に削除しますか？" %>
         <% end %>
       </div>
     </div>

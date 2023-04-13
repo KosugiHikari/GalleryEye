@@ -15,14 +15,27 @@ class Post < ApplicationRecord
   # acts_as_taggable_on :tags の省略
   acts_as_taggable
 
+  # カラムデータの取り出し方を支持する記述
+  # order：データの取り出し　desc：昇順　asc：降順
+  scope :new_post, -> {order(created_at: :desc)}
+  scope :old_post, -> {order(created_at: :asc)}
+  scope :like_many, -> {order(created_at: :desc)}
+  scope :like_few, -> {order(created_at: :asc)}
+
+
   # enum設定
   enum shooting_availability: {shooting_not_possible:0, shooting_allowed:1, unknown:2}
 
   # バリデーション
-  validates :art_exhibition_name, presence: true
-  validates :gallery_name, presence: true
-  validates :point, presence: true
-  validates :body, presence: true
+  with_options presence: true, on: :publicize do
+    validates :art_exhibition_name
+    validates :gallery_name
+    validates :admission
+    validates :shooting_availability
+    validates :point
+    validates :body
+  end
+
 
   # ログイン中のユーザーがその投稿に対していいねをしているかを判断するメソッド
   def liked?(user)

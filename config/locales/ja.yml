@@ -10,3 +10,6 @@ ja:
         shooting_not_possible: "撮影不可"
         shooting_allowed: "撮影可"
         unknown: "不明"
+  time:
+    formats:
+      default: "%Y/%m/%d %H:%M:%S"

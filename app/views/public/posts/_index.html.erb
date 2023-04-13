@@ -13,15 +13,22 @@
           <%= post.art_exhibition_name %>
         <% end %>
       </h3>
-      <!--いいねボタン-->
-      <div id="like_buttons_<%= post.id %>">
-        <%= render "public/likes/like", post: post %>
-      </div>
+      <!--いいねボタン（ログインユーザーのみ。非ログイン時はいいね数表示）-->
+      <% if user_signed_in? %>
+        <div id="like_buttons_<%= post.id %>">
+          <%= render "public/likes/like", post: post %>
+        </div>
+      <% else %>
+        <p><i class="fas fa-heart" style="color: gray;"></i><%= post.likes.count %></p>
+      <% end %>
+
       <%= post.gallery_name %><br>
       <%= post.start_date %> ~ <%= post.end_date %><br>
       <%= post.point %><br>
       <!--コメント数-->
       <p><%= link_to "#{post.comments.count}コメント", post_path(post.id) %></p>
+      <!--投稿日時-->
+      <%= l post.created_at %>
       <!--投稿したユーザーアイコン・名前-->
       <%= link_to user_path(post.user) do %>
         <%= image_tag post.user.get_profile_image(100,100), class: "rounded-circle" %>

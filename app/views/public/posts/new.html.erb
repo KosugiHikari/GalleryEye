@@ -40,7 +40,8 @@
         <h4>レビュー内容</h4>
         <%= f.text_field :point, placeholder: "注目ポイント" %><br>
         <%= f.text_area :body, placeholder: "本文" %><br>
-        <%= f.submit '投稿' %>
+        <%= f.submit 'レビューを投稿', :name => 'post', class: 'mr-5 btn btn-sm btn-warning text-white' %>
+        <%= f.submit '下書き保存', :name => 'draft', class: 'mmr-5 btn btn-sm btn-outline-secondary' %>
       </div>
     </div>
    <% end %>

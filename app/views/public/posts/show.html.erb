@@ -7,10 +7,15 @@
     </div>
     <div class="col">
       <h4>美術展情報</h4>
-      <!--いいねボタン-->
-      <div id="like_buttons_<%= @post.id %>">
-        <%= render 'public/likes/like', post: @post %><br>
-      </div>
+      <!--いいねボタン（ログインユーザーのみ。非ログイン時はいいね数表示）-->
+      <% if user_signed_in? %>
+        <div id="like_buttons_<%= @post.id %>">
+          <%= render 'public/likes/like', post: @post %><br>
+        </div>
+      <% else %>
+        <p><i class="fas fa-heart" style="color: gray;"></i><%= @post.likes.count %></p>
+      <% end %>
+
       美術展名：<%= @post.art_exhibition_name %><br>
       美術館名<%= @post.gallery_name %><br>
       会期：<%= @post.start_date %> ~ <%= @post.end_date %><br>
@@ -19,9 +24,13 @@
       撮影可否：<%= @post.shooting_availability_i18n %>
       <!--登録されているタグ-->
       <% if @tags.present? %>
-        <% @tags.each do |tag| %>
-          <%= link_to "#{tag.name}(#{tag.taggings_count})", tags_path(tag: tag.name) %>
-        <% end %>
+        <div class"row">
+          <div class="col">
+          <% @tags.each do |tag| %>
+            <%= link_to "##{tag.name}", tags_path(tag: tag.name) %>
+          <% end %>
+        </div>
+        </div>
       <% else %>
         <p>登録されているタグはありません</p>
       <% end %>
