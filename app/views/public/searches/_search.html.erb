@@ -13,7 +13,9 @@
 </div>
 
 <script>
-  $("#search-icon").click(function() {
-   $("#search-form").show('slow');
-});
+  $(function () {
+    $('#search-icon').click(function(){
+      $(this).next('#search-form').slideToggle();
+    });
+  });
 </script>

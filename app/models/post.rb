@@ -26,10 +26,10 @@ class Post < ApplicationRecord
   enum shooting_availability: {shooting_not_possible:0, shooting_allowed:1, unknown:2}
 
   # バリデーション
-  with_options presence: true, on: :publicize do
+  # 下書きの状態ではバリデーションをかけない
+  with_options presence: true, unless: :draft? do
     validates :art_exhibition_name
     validates :gallery_name
-    validates :admission
     validates :shooting_availability
     validates :point
     validates :body
@@ -48,6 +48,11 @@ class Post < ApplicationRecord
     or(where(["address like?", "%#{keyword}%"])).
     or(where(["point like?", "%#{keyword}%"])).
     or(where(["body like?", "%#{keyword}%"]))
+  end
+
+  # バリデーションの条件分岐に使用しているメソッド
+  def draft?
+    is_draft == true
   end
 
 end

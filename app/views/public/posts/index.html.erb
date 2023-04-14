@@ -1,4 +1,4 @@
-<div class="conteiner m-5">
+<div class="conteiner">
   <h1>TOP投稿一覧</h1>
   <div class="row">
     <div class="col-3 text-center bg-light p-2">
@@ -14,9 +14,11 @@
     </div>
     <div class="col-9">
       <!--ソートリンク-->
-      <%= link_to '新しい順', posts_path(new_post: "true") %>
-      |<%= link_to '古い順', posts_path(old_post: "true") %>
-      |<%= link_to 'いいねが多い順', posts_path(@posts) %>
+      <div class="sort-btn text-center mb-3">
+        <%= link_to '新しい順', posts_path(new_post: "true"), class: "btn btn-dark rounded-pill" %>
+        <%= link_to '古い順', posts_path(old_post: "true"), class: "btn btn-dark rounded-pill" %>
+        <%= link_to 'いいねが多い順', posts_path(@posts), class: "btn btn-dark rounded-pill" %>
+      </div>
       <%= render 'index', posts: @posts %>
     </div>
   </div>

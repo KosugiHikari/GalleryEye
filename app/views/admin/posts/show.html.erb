@@ -6,6 +6,14 @@
       <%= render 'public/posts/post_image', post: @post %>
     </div>
     <div class="col">
+      
+      <!--公開範囲-->
+      <% if @post.is_draft == false %>
+        <p class="btn btn-primary">公開中</p>
+      <% else %>
+        <p class="btn btn-danger">非公開</p>
+      <% end %>
+      
       <h4>美術展情報</h4>
       美術展名：<%= @post.art_exhibition_name %><br>
       美術館名<%= @post.gallery_name %><br>

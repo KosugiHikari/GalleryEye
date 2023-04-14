@@ -56,20 +56,10 @@ class Public::PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    if
-      if @post.update(post_params)
-        @post.is_draft == true
-        redirect_to post_path(@post.id)
-      else
-        render :edit
-      end
+    if @post.update(post_params)
+      redirect_to post_path(@post.id)
     else
-      if @post.is_draft == false
-        @post.save(context: :publicize)
-        redirect_to post_path(@post.id)
-      else
-        render :edit
-      end
+      render :edit
     end
   end
 

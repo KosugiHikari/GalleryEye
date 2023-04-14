@@ -44,8 +44,12 @@
           <%= f.label :is_draft, "下書き保存", { value: :true } %>
         </div>
 
-          <%= f.submit 'レビューを投稿', class: 'btn btn-sm btn-warning text-light' %>
-          <%= link_to "下書き一覧", confirm_user_path(current_user) %>
+        <% if post.is_draft == false %>
+          <%= f.submit '投稿', class: 'btn btn-success' %>
+        <% else %>
+          <%= f.submit '保存', class: 'btn btn-secondary' %>
+        <% end %>
+        <%= link_to "下書き一覧", confirm_user_path(current_user), class: 'btn btn-outline-secondary' %>
       </div>
     </div>
   <% end %>

@@ -6,3 +6,8 @@
 #search-form {
   display: none;
 }
+
+body {
+  font-family: 'Zen Kaku Gothic Antique', sans-serif;
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+}
