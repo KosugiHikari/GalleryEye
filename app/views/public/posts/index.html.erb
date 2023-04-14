@@ -14,12 +14,13 @@
     </div>
     <div class="col-9">
       <!--ソートリンク-->
-      <div class="sort-btn text-center mb-3">
-        <%= link_to '新しい順', posts_path(new_post: "true"), class: "btn btn-dark rounded-pill" %>
-        <%= link_to '古い順', posts_path(old_post: "true"), class: "btn btn-dark rounded-pill" %>
-        <%= link_to 'いいねが多い順', posts_path(@posts), class: "btn btn-dark rounded-pill" %>
+      <div class="row">
+        <%= link_to '新しい順', posts_path(new_post: "true"), class: "btn btn-outline-dark rounded-pill" %>
+        <%= link_to '古い順', posts_path(old_post: "true"), class: "btn btn-outline-dark rounded-pill" %>
+        <%= link_to 'いいねが多い順', posts_path(@posts), class: "btn btn-outline-dark rounded-pill" %>
       </div>
-      <%= render 'index', posts: @posts %>
+        <%= render 'index', posts: @posts %>
+      </div>
     </div>
   </div>
 </div>
