@@ -27,8 +27,10 @@
         <%= f.label :shooting_availability_unknown, Post.shooting_availabilities_i18n[:unknown] %>
 
         <!--登録タグ-->
-        <%= f.label :tag_list %>
-        <%= f.text_field :tag_list, value: post.tag_list.join(',') %>
+        <div>
+          <p>登録タグ（複数登録の場合は半角カンマ”,”で区切ってください）</p>
+          <%= f.text_field :tag_list, value: post.tag_list.join(',') %>
+        </div>
       </div>
       <div class="col-md-6">
         <h4>レビュー内容</h4>

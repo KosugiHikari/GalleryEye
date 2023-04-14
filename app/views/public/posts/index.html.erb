@@ -1,11 +1,12 @@
-<div class="conteiner">
+<div class="conteiner m-5">
   <h1>TOP投稿一覧</h1>
   <div class="row">
-    <div class="col-3 text-center">
-      <h3>注目タグ</h3>
+    <div class="col-3 text-center bg-light p-2">
+      <h3>Tag list</h3>
+      <p>よく使われているタグ</p>
       <% if @tags.present? %>
           <% @tags.each do |tag| %>
-            <p><%= link_to "##{tag.name}(#{tag.taggings_count})", tags_path(tag: tag.name) %></p>
+            <%= link_to "##{tag.name}(#{tag.taggings_count})", tags_path(tag: tag.name), class: "btn btn-outline-secondary mb-2 rounded-pill" %>
           <% end %>
       <% else %>
         <p>登録されているタグはありません</p>

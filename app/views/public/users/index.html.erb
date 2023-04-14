@@ -1,16 +1,27 @@
-<h1>users</h1>
-<% @users.each do |user| %>
-  <%= link_to user_path(user.id) do %>
-    <!--退会しているユーザーは表示させない↓-->
-    <% if user.is_deleted == false %>
-      <%= image_tag user.get_profile_image(100,100), class: "rounded-circle" %>
-      <%= user.name %>
-
-      <!--フォローボタン-->
-      <div id="follow-<%= user.id %>">
-        <%= render 'public/relationships/follow', user: user %>
-      </div>
-
+<div class="container">
+  <h1>users</h1>
+  <table class="table w-100 table-hover text-center">
+    <% @users.each do |user| %>
+      <tbody>
+        <!--退会しているユーザーは表示させない↓-->
+        <% if user.is_deleted == false %>
+          <td>
+            <%= link_to user_path(user.id) do %>
+              <%= image_tag user.get_profile_image(100,100), class: "rounded-circle" %>
+            <% end %>
+          </td>
+          <td class="text-left align-middle">
+            <%= link_to user_path(user.id) do %>
+              <strong><%= user.name %></strong>
+            <% end %>
+          </td>
+          <!--フォローボタン-->
+          <td id="follow-<%= user.id %>" class="align-middle">
+            <%= render 'public/relationships/follow', user: user %>
+          </td>
+          <td class="text-left align-middle"><%= user.introduction %></td>
+        <% end %>
+      </tbody>
     <% end %>
-  <% end %>
-<% end %>
+  </table>
+</div>
