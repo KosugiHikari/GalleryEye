@@ -2,3 +2,7 @@
 .header {
   background-color: #203744;
 }
+
+#search-form {
+  display: none;
+}

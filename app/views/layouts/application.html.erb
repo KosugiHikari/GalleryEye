@@ -19,8 +19,6 @@
     <div class="mt-1">
       <% if admin_signed_in? %>
         <%= render 'admin/searches/search' %>
-      <% else %>
-        <%= render 'public/searches/search' %>
       <% end %>
     </div>
       <%= yield %>

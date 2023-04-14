@@ -1,12 +1,19 @@
 <div class="d-flex justify-content-center">
-  <div class="search_form" style="border-radius: 0!important;">
+  <div id="search-icon" class="m-1 text-light h4">
+    <i class="fas fa-search"></i>
+  </div>
+  <div class="search_form" id="search-form" style="border-radius: 0!important;">
     <%= form_with url: search_path, method: :get do |f| %>
       <div class="input-group no-border">
-        <%= f.text_field :keyword, class: "search-control", size: "80x2", placeholder: 'レビュー検索' %>
-        <%= button_tag type: "submit", class: "btn btn-outline-dark" do %>
-          <i class="fas fa-search"></i>
-        <% end %>
+        <%= f.text_field :keyword, class: "search-control", size: "30", placeholder: 'レビュー検索' %>
+        <%= button_tag "検索", type: "submit", class: "btn btn-secondary" %>
       </div>
     <% end %>
   </div>
 </div>
+
+<script>
+  $("#search-icon").click(function() {
+   $("#search-form").show('slow');
+});
+</script>
