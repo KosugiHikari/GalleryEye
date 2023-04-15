@@ -1,5 +1,5 @@
 <div class="d-flex flex-wrap">
-  <% @posts.each do |post| %>
+  <% posts.each do |post| %>
     <div class="col text-center">
       <%= link_to post_path(post.id) do %>
         <%= render 'public/posts/post_image', post: post %>

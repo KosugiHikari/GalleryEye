@@ -7,6 +7,9 @@ class Public::UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @posts = @user.posts.where(is_draft: :false)
+    @draft_post = @user.posts.where(is_draft: :true)
+    params[:name]
+    @name = params[:name]
   end
 
   def confirm

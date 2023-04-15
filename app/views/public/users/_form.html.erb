@@ -1,0 +1,41 @@
+  <%= form_with model: user do |f| %>
+    <div class="ProfileImage">
+      <label for="inputImage">ProfileImage</label>
+      <%= f.file_field :profile_image, accept: "image/*" %>
+    </div>
+
+    <!--ゲストユーザーでログインした場合には編集できない-->
+    <% if user.name == "guestuser" %>
+      UserName：<%= user.name %>
+    <% elsif %>
+      <div class="UserName">
+        <label for="inputName">UserName</label>
+        <%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"名前" %>
+      </div>
+    <% end %>
+
+    <!--性別選択-->
+    <div class="Sex">
+      <label for="Sex">Sex</label>
+      <!--男性-->
+      <%= f.radio_button :sex, User.sexes.key(0) %>
+      <%= f.label :sex_men, User.sexes_i18n[:men] %>
+      <!--女性-->
+      <%= f.radio_button :sex, User.sexes.key(1) %>
+      <%= f.label :sex_women, User.sexes_i18n[:women] %>
+      <!--その他-->
+      <%= f.radio_button :sex, User.sexes.key(2) %>
+      <%= f.label :sex_others, User.sexes_i18n[:others] %>
+    </div>
+
+    <div class="BirthDate">
+      <label for="BirthDate">BirthDate</label>
+      <%= f.date_field :birthdate %>
+    </div>
+
+    <div class="Introduction">
+      <label for="Introduction">Introduction</label>
+      <%= f.text_field :introduction, placeholder:"自己紹介文" %>
+    </div>
+    <%= f.submit "変更を保存" %>
+  <% end %>

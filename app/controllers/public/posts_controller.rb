@@ -41,7 +41,7 @@ class Public::PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    pp params[:name]
+    params[:name]
     @name = params[:name]
     @comment = Comment.new
     # 投稿に紐付くタグの表示↓

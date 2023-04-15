@@ -2,10 +2,10 @@
 <h1>user編集</h1>
   <div class="row">
     <div class="col-9">
-      <table class="table table-borderless">
-        <tbody>
-          <%= image_tag @user.get_profile_image(100,100), class: "rounded-circle" %>
-          <%= form_with model: @user, url:admin_user_path, method: :patch do |f| %>
+      <%= image_tag @user.get_profile_image(100,100), class: "rounded-circle" %>
+      <%= form_with model: @user, url:admin_user_path, method: :patch do |f| %>
+        <table class="table table-borderless">
+          <tbody>
             <tr>
               <th>会員ID</th>
               <td><%= @user.id %></td>
@@ -46,7 +46,7 @@
             <tr>
               <th>会員ステータス</th>
               <td>
-                <!--ゲストユーザーの場合は編集不可-->
+              <!--ゲストユーザーの場合は編集不可-->
                 <% if @user.name == "guestuser" %>
                   <% if @user.is_deleted == false %>
                     <strong><p class="text-success">有効</p></strong></td>
@@ -64,9 +64,9 @@
             <tr>
               <td class="text-right"><%= f.submit '変更を保存', class: "btn btn-success" %></td>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      <% end %>
     </div>
   </div>
 </div>

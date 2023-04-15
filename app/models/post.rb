@@ -1,6 +1,8 @@
 class Post < ApplicationRecord
 
   has_one_attached :image
+  
+   attachment :post_image
 
   belongs_to :user, optional: true
 
@@ -10,8 +12,6 @@ class Post < ApplicationRecord
   # いいねのアソシエーション
   has_many :likes, dependent: :destroy
   has_many :liked_users, through: :likes, source: :user
-
-  attachment :post_image
 
   # acts_as_taggable_on :tags の省略
   acts_as_taggable

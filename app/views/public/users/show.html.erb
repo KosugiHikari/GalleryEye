@@ -1,9 +1,11 @@
 <div class="container m-5">
   <h1>マイページ</h1>
   <div class="row">
-    <div class="col-3 text-center border border-secondary rounded bg-light">
-      <%= image_tag @user.get_profile_image(100,100), class: "rounded-circle" %><br>
-      <strong><%= @user.name %></strong>
+    <div class="col-3 text-center border border-secondary rounded bg-light m-3">
+      <div>
+        <%= image_tag @user.get_profile_image(100,100), class: "rounded-circle" %>
+      </div>
+      <h5><%= @user.name %></h5>
 
       <!--自己紹介文-->
       <div class="mt-3 mb-3">
@@ -36,6 +38,24 @@
       <% end %>
 
     </div>
-    <%= render 'posts_list', posts: @posts %>
+
+    <div class="col-8">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <%= link_to '公開中', "#now-posts", class: "nav-link active", data: { toggle: "tab" } %>
+        </li>
+        <li class="nav-item">
+          <%= link_to '下書き', "#draft-posts", class: "nav-link", data: { toggle: "tab" } %>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div id="now-posts" class="tab-pane fade show active">
+          <%= render 'public/posts/index', posts: @posts, kind: 'now' %>
+        </div>
+        <div id="draft-posts" class="tab-pane fade">
+            <%= render 'public/posts/draft', posts: @draft_post, kind: 'draft' %>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

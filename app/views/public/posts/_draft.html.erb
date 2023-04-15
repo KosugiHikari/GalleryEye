@@ -1,0 +1,7 @@
+<div class="m-3">
+  <% if posts.present? %>
+    <%= render 'posts_list', posts: posts %>
+  <% else %>
+    <p>下書きはありません</p>
+  <% end %>
+</div>
