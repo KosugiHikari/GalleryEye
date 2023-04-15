@@ -15,8 +15,8 @@
       </h3>
       <!--いいねボタン（ログインユーザーのみ。非ログイン時はいいね数表示）-->
       <% if user_signed_in? %>
-        <div id="like_buttons_<%= post.id %>">
-          <%= render "public/likes/like", post: post %>
+        <div id="like_buttons_<%= kind %>_<%= post.id %>">
+          <%= render "public/likes/like", post: post, name: kind %>
         </div>
       <% else %>
         <p><i class="fas fa-heart" style="color: gray;"></i><%= post.likes.count %></p>

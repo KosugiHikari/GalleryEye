@@ -9,8 +9,8 @@
       <h4>美術展情報</h4>
       <!--いいねボタン（ログインユーザーのみ。非ログイン時はいいね数表示）-->
       <% if user_signed_in? %>
-        <div id="like_buttons_<%= @post.id %>">
-          <%= render 'public/likes/like', post: @post %><br>
+        <div id="like_buttons_<%= @name %>_<%= @post.id %>">
+          <%= render 'public/likes/like', post: @post, name: @name %><br>
         </div>
       <% else %>
         <p><i class="fas fa-heart" style="color: gray;"></i><%= @post.likes.count %></p>

@@ -1,5 +1,4 @@
 <div class="conteiner">
-  <h1>TOP投稿一覧</h1>
   <div class="row">
     <div class="col-3 text-center bg-light p-2">
       <h3>Tag list</h3>
@@ -12,14 +11,30 @@
         <p>登録されているタグはありません</p>
       <% end %>
     </div>
-    <div class="col-9">
-      <!--ソートリンク-->
-      <div class="row">
-        <%= link_to '新しい順', posts_path(new_post: "true"), class: "btn btn-outline-dark rounded-pill" %>
-        <%= link_to '古い順', posts_path(old_post: "true"), class: "btn btn-outline-dark rounded-pill" %>
-        <%= link_to 'いいねが多い順', posts_path(@posts), class: "btn btn-outline-dark rounded-pill" %>
-      </div>
-        <%= render 'index', posts: @posts %>
+    <div class="col-8 ml-4">
+      <!--タブで投稿の新しい順・古い順・いいねが多い順に切り替え-->
+      <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <%= link_to '新しい順', "#new-posts", class: "nav-link active", data: { toggle: "tab" } %>
+          </li>
+          <li class="nav-item">
+            <%= link_to '古い順', "#old-posts", class: "nav-link", data: { toggle: "tab" } %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'いいねが多い順', "#like-posts", class: "nav-link", data: { toggle: "tab" } %>
+          </li>
+      </ul>
+
+      <div class="tab-content mt-4">
+        <div id="new-posts" class="tab-pane fade show active">
+          <%= render 'index', posts: @new_posts, kind: 'new' %>
+        </div>
+        <div id="old-posts" class="tab-pane fade">
+          <%= render 'index', posts: @old_posts, kind: 'old' %>
+        </div>
+        <div id="like-posts" class="tab-pane fade">
+          <%= render 'index', posts: @like_posts, kind: 'like' %>
+        </div>
       </div>
     </div>
   </div>

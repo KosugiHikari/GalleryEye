@@ -24,15 +24,11 @@ class Public::PostsController < ApplicationController
 
   def index
     # 投稿の新しい順
-    if params[:new_post]
-      @posts = Post.where(is_draft: :false).new_post
+    @new_posts = Post.where(is_draft: false).new_post
     # 投稿の古い順
-    elsif params[:old_post]
-      @posts = Post.where(is_draft: :false).old_post
+    @old_posts = Post.where(is_draft: false).old_post
     # いいねの多い順
-    else
-      @posts = Post.where(is_draft: :false).includes(:liked_users).sort {|a,b| b.liked_users.size <=> a.liked_users.size}
-    end
+    @like_posts = Post.where(is_draft: false).includes(:liked_users).sort {|a,b| b.liked_users.size <=> a.liked_users.size}
 
     # 全タグ取得↓
     @tags = Post.tag_counts_on(:tags).order('count DESC')
@@ -45,6 +41,8 @@ class Public::PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    pp params[:name]
+    @name = params[:name]
     @comment = Comment.new
     # 投稿に紐付くタグの表示↓
     @tags = @post.tag_counts_on(:tags)
