@@ -42,19 +42,23 @@
     <div class="col-8">
       <ul class="nav nav-tabs">
         <li class="nav-item">
-          <%= link_to '公開中', "#now-posts", class: "nav-link active", data: { toggle: "tab" } %>
+          <%= link_to '投稿一覧', "#now-posts", class: "nav-link active", data: { toggle: "tab" } %>
         </li>
-        <li class="nav-item">
-          <%= link_to '下書き', "#draft-posts", class: "nav-link", data: { toggle: "tab" } %>
-        </li>
+        <% if @user == current_user %>
+          <li class="nav-item">
+            <%= link_to '下書き', "#draft-posts", class: "nav-link", data: { toggle: "tab" } %>
+          </li>
+        <% end %>
       </ul>
       <div class="tab-content">
         <div id="now-posts" class="tab-pane fade show active">
           <%= render 'public/posts/index', posts: @posts, kind: 'now' %>
         </div>
-        <div id="draft-posts" class="tab-pane fade">
-            <%= render 'public/posts/draft', posts: @draft_post, kind: 'draft' %>
-        </div>
+        <% if @user == current_user %>
+          <div id="draft-posts" class="tab-pane fade">
+              <%= render 'public/posts/draft', posts: @draft_post, kind: 'draft' %>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>

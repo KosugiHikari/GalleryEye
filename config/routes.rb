@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   end
 
   # ユーザー側（コントローラーの記述を変更してもその処理が実行されるようにするため）
-  devise_for :users,skip: [:passwords], controllers: {
+  devise_for :users, controllers: {
     registrations: "public/registrations",
     sessions: 'public/sessions'
   }
