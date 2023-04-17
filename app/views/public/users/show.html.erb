@@ -39,7 +39,7 @@
 
     </div>
 
-    <div class="col-8">
+    <div class="col-9">
       <ul class="nav nav-tabs">
         <li class="nav-item">
           <%= link_to '投稿一覧', "#now-posts", class: "nav-link active", data: { toggle: "tab" } %>
@@ -50,7 +50,7 @@
           </li>
         <% end %>
       </ul>
-      <div class="tab-content">
+      <div class="tab-content m-3">
         <div id="now-posts" class="tab-pane fade show active">
           <%= render 'public/posts/index', posts: @posts, kind: 'now' %>
         </div>

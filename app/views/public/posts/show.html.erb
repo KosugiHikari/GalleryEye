@@ -6,6 +6,10 @@
       <%= render 'post_image', post: @post %>
     </div>
     <div class="col">
+
+      <!--開催状況-->
+      <%= render 'date', post: @post %>
+
       <h4>美術展情報</h4>
       <!--いいねボタン（ログインユーザーのみ。非ログイン時はいいね数表示）-->
       <% if user_signed_in? %>

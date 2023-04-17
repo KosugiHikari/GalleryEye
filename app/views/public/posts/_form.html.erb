@@ -1,4 +1,5 @@
 <div class="container m-5">
+  <%= flash[:error] %>
   <%= render 'errors', post: post %>
   <%= attachment_image_tag post, :post_image, class: "card img-square", fallback: "noimage.png", size: "300x300" %>
   <%= form_with model: post, local: true do |f| %>

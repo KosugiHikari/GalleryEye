@@ -5,7 +5,7 @@
   <div class="search_form" id="search-form" style="border-radius: 0!important;">
     <%= form_with url: search_path, method: :get do |f| %>
       <div class="input-group no-border">
-        <%= f.text_field :keyword, class: "search-control", size: "30", placeholder: 'レビュー検索' %>
+        <%= f.text_field :keyword, class: "search-control", size: "30", placeholder: 'ユーザー検索' %>
         <%= button_tag "検索", type: "submit", class: "btn btn-secondary" %>
       </div>
     <% end %>

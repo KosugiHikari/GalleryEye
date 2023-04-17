@@ -18,8 +18,11 @@
           <%= f.text_field :art_exhibition_name_or_body_cont, placeholder: "キーワード検索" %>
           <!--Post.holding_areas_i18n.invert：1 =>"北海道", 2 =>"青森県"...のデータが出力される。（_i18nはenumを日本語表記で出力させるためのもの）-->
           <!--mapメソッドでkeyが1,valueに"北海道"が代入される-->
-          <%= f.select :holding_area_eq, Post.holding_areas_i18n.invert.map{|key, value| [key, Post.holding_areas[value]]} %>
-          <%= f.select :shooting_availability_eq, Post.shooting_availabilities_i18n.invert.map{|key, value| [key, Post.shooting_availabilities[value]]} %>
+          <%= f.select :holding_area_eq, Post.holding_areas_i18n.invert.map{|key, value| [key, Post.holding_areas[value]]}, { include_blank: '選択してください' } %>
+          <%= f.select :shooting_availability_eq, Post.shooting_availabilities_i18n.invert.map{|key, value| [key, Post.shooting_availabilities[value]]}, { include_blank: '選択してください' } %>
+          <%= f.date_field :start_date_gteq %>
+          <span>~</span>
+          <%= f.date_field :end_date_lteq %>
           <%= f.submit '検索' %>
         <% end %>
       </div>
@@ -34,6 +37,15 @@
           <li class="nav-item">
             <%= link_to 'いいねが多い順', "#like-posts", class: "nav-link", data: { toggle: "tab" } %>
           </li>
+          <li class="nav-item">
+            <%= link_to '開催中', "#now", class: "nav-link", data: { toggle: "tab" } %>
+          </li>
+          <li class="nav-item">
+            <%= link_to '開催予定', "#soon", class: "nav-link", data: { toggle: "tab" } %>
+          </li>
+          <li class="nav-item">
+            <%= link_to '会期終了', "#end", class: "nav-link", data: { toggle: "tab" } %>
+          </li>
       </ul>
 
       <div class="tab-content mt-4">
@@ -45,6 +57,15 @@
         </div>
         <div id="like-posts" class="tab-pane fade">
           <%= render 'index', posts: @like_posts, kind: 'like' %>
+        </div>
+        <div id="now" class="tab-pane fade">
+          <%= render 'index', posts: @now, kind: 'now' %>
+        </div>
+        <div id="soon" class="tab-pane fade">
+          <%= render 'index', posts: @soon, kind: 'soon' %>
+        </div>
+        <div id="end" class="tab-pane fade">
+          <%= render 'index', posts: @end, kind: 'end' %>
         </div>
       </div>
     </div>

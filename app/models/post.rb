@@ -28,6 +28,7 @@ class Post < ApplicationRecord
 
   # 地域
   enum holding_area: {
+     選択なし:0,
      北海道:1,青森県:2,岩手県:3,宮城県:4,秋田県:5,山形県:6,福島県:7,
      茨城県:8,栃木県:9,群馬県:10,埼玉県:11,千葉県:12,東京都:13,神奈川県:14,
      新潟県:15,富山県:16,石川県:17,福井県:18,山梨県:19,長野県:20,
@@ -47,6 +48,14 @@ class Post < ApplicationRecord
     validates :shooting_availability
     validates :point
     validates :body
+    validates :holding_area
+  end
+
+  # 終了日が開始日より前にならないようにするためのバリデーション
+  validate :start_end_check
+  def start_end_check
+    errors.add(:end_date, "は開始日より前の日付は登録できません。") unless
+    self.start_date < self.end_date
   end
 
 
@@ -70,11 +79,11 @@ class Post < ApplicationRecord
   end
 
   def self.ransackable_attributes(auth_object = nil)
-      ["art_exhibition_name","gallery_name","shooting_availability","point","body","holding_area"]
+      ["art_exhibition_name","gallery_name","shooting_availability","point","body","holding_area","start_date","end_date"]
   end
 
   def self.ransackable_associations(auth_object = nil)
-      ["art_exhibition_name","gallery_name","shooting_availability","point","body","holding_area"]
+      ["art_exhibition_name","gallery_name","shooting_availability","point","body","holding_area","start_date","end_date"]
   end
 
 end

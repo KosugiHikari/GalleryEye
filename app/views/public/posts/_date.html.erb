@@ -1,0 +1,9 @@
+<% if post.is_draft == false %>
+  <% if post.start_date <= Date.today && Date.today <= post.end_date %>
+    <p>開催中</p>
+  <% elsif post.start_date >= Date.today %>
+    <p>開催予定</p>
+  <% else post.end_date <= Date.today %>
+    <p>会期終了</p>
+  <% end %>
+<% end %>

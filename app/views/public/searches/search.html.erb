@@ -1,6 +1,6 @@
-<% if @posts.present? %>
-  <h3><%= @keyword %>に関連するレビュー</h3>
-  <%= render 'public/posts/index', posts: @posts, kind: @name %>
+<% if @users.present? %>
+  <h3><%= @keyword %>に関連するユーザー</h3>
+  <%= render 'public/users/index', users: @users %>
 <% else %>
-  <p>関連するレビューはありません</p>
+  <p>関連するユーザーはいません</p>
 <% end %>

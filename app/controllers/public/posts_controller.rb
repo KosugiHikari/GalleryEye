@@ -8,19 +8,10 @@ class Public::PostsController < ApplicationController
 
   def create
     @post = current_user.posts.new(post_params)
-    if @post.is_draft == false
-      if @post.save
-        redirect_to root_path
-      else
-        render :new
-      end
-    else
-      if @post.is_draft == true
-      @post.save
+    if @post.save
       redirect_to root_path
-      else
-        render :new
-      end
+    else
+      render :new
     end
   end
 
@@ -31,6 +22,10 @@ class Public::PostsController < ApplicationController
     @old_posts = Post.where(is_draft: false).old_post
     # いいねの多い順
     @like_posts = Post.where(is_draft: false).includes(:liked_users).sort {|a,b| b.liked_users.size <=> a.liked_users.size}
+
+    @now = Post.where('start_date <= ?', Date.today).where('end_date >= ?', Date.today)
+    @end = Post.where('end_date <= ?', Date.today)
+    @soon = Post.where('start_date >= ?', Date.today)
 
     # 全タグ取得↓
     @tags = Post.tag_counts_on(:tags).order('count DESC')
