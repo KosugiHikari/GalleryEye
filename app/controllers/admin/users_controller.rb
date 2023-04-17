@@ -1,19 +1,17 @@
 class Admin::UsersController < ApplicationController
+  before_action :set_user, only: [:show, :edit, :update]
 
   def index
     @users = User.all
   end
 
   def show
-    @user = User.find(params[:id])
   end
 
   def edit
-    @user = User.find(params[:id])
   end
 
   def update
-    @user = User.find(params[:id])
     if @user.update(user_params)
       flash[:notice] = "会員情報の編集が完了しました。"
       redirect_to admin_user_path(@user)
@@ -28,4 +26,8 @@ class Admin::UsersController < ApplicationController
     params.require(:user).permit(:name, :birtydate, :sex, :profile_image, :is_deleted, :introduction)
   end
 
+  # 重複するコードをメソッド化
+  def set_user
+    @user = User.find(params[:id])
+  end
 end

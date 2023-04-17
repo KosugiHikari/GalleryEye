@@ -1,0 +1,6 @@
+<% if @posts.present? %>
+  <h3>検索結果</h3>
+  <%= render 'public/posts/index', posts: @posts, kind: @name %>
+<% else %>
+  <p>関連するレビューはありません</p>
+<% end %>

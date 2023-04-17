@@ -12,6 +12,17 @@
       <% end %>
     </div>
     <div class="col-8 ml-4">
+      <!--地域検索-->
+      <div>
+        <%= search_form_for @q, url:search_posts_path do |f| %>
+          <%= f.text_field :art_exhibition_name_or_body_cont, placeholder: "キーワード検索" %>
+          <!--Post.holding_areas_i18n.invert：1 =>"北海道", 2 =>"青森県"...のデータが出力される。（_i18nはenumを日本語表記で出力させるためのもの）-->
+          <!--mapメソッドでkeyが1,valueに"北海道"が代入される-->
+          <%= f.select :holding_area_eq, Post.holding_areas_i18n.invert.map{|key, value| [key, Post.holding_areas[value]]} %>
+          <%= f.select :shooting_availability_eq, Post.shooting_availabilities_i18n.invert.map{|key, value| [key, Post.shooting_availabilities[value]]} %>
+          <%= f.submit '検索' %>
+        <% end %>
+      </div>
       <!--タブで投稿の新しい順・古い順・いいねが多い順に切り替え-->
       <ul class="nav nav-tabs">
           <li class="nav-item">

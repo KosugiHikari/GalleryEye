@@ -1,11 +1,11 @@
 class Public::UsersController < ApplicationController
+  before_action :set_user, only: [:show, :confirm, :edit, :update]
 
   def index
     @users = User.all
   end
 
   def show
-    @user = User.find(params[:id])
     @posts = @user.posts.where(is_draft: :false)
     @draft_post = @user.posts.where(is_draft: :true)
     params[:name]
@@ -13,16 +13,13 @@ class Public::UsersController < ApplicationController
   end
 
   def confirm
-    @user = User.find(params[:id])
     @posts = @user.posts.where(is_draft: :true)
   end
 
   def edit
-    @user = User.find(params[:id])
   end
 
   def update
-    @user = User.find(params[:id])
     if @user.update(user_params)
       redirect_to user_path(@user)
     else
@@ -53,5 +50,9 @@ class Public::UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :birthdate, :sex, :profile_image, :is_deleted, :introduction)
   end
-
+  
+  # 重複するコードをメソッド化
+  def set_user
+    @user = User.find(params[:id])
+  end
 end

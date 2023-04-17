@@ -4,11 +4,18 @@
       <%= link_to post_path(post.id) do %>
         <%= render 'public/posts/post_image', post: post %>
       <% end %>
+      <!--美術展名-->
       <h3><%= post.art_exhibition_name %></h3>
+      <!--美術館名-->
       <p><%= post.gallery_name %></p>
+      <!--会期-->
       <p><%= post.start_date %> ~ <%= post.end_date %></p>
+      <!--注目ポイント-->
       <p><%= post.point %></p>
+      <!--コメント数-->
       <p><%= link_to "#{post.comments.count}コメント", post_path(post.id) %></p>
+      <!--投稿日時-->
+      <p><%= l post.created_at %></p>
       </div>
   <% end %>
 </div>

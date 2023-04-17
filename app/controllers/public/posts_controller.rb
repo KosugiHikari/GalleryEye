@@ -1,4 +1,6 @@
 class Public::PostsController < ApplicationController
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_q, only: [:index, :search]
 
   def new
     @post = Post.new
@@ -7,7 +9,7 @@ class Public::PostsController < ApplicationController
   def create
     @post = current_user.posts.new(post_params)
     if @post.is_draft == false
-      if @post.save(context: :publicize)
+      if @post.save
         redirect_to root_path
       else
         render :new
@@ -40,7 +42,6 @@ class Public::PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
     params[:name]
     @name = params[:name]
     @comment = Comment.new
@@ -49,11 +50,9 @@ class Public::PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:id])
   end
 
   def update
-    @post = Post.find(params[:id])
     if @post.update(post_params)
       redirect_to post_path(@post.id)
     else
@@ -62,14 +61,27 @@ class Public::PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:id])
     @post.destroy
     redirect_to user_path(current_user.id)
+  end
+
+  def search
+    @posts = @q.result(distinct: true)
+    @name = params[:name]
   end
 
   private
 
   def post_params
-    params.require(:post).permit(:art_exhibition_name, :gallery_name, :start_date, :end_date, :admission, :address, :shooting_availability, :point, :body, :post_image, :tag_list, :is_draft)
+    params.require(:post).permit(:art_exhibition_name, :gallery_name, :start_date, :end_date, :admission, :address, :shooting_availability, :point, :body, :post_image, :tag_list, :is_draft).merge(holding_area: params[:post][:holding_area].to_i)
+  end
+
+  # 重複するコードをメソッド化
+  def set_post
+    @post = Post.find(params[:id])
+  end
+
+  def set_q
+    @q = Post.ransack(params[:q])
   end
 end
