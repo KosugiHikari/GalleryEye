@@ -74,3 +74,4 @@ gem "net-imap"
 gem 'acts-as-taggable-on', '~> 9.0'
 gem 'jquery-ui-rails'
 gem 'ransack'
+gem 'kaminari','~> 1.2.1'

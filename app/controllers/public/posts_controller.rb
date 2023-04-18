@@ -17,17 +17,23 @@ class Public::PostsController < ApplicationController
 
   def index
     # 投稿の新しい順
-    @new_posts = Post.where(is_draft: false).new_post
+    @new_posts = Post.new_post
+    @new_posts = Kaminari.paginate_array(@new_posts).page(params[:page]).per(12)
     # 投稿の古い順
-    @old_posts = Post.where(is_draft: false).old_post
+    @old_posts = Post.old_post
+    @old_posts = Kaminari.paginate_array(@old_posts).page(params[:page]).per(12)
     # いいねの多い順
-    @like_posts = Post.where(is_draft: false).includes(:liked_users).sort {|a,b| b.liked_users.size <=> a.liked_users.size}
+    @like_posts = Post.includes(:liked_users).sort {|a,b| b.liked_users.size <=> a.liked_users.size}
+    @like_posts = Kaminari.paginate_array(@like_posts).page(params[:page]).per(12)
     # 開催中の美術展
     @now = Post.where('start_date <= ?', Date.today).where('end_date >= ?', Date.today).order(created_at: :desc)
+    @now = Kaminari.paginate_array(@now).page(params[:page]).per(12)
     # 開催終了している美術展
     @end = Post.where('end_date <= ?', Date.today).order(created_at: :desc)
+    @end = Kaminari.paginate_array(@end).page(params[:page]).per(12)
     # 開催予定の美術展
     @soon = Post.where('start_date >= ?', Date.today).order(created_at: :desc)
+    @soon = Kaminari.paginate_array(@soon).page(params[:page]).per(12)
 
     # 全タグ取得↓
     @tags = Post.tag_counts_on(:tags).order('count DESC')
@@ -39,7 +45,6 @@ class Public::PostsController < ApplicationController
   end
 
   def show
-    params[:name]
     @name = params[:name]
     @comment = Comment.new
     # 投稿に紐付くタグの表示↓

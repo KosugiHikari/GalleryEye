@@ -2,13 +2,12 @@ class Public::UsersController < ApplicationController
   before_action :set_user, only: [:show, :confirm, :edit, :update]
 
   def index
-    @users = User.all
+    @users = User.all.page(params[:page])
   end
 
   def show
-    @posts = @user.posts.where(is_draft: :false).order(created_at: :desc)
-    @draft_post = @user.posts.where(is_draft: :true).order(created_at: :desc)
-    params[:name]
+    @posts = @user.posts.where(is_draft: :false).order(created_at: :desc).page(params[:page])
+    @draft_post = @user.posts.where(is_draft: :true).order(created_at: :desc).page(params[:page])
     @name = params[:name]
   end
 
