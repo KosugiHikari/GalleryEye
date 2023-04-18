@@ -6,8 +6,8 @@ class Public::UsersController < ApplicationController
   end
 
   def show
-    @posts = @user.posts.where(is_draft: :false)
-    @draft_post = @user.posts.where(is_draft: :true)
+    @posts = @user.posts.where(is_draft: :false).order(created_at: :desc)
+    @draft_post = @user.posts.where(is_draft: :true).order(created_at: :desc)
     params[:name]
     @name = params[:name]
   end
@@ -43,6 +43,7 @@ class Public::UsersController < ApplicationController
     @user = User.find(params[:id])
     likes = Like.where(user_id: @user.id).pluck(:post_id)
     @like_posts = Post.find(likes)
+    @name = params[:name]
   end
 
   private
@@ -50,7 +51,7 @@ class Public::UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :birthdate, :sex, :profile_image, :is_deleted, :introduction)
   end
-  
+
   # 重複するコードをメソッド化
   def set_user
     @user = User.find(params[:id])

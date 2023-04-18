@@ -22,10 +22,12 @@ class Public::PostsController < ApplicationController
     @old_posts = Post.where(is_draft: false).old_post
     # いいねの多い順
     @like_posts = Post.where(is_draft: false).includes(:liked_users).sort {|a,b| b.liked_users.size <=> a.liked_users.size}
-
-    @now = Post.where('start_date <= ?', Date.today).where('end_date >= ?', Date.today)
-    @end = Post.where('end_date <= ?', Date.today)
-    @soon = Post.where('start_date >= ?', Date.today)
+    # 開催中の美術展
+    @now = Post.where('start_date <= ?', Date.today).where('end_date >= ?', Date.today).order(created_at: :desc)
+    # 開催終了している美術展
+    @end = Post.where('end_date <= ?', Date.today).order(created_at: :desc)
+    # 開催予定の美術展
+    @soon = Post.where('start_date >= ?', Date.today).order(created_at: :desc)
 
     # 全タグ取得↓
     @tags = Post.tag_counts_on(:tags).order('count DESC')
