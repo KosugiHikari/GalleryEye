@@ -1,3 +1,16 @@
+#header {
+  background-color: #203744;
+}
+
+#search-form {
+  display: none;
+}
+
+body {
+  font-family: 'Zen Kaku Gothic Antique', sans-serif;
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+}
+
 /*ページネーション自体のデザイン*/
 .pagination>li>a {
   border: none;     /*枠線をなくす*/

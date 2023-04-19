@@ -2,7 +2,7 @@ class Post < ApplicationRecord
 
   has_one_attached :image
 
-   attachment :post_image
+  attachment :post_image
 
   belongs_to :user, optional: true
 
@@ -43,11 +43,11 @@ class Post < ApplicationRecord
   # バリデーション
   # 下書きの状態ではバリデーションをかけない
   with_options presence: true, unless: :draft? do
-    validates :art_exhibition_name
-    validates :gallery_name
+    validates :art_exhibition_name, length: { maximum: 20 }
+    validates :gallery_name, length: { maximum: 20 }
     validates :shooting_availability
-    validates :point
-    validates :body
+    validates :point, length: { maximum: 20 }
+    validates :body, length: { maximum: 300 }
     validates :holding_area
   end
 

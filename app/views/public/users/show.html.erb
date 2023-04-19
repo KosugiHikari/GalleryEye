@@ -2,8 +2,9 @@
   <h1>マイページ</h1>
   <div class="row">
     <div class="col-3 text-center border border-secondary rounded bg-light p-3">
+      <!--プロフィール画像-->
       <div>
-        <%= image_tag @user.get_profile_image(100,100), class: "rounded-circle" %>
+        <%= image_tag @user.get_profile_image(100,100), class: "rounded-circle", size: "100x100" %>
       </div>
       <h5><%= @user.name %></h5>
 

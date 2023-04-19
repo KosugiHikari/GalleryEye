@@ -8,22 +8,23 @@
 
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= favicon_link_tag('favicon.ico') %>
   </head>
 
   <body>
-    <header class="header">
+    <header id="header">
       <%= render 'layouts/header' %>
     </header>
 
     <main>
-    <div class="mt-1">
-      <% if admin_signed_in? %>
-        <%= render 'admin/searches/search' %>
-      <% end %>
-    </div>
-    <div class="m-5">
-      <%= yield %>
-    </div>
+      <div class="mt-1">
+        <% if admin_signed_in? %>
+          <%= render 'admin/searches/search' %>
+        <% end %>
+      </div>
+      <div class="m-5">
+        <%= yield %>
+      </div>
     </main>
 
     <footer>

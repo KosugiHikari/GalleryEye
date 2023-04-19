@@ -34,7 +34,7 @@
         <%= l post.created_at %>
         <!--投稿したユーザーアイコン・名前-->
         <%= link_to user_path(post.user) do %>
-          <%= image_tag post.user.get_profile_image(100,100), class: "rounded-circle" %>
+          <%= image_tag post.user.get_profile_image(100,100), class: "rounded-circle", size: "100x100" %>
           <%= post.user.name %>
         <% end %>
       </div>

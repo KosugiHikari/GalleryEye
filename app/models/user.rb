@@ -31,8 +31,11 @@ class User < ApplicationRecord
   # enum設定
   enum sex: { men:0, women:1, others:2 }
 
-  validates :name, presence: true
-  validates :email, presence: true
+  # バリデーション
+  with_options presence: true do
+    validates :name, length: { minimum: 1, maximum: 10 }
+    validates :email
+  end
 
   # プロフィール画像を表示させるためのメソッド
   def get_profile_image(width, height)
