@@ -1,47 +1,86 @@
 <div class="d-flex flex-wrap">
   <% posts.each do |post| %>
     <% if post.is_draft == false %>
-      <div class="col text-center">
+      <div class="col border m-2 pr-2 pl-2 pb-2">
         <!--投稿画像-->
-        <div class="image-conteiner">
+        <div class="image-conteiner text-center">
           <%= link_to post_path(post.id) do %>
-            <%= render 'public/posts/post_image', post: post %>
+            <%= attachment_image_tag post, :post_image, fallback: "noimage.png", size: "300x300" %>
           <% end %>
         </div>
-        <!--美術展情報-->
-        <h3>
-          <%= link_to post_path(post.id) do %>
-            <%= post.art_exhibition_name %>
-          <% end %>
-        </h3>
-        <!--開催状況-->
-        <%= render 'public/posts/date', post: post %>
-        <!--いいねボタン（ログインユーザーのみ。非ログイン時はいいね数表示）-->
-        <% if user_signed_in? %>
-          <div id="like_buttons_<%= kind %>_<%= post.id %>">
-            <%= render "public/likes/like", post: post, name: kind %>
-          </div>
-        <% else %>
-          <p><i class="fas fa-heart" style="color: gray;"></i><%= post.likes.count %></p>
-        <% end %>
 
-        <%= post.gallery_name %><br>
-        <%= post.start_date %> ~ <%= post.end_date %><br>
-        <%= post.point %><br>
-        <!--コメント数-->
-        <p><%= link_to "#{post.comments.count}コメント", post_path(post.id) %></p>
-        <!--投稿日時-->
-        <%= l post.created_at %>
-        <!--投稿したユーザーアイコン・名前-->
-        <%= link_to user_path(post.user) do %>
-          <%= image_tag post.user.get_profile_image(100,100), class: "rounded-circle", size: "100x100" %>
-          <%= post.user.name %>
-        <% end %>
+        <div class="m-1">
+          <div class="d-flex justify-content-between text-secondary">
+            <div class="d-flex align-items-center">
+              <!--美術館名-->
+              <%= post.gallery_name %> |
+              <!--開催地域-->
+              <%= post.holding_area %>
+            </div>
+            <!--開催状況-->
+            <div>
+              <%= render 'public/posts/date', post: post %>
+            </div>
+          </div>
+            <div>
+              <!--美術展名-->
+              <h4>
+                <%= link_to post_path(post.id) do %>
+                  <%= post.art_exhibition_name %>
+                <% end %>
+              </h4>
+            </div>
+        </div>
+
+        <div>
+          会期：<%= post.start_date %> ~ <%= post.end_date %>
+        </div>
+        <div class="border-top mt-2 pb-1">
+          <div class="d-flex">
+            <!--投稿日-->
+            <div class="d-flex align-items-center text-secondary m-2">
+              <%= l post.created_at, format: :short %>
+            </div>
+            <!--注目ポイント-->
+            <div class="d-flex align-items-center m-1">
+              <%= post.point %>
+            </div>
+          </div>
+
+            <div class="d-flex">
+              <!--投稿したユーザーアイコン・名前-->
+              <div class="text-center mr-3">
+                <%= link_to user_path(post.user) do %>
+                  <%= image_tag post.user.get_profile_image(50,50), class: "rounded-circle", size: "50x50" %>
+                  <%= post.user.name %>
+                <% end %>
+              </div>
+
+              <!--いいねボタン（ログインユーザーのみ。非ログイン時はいいね数表示）-->
+              <div class="d-flex align-items-center pr-2 pl-2">
+                <% if user_signed_in? %>
+                  <div id="like_buttons_<%= kind %>_<%= post.id %>">
+                    <%= render "public/likes/like", post: post, name: kind %>
+                  </div>
+                <% else %>
+                  <div>
+                    <i class="fas fa-heart" style="color: gray;"></i> <%= post.likes.count %>
+                  </div>
+                <% end %>
+              </div>
+            <!--コメント数-->
+            <div class="d-flex align-items-center pr-2 pl-2">
+              <%= link_to post_path(post.id) do %>
+                <i class="fas fa-comment"></i> <%= post.comments.count %>
+              <% end %>
+            </div>
+          </div>
+        </div>
       </div>
     <% end %>
   <% end %>
 </div>
-<div class="container">
+<div class="container mt-5">
   <div class="row">
     <div class="col"><%= paginate posts %></div>
   </div>

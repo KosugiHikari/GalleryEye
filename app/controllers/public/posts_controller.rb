@@ -30,10 +30,10 @@ class Public::PostsController < ApplicationController
     @now = Post.where('start_date <= ?', Date.today).where('end_date >= ?', Date.today).order(created_at: :desc)
     @now = Kaminari.paginate_array(@now).page(params[:page]).per(12)
     # 開催終了している美術展
-    @end = Post.where('end_date <= ?', Date.today).order(created_at: :desc)
+    @end = Post.where('end_date < ?', Date.today).order(created_at: :desc)
     @end = Kaminari.paginate_array(@end).page(params[:page]).per(12)
     # 開催予定の美術展
-    @soon = Post.where('start_date >= ?', Date.today).order(created_at: :desc)
+    @soon = Post.where('start_date > ?', Date.today).order(created_at: :desc)
     @soon = Kaminari.paginate_array(@soon).page(params[:page]).per(12)
 
     # 全タグ取得↓
@@ -70,7 +70,7 @@ class Public::PostsController < ApplicationController
   end
 
   def search
-    @posts = @q.result(distinct: true)
+    @posts = @q.result(distinct: true).page(params[:page]).per(12)
     @name = params[:name]
   end
 

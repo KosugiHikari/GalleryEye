@@ -1,40 +1,38 @@
 <div class="login">
   <div class="container">
     <div class="row d-flex justify-content-center">
-      <div class="col-5 d-flex justify-content-center bg-dark text-light pt-2 pb-2 h4">
-        <i class="fas fa-unlock-alt"></i>
+      <div class="col-5 d-flex justify-content-center h3 mb-3">
+        ログイン
       </div>
     </div>
     <div class="row d-flex justify-content-center">
-      <div class="col-5 d-flex justify-content-center pt-3 pb-3  shadow-sm">
+      <div class="col-5 d-flex justify-content-center pt-3 pb-3 border border-secondary rounded">
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-          <div class="field">
+          <div class="field mt-3">
             <%= f.label :メールアドレス %><br />
             <%= f.email_field :email, autofocus: true, autocomplete: "email", size: 40, placeholder: 'sample@example.com' %>
           </div>
 
-          <div class="field">
+          <div class="field mt-3">
             <%= f.label :パスワード %><br />
             <%= f.password_field :password, autocomplete: "current-password", size: 40 %>
           </div>
 
           <% if devise_mapping.rememberable? %>
-            <div class="field mt-2 text-center">
+            <div class="field mt-2">
               <%= f.check_box :remember_me %>
               <%= f.label :ログイン状態を維持する %>
             </div>
           <% end %>
 
-          <div class="actions  d-flex justify-content-center">
-            <%= f.submit "ログイン", class: "btn btn-outline-success" %>
+          <div class="actions mt-2">
+            <%= f.submit "ログイン", class: "form-control btn btn-success" %>
+          </div>
+          <div class="text-center border-top mt-4 pt-3 pb-3">
+            <%= render "public/shared/links" %>
           </div>
         <% end %>
-
-
       </div>
-    </div>
-    <div class="text-center mt-3">
-      <%= render "public/shared/links" %>
     </div>
   </div>
 </div>

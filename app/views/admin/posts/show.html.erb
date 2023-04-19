@@ -2,7 +2,7 @@
   <div class="row">
     <!--投稿画像-->
     <div class="col text-right">
-      <%= render 'public/posts/post_image', post: @post %>
+      <%= attachment_image_tag post, :post_image, fallback: "noimage.png", size: "300x300" %>
     </div>
     <div class="col">
 
