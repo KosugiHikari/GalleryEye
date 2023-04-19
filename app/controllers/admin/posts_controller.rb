@@ -3,9 +3,9 @@ class Admin::PostsController < ApplicationController
   def index
     if params[:user_id]
       @user = User.find(params[:user_id])
-      @posts = @user.posts
+      @posts = @user.posts.page(params[:page]).per(10)
     else
-      @posts = Post.all
+      @posts = Post.all.page(params[:page]).per(10)
     end
   end
 
@@ -16,6 +16,7 @@ class Admin::PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
+    flash[:notice] = "投稿の削除が完了しました"
     redirect_to admin_posts_path
   end
 

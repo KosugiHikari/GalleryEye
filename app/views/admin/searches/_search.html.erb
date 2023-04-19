@@ -1,9 +1,9 @@
-<div class="d-flex justify-content-center">
+<div class="d-flex justify-content-center mt-1">
   <div class="search_form" style="border-radius: 0!important;">
     <%= form_with url:admin_search_path, method: :get do |f| %>
       <div class="input-group no-border">
         <%= f.text_field :keyword, size: "80x2", placeholder: '投稿やユーザー名を検索' %>
-        <%= f.select :model, options_for_select([["Post"], ["User"]]) %>
+        <%= f.select :model, options_for_select([["投稿", "Post"], ["ユーザー名", "User"]]) %>
         <%= button_tag type: "submit", class: "btn btn-outline-dark" do %>
           <i class="fas fa-search"></i>
         <% end %>

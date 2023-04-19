@@ -1,4 +1,7 @@
 <div class="container">
+	<div class="mb-3">
+    <%= flash[:notice] %>
+  </div>
   <h3>
 		<% if params[:user_id] %>
 			<%= @user.name %>さんの投稿履歴一覧

@@ -9,7 +9,8 @@ class Public::PostsController < ApplicationController
   def create
     @post = current_user.posts.new(post_params)
     if @post.save
-      redirect_to root_path
+      flash[:notice] = "投稿が成功しました"
+      redirect_to post_path(@post.id)
     else
       render :new
     end
@@ -56,6 +57,7 @@ class Public::PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
+      flash[:notice] = "投稿内容を編集しました"
       redirect_to post_path(@post.id)
     else
       render :edit

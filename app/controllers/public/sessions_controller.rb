@@ -20,12 +20,13 @@ class Public::SessionsController < Devise::SessionsController
   # end
 
   protected
-  
+
+  # 顧客のログイン処理が実行される前に退会管理用のカラムを確認し、退会済みだった場合、ログインせずにサインアップ画面に遷移する
   def user_state
     @user = User.find_by(email: params[:user][:email])
     return if !@user
     if @user.valid_password?(params[:user][:password]) && @user.is_deleted == true
-      flash[:notice] = "退会済みの為、再登録が必要です。"
+      flash[:notice] = "退会済みの為、再登録が必要です"
       redirect_to new_user_registration_path
     end
   end

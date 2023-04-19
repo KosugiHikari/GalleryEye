@@ -20,6 +20,7 @@ class Public::UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
+      flash[:notice] = "プロフィール情報を変更しました"
       redirect_to user_path(@user)
     else
       render "edit"
