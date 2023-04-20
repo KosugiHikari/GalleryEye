@@ -1,2 +1,6 @@
 <h3>フォロワー一覧</h3>
-<%= render 'follow_list', users: @users %>
+<% if @users.exists? %>
+  <%= render 'public/users/index', users: @users %>
+<% else %>
+  <p>ユーザーはいません</p>
+<% end %>

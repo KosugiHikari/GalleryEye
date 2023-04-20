@@ -9,39 +9,47 @@
       </div>
       <div class="border border-secondary">
         <%= search_form_for @q, url:search_posts_path do |f| %>
-          <div class="bg-dark">
-            <%= f.label :holding_area, "開催地域", class: "p-1 text-light" %>
+          <div class="form-group">
+            <div class="bg-dark">
+              <%= f.label :holding_area, "開催地域", class: "p-1 text-light" %>
+            </div>
+            <div class="text-center mt-2 pl-3 pr-3">
+              <!--Post.holding_areas_i18n.invert：1 =>"北海道", 2 =>"青森県"...のデータが出力される。（_i18nはenumを日本語表記で出力させるためのもの）-->
+              <!--mapメソッドでkeyが1,valueに"北海道"が代入される-->
+              <%= f.select :holding_area_eq, Post.holding_areas_i18n.invert.map{|key, value| [key, Post.holding_areas[value]]}, { include_blank: '選択してください' }, class: "text-center form-control" %>
+            </div>
           </div>
-          <div class="text-center mt-2 mb-2 pl-3 pr-3">
-            <!--Post.holding_areas_i18n.invert：1 =>"北海道", 2 =>"青森県"...のデータが出力される。（_i18nはenumを日本語表記で出力させるためのもの）-->
-            <!--mapメソッドでkeyが1,valueに"北海道"が代入される-->
-            <%= f.select :holding_area_eq, Post.holding_areas_i18n.invert.map{|key, value| [key, Post.holding_areas[value]]}, { include_blank: '選択してください' }, class: "text-center form-control" %>
+          <div class="form-group">
+            <div class="bg-dark">
+              <%= f.label :shooting_availability, "撮影可否", class: "p-1 text-light" %>
+            </div>
+            <div class="text-center mt-2 pl-3 pr-3">
+              <%= f.select :shooting_availability_eq, Post.shooting_availabilities_i18n.invert.map{|key, value| [key, Post.shooting_availabilities[value]]}, { include_blank: '選択してください' }, class: "text-center form-control" %>
+            </div>
           </div>
-          <div class="bg-dark">
-            <%= f.label :shooting_availability, "撮影可否", class: "p-1 text-light" %>
+          <div class="form-group">
+            <div class="bg-dark">
+              <%= f.label :start_date, "会期", class: "p-1 text-light" %>
+            </div>
+            <div class="pl-3 pr-3">
+              <%= f.label :start_date, "開始日", class: "p-1" %>
+              <%= f.date_field :start_date_gteq, class: "form-control" %>
+            </div>
+            <div class="pl-3 pr-3">
+              <%= f.label :end_date, "終了日", class: "p-1" %>
+              <%= f.date_field :end_date_lteq, class: "form-control" %>
+            </div>
           </div>
-          <div class="text-center mt-2 mb-2 pl-3 pr-3">
-            <%= f.select :shooting_availability_eq, Post.shooting_availabilities_i18n.invert.map{|key, value| [key, Post.shooting_availabilities[value]]}, { include_blank: '選択してください' }, class: "text-center form-control" %>
+          <div class="form-group">
+            <div class="bg-dark">
+              <p class="pt-2 pb-2 pl-1 pr-1 text-light">キーワード</p>
+            </div>
+            <div class="pl-3 pr-3">
+              <%= f.text_field :art_exhibition_name_or_body_cont, placeholder: "キーワードを入力してください", class: "form-control" %>
+            </div>
           </div>
-          <div class="bg-dark">
-            <p class="pt-2 pb-2 pl-1 pr-1 text-light">会期</p>
-          </div>
-          <div class="pl-3 pr-3">
-            <%= f.label :start_date, "開始日", class: "p-1" %>
-            <%= f.date_field :start_date_gteq, class: "form-control" %>
-          </div>
-          <div class="pl-3 pr-3">
-            <%= f.label :end_date, "終了日", class: "p-1" %>
-            <%= f.date_field :end_date_lteq, class: "form-control" %><br>
-          </div>
-          <div class="bg-dark">
-            <p class="pt-2 pb-2 pl-1 pr-1 text-light">キーワード</p>
-          </div>
-          <div class="pl-3 pr-3">
-            <%= f.text_field :art_exhibition_name_or_body_cont, placeholder: "キーワードを入力してください", class: "form-control" %>
-          </div>
-          <div class="pl-3 pr-3">
-            <%= button_tag type: "submit", class: "btn btn-info form-control mt-3 mb-3" do %>
+          <div class="pl-3 pr-3 pt-2 border-top">
+            <%= button_tag type: "submit", class: "btn btn-info form-control mt-1 mb-3" do %>
               <i class="fas fa-search"></i>検索
             <% end %>
           </div>

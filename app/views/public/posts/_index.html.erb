@@ -1,7 +1,7 @@
 <div class="d-flex flex-wrap">
   <% posts.each do |post| %>
     <% if post.is_draft == false %>
-      <div class="col border m-2 pr-2 pl-2 pb-2">
+      <div class="col-md-5 border m-2 pr-2 pl-2 pb-2">
         <!--投稿画像-->
         <div class="image-conteiner text-center">
           <%= link_to post_path(post.id) do %>

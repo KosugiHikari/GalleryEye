@@ -49,6 +49,8 @@ class Post < ApplicationRecord
     validates :point, length: { maximum: 20 }
     validates :body, length: { maximum: 300 }
     validates :holding_area
+    validates :start_date
+    validates :end_date
   end
 
   # 終了日が開始日より前にならないようにするためのバリデーション

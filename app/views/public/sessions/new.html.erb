@@ -8,14 +8,14 @@
     <div class="row d-flex justify-content-center">
       <div class="col-5 d-flex justify-content-center pt-3 pb-3 border border-secondary rounded">
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-          <div class="field mt-3">
+          <div class="field mt-3 form-group">
             <%= f.label :メールアドレス %><br />
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", size: 40, placeholder: 'sample@example.com' %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", size: 40, placeholder: 'sample@example.com', class: "form-control" %>
           </div>
 
-          <div class="field mt-3">
+          <div class="field mt-3 form-group">
             <%= f.label :パスワード %><br />
-            <%= f.password_field :password, autocomplete: "current-password", size: 40 %>
+            <%= f.password_field :password, autocomplete: "current-password", size: 40, class: "form-control" %>
           </div>
 
           <% if devise_mapping.rememberable? %>
