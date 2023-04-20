@@ -1,58 +1,79 @@
-<div class="container m-5">
+<div class="container d-flex justify-content-center">
   <%= flash[:error] %>
   <%= render 'errors', post: post %>
-  <%= attachment_image_tag post, :post_image, class: "card img-square", fallback: "noimage.png", size: "300x300" %>
   <%= form_with model: post, local: true do |f| %>
     <div class="row">
-      <div class="col-md-6">
-        <%= f.file_field :post_image, id: "image", accept: "image/*" %>
-        <h4>美術展情報</h4>
-        <div>
-          <%= f.text_field :art_exhibition_name, placeholder: "美術展名" %>
+      <div class="col border border-secondary p-5">
+        <div class="d-flex justify-content-center mb-3">
+          <%= attachment_image_tag post, :post_image, class: "card img-square", fallback: "noimage.png", size: "300x300" %>
         </div>
-        <div>
-          <%= f.text_field :gallery_name, placeholder: "美術館名" %>
+        <div class="d-flex justify-content-center form-group">
+          <%= f.file_field :post_image, id: "image", accept: "image/*", class: "form-control-file" %>
+        </div>
+        <div class="pt-1 pb-1 bg-info form-group">
+          <h4>美術展情報</h4>
+        </div>
+        <div class="form-group">
+          <%= f.label :art_exhibition_name, "美術展名", class: "" %>
+          <%= f.text_field :art_exhibition_name, placeholder: "美術展名", class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :gallery_name, "美術館名", class: "" %>
+          <%= f.text_field :gallery_name, placeholder: "美術館名", class: "form-control" %>
         </div>
 
         <!--会期選択-->
-        <div>
-          <%= f.date_field :start_date %> ~ <%= f.date_field :end_date %>
+        <div class="form-group">
+          <%= f.label :start_date, "開始日", class: "" %>
+          <%= f.date_field :start_date, class: "form-control" %>
+          <%= f.label :end_date, "終了日", class: "" %>
+          <%= f.date_field :end_date, class: "form-control" %>
         </div>
 
-        <div>
-          <%= f.number_field :admission, placeholder: "入場料" %>円
+        <div class="form-group">
+          <%= f.label :admission, "入場料", class: "" %>
+          <%= f.number_field :admission, placeholder: "入場料(数字を入力してください)", class: "form-control" %>円
         </div>
         <!--エリア選択-->
-        <div>
-          <%= f.select :holding_area, options_for_select(Post.holding_areas), {prompt: "選択してください"}, class: "prefecture-select" %>
+        <div class="form-group">
+          <%= f.label :holding_area, "エリア選択", class: "" %>
+          <%= f.select :holding_area, options_for_select(Post.holding_areas), {prompt: "選択してください"}, class: "prefecture-select form-control" %>
         </div>
-        <div>
-          <%= f.text_field :address, placeholder: "住所" %>
+        <div class="form-group">
+          <%= f.label :address, "住所", class: "" %>
+          <%= f.text_field :address, placeholder: "住所", class: "form-control" %>
         </div>
 
         <!--撮影可否選択のラジオボタン-->
-        <div>
+        <div class="d-flex flex-column">
+          <div>
+          <%= f.label :shooting_availability, "撮影可否", class: "" %>
+          </div>
           <!--撮影不可-->
+          <div>
           <%= f.radio_button :shooting_availability, Post.shooting_availabilities.key(0) %>
           <%= f.label :shooting_availability_shooting_not_possible, Post.shooting_availabilities_i18n[:shooting_not_possible] %>
+          </div>
           <!--撮影可-->
+          <div>
           <%= f.radio_button :shooting_availability, Post.shooting_availabilities.key(1) %>
           <%= f.label :shooting_availability_shooting_allowed, Post.shooting_availabilities_i18n[:shooting_allowed] %>
+          </div>
           <!--不明-->
+          <div>
           <%= f.radio_button :shooting_availability, Post.shooting_availabilities.key(2) %>
           <%= f.label :shooting_availability_unknown, Post.shooting_availabilities_i18n[:unknown] %>
+          </div>
         </div>
 
         <!--登録タグ-->
         <div>
           <p>登録タグ(複数登録の場合は半角カンマ”,”で区切ってください)</p>
-          <%= f.text_field :tag_list, value: post.tag_list.join(',') %>
+          <%= f.text_field :tag_list, value: post.tag_list.join(','), class: "form-control" %>
         </div>
-      </div>
-      <div class="col-md-6">
         <h4>レビュー内容</h4>
-        <%= f.text_field :point, placeholder: "注目ポイント" %><br>
-        <%= f.text_area :body, placeholder: "本文" %><br>
+        <%= f.text_field :point, placeholder: "注目ポイント", class: "form-control" %>
+        <%= f.text_area :body, placeholder: "本文", class: "form-control", rows: "5" %>
         <div>
           <%= f.label :"公開範囲" %>
           <%= f.radio_button :is_draft, :false %>
