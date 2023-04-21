@@ -2,7 +2,7 @@
   <% posts.each do |post| %>
     <div class="col text-center">
       <%= link_to post_path(post.id) do %>
-        <%= render 'public/posts/post_image', post: post %>
+        <%= attachment_image_tag post, :post_image, fallback: "noimage.png", size: "300x300" %>
       <% end %>
       <!--美術展名-->
       <h3><%= post.art_exhibition_name %></h3>

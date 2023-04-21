@@ -31,10 +31,10 @@
             <div class="field mt-3 form-group">
               <div class="d-flex flex-row">
                 <%= f.label :パスワード %>
-                <% if @minimum_password_length %>
-                (<%= @minimum_password_length %> 文字以上の半角英数字)
-                <% end %>
                 <p class="bg-danger text-light pl-1 pr-1 ml-1">必須</p>
+                <% if @minimum_password_length %>
+                <p class="text-primary">　<i class="fas fa-check"></i><%= @minimum_password_length %> 文字以上の半角英数字</p>
+                <% end %>
               </div>
               <%= f.password_field :password, autocomplete: "new-password", size: 40, class: "form-control"  %>
             </div>

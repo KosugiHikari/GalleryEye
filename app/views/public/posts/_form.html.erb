@@ -1,8 +1,8 @@
 <%= flash[:error] %>
 <%= render 'errors', post: post %>
-<div class="container d-flex justify-content-center">
-    <div class="row">
-      <div class="col-md-12 shadow p-5">
+<div class="container">
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-8 shadow p-5">
         <%= form_with model: post, local: true do |f| %>
         <div class="d-flex justify-content-center mb-3">
           <%= attachment_image_tag post, :post_image, class: "card img-square", fallback: "noimage.png", size: "300x300" %>
@@ -10,19 +10,24 @@
         <div class="d-flex justify-content-center form-group">
           <%= f.file_field :post_image, id: "image", accept: "image/*", class: "form-control-file" %>
         </div>
+
         <div class="p-2 bg-info form-group">
           <h4>美術展情報</h4>
         </div>
+
+        <!--美術展名-->
         <div class="form-group">
           <div class="d-flex flex-row">
-            <%= f.label :art_exhibition_name, "美術展名" %>
+            <%= f.label :art_exhibition_name, "美術展名", class: "h5" %>
             <p class="bg-danger text-light pl-1 pr-1 ml-1">必須</p>
           </div>
           <%= f.text_field :art_exhibition_name, placeholder: "美術展名", class: "form-control" %>
         </div>
+
+        <!--美術館名-->
         <div class="form-group">
           <div class="d-flex flex-row">
-            <%= f.label :gallery_name, "美術館名" %>
+            <%= f.label :gallery_name, "美術館名", class: "h5" %>
             <p class="bg-danger text-light pl-1 pr-1 ml-1">必須</p>
           </div>
           <%= f.text_field :gallery_name, placeholder: "美術館名", class: "form-control" %>
@@ -31,31 +36,41 @@
         <!--会期選択-->
         <div class="form-group">
           <div class="d-flex flex-row">
-            <%= f.label :start_date, "開始日" %>
+            <%= f.label :start_date, "開始日", class: "h5" %>
             <p class="bg-danger text-light pl-1 pr-1 ml-1">必須</p>
           </div>
           <%= f.date_field :start_date, class: "form-control" %>
           <div class="d-flex flex-row mt-3">
-            <%= f.label :end_date, "終了日" %>
+            <%= f.label :end_date, "終了日", class: "h5" %>
             <p class="bg-danger text-light pl-1 pr-1 ml-1">必須</p>
           </div>
           <%= f.date_field :end_date, class: "form-control" %>
         </div>
 
+        <!--入場料-->
         <div class="form-group">
-          <%= f.label :admission, "入場料(数字を入力してください)" %>
-          <%= f.number_field :admission, placeholder: "入場料", class: "form-control" %>円
+          <%= f.label :admission, "入場料", class: "h5" %>
+          <p class="text-primary"><i class="fas fa-check"></i>　半角数字を入力してください</p>
+          <%= f.number_field :admission, placeholder: "入場料", class: "form-control" %>
+          <p class="text-right">円</p>
         </div>
+
         <!--エリア選択-->
         <div class="form-group">
           <div class="d-flex flex-row">
-            <%= f.label :holding_area, "エリア選択", class: "" %>
+            <%= f.label :holding_area, "エリア選択", class: "h5" %>
             <p class="bg-danger text-light pl-1 pr-1 ml-1">必須</p>
           </div>
-          <%= f.select :holding_area, options_for_select(Post.holding_areas), {prompt: "選択してください"}, class: "prefecture-select form-control" %>
+          <!--Post.holding_areasで支払日のenumをハッシュの形で取得-->
+          <!--keysで取得したハッシュのキーを配列の形で取得。map メソッドで新たに配列を生成。-->
+          <!--第二引数（with_index）で要素の添字を変数 i として取得。変数 i (数値)がvalueに渡される。-->
+          <!--t("enum.post.holding_area.#{k}")→ja.ymlの表記の通りに翻訳するというメソッド-->
+          <%= f.select :holding_area, Post.holding_areas.keys.map.with_index { |k| [t("enum.post.holding_area.#{k}"), k] }, { include_blank: "選択してください" }, class: "prefecture-select form-control" %>
         </div>
+
+        <!--住所-->
         <div class="form-group">
-          <%= f.label :address, "住所" %>
+          <%= f.label :address, "住所", class: "h5" %>
           <%= f.text_field :address, placeholder: "住所", class: "form-control" %>
         </div>
 
@@ -63,7 +78,7 @@
         <div class="d-flex flex-column form-group">
           <div>
           <div class="d-flex flex-row">
-            <%= f.label :shooting_availability, "撮影可否" %>
+            <%= f.label :shooting_availability, "撮影可否", class: "h5" %>
             <p class="bg-danger text-light pl-1 pr-1 ml-1">必須</p>
           </div>
           </div>
@@ -86,29 +101,36 @@
 
         <!--登録タグ-->
         <div class="form-group">
-          <p>登録タグ(複数登録の場合は半角カンマ”,”で区切ってください)</p>
+          <h5>登録タグ</h5>
+          <p class="text-primary"><i class="fas fa-check"></i>　複数登録の場合は半角カンマ(,)で区切ってください</p>
           <%= f.text_field :tag_list, value: post.tag_list.join(','), class: "form-control", placeholder: "タグ" %>
         </div>
         <div class="p-2 bg-info form-group">
           <h4>レビュー内容</h4>
         </div>
+
+        <!--注目ポイント-->
         <div class="form-group">
           <div class="d-flex flex-row">
-            <%= f.label :point, "注目ポイント" %>
+            <%= f.label :point, "注目ポイント", class: "h5" %>
             <p class="bg-danger text-light pl-1 pr-1 ml-1">必須</p>
           </div>
           <%= f.text_field :point, placeholder: "注目ポイント", class: "form-control" %>
         </div>
+
+        <!--本文-->
         <div class="form-group">
           <div class="d-flex flex-row">
-            <%= f.label :bodt, "本文" %>
+            <%= f.label :bodt, "本文", class: "h5" %>
             <p class="bg-danger text-light pl-1 pr-1 ml-1">必須</p>
           </div>
           <%= f.text_area :body, placeholder: "本文", class: "form-control", rows: "5" %>
         </div>
+
+        <!--公開範囲選択のラジオボタン-->
         <div class="form-group">
           <div>
-          <%= f.label :"公開範囲" %>
+          <%= f.label :"公開範囲", class: "h5" %>
           </div>
           <div>
           <%= f.radio_button :is_draft, :false %>
@@ -120,6 +142,7 @@
           </div>
         </div>
 
+        <!--投稿・保存ボタン、下書き一覧ボタン-->
         <% if post.is_draft == false %>
           <div class="pb-3">
             <%= f.submit '投稿', class: 'btn btn-success form-control' %>

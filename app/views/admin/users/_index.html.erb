@@ -11,17 +11,17 @@
   <% if users.exists? %>
     <% users.each do |user| %>
       <tbody>
-        <td><%= user.id %></td>
-        <td>
+        <td class="align-middle"><%= user.id %></td>
+        <td class="align-middle">
           <%= image_tag user.get_profile_image(50,50), class: "rounded-circle" %>
         </td>
-        <td>
+        <td class="align-middle">
           <%= link_to admin_user_path(user.id) do %>
             <%= user.name %>
           <% end %>
         </td>
-        <td><%= user.email %></td>
-        <td>
+        <td class="align-middle"><%= user.email %></td>
+        <td class="align-middle">
           <% if user.is_deleted == false %>
             <strong><p class="text-success">有効</p></strong>
           <% elsif %>

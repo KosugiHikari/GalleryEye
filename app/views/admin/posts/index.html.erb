@@ -4,9 +4,9 @@
   </div>
   <h3>
 		<% if params[:user_id] %>
-			<%= @user.name %>さんの投稿履歴一覧
+			<h3 class="pb-3"><%= @user.name %>さんの投稿履歴一覧</h3>
 		<% else %>
-			<h3>Posts</h3>
+			<h3 class="pb-3">Posts</h3>
 		<% end %>
 	</h3>
   <div class="row">

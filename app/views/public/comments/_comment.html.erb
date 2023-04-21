@@ -1,7 +1,7 @@
 <% if post.comments.present? %>
   <div class="m-3"><%= flash[:notice] %></div>
   <% post.comments.each do |comment| %>
-    <div class="container border mb-3">
+    <div class="container border rounded mb-3">
       <div class="row p-3">
         <div class="col-5">
           <div class="text-left">
@@ -9,18 +9,20 @@
           </div>
         </div>
       </div>
-      <div class="row p-3 d-flex justify-content-end">
+      <div class="row p-3 justify-content-end">
         <div class="d-flex justify-content-end col-4">
-          <p><%= comment.created_at.strftime('%Y/%m/%d') %></p>
+          <div class="p-2">
+          <span><%= comment.created_at.strftime('%Y/%m/%d') %></span>
+          </div>
           <div>
             BY
             <%= link_to user_path(comment.user) do %>
-              <%= image_tag comment.user.get_profile_image(50,50) %>
+              <span><%= image_tag comment.user.get_profile_image(50,50) %></span>
             <% end %>
           </div>
-          <div>
+          <div class="p-2">
             <%= link_to user_path(comment.user) do %>
-              <%= comment.user.name %>
+              <span><%= comment.user.name %></span>
             <% end %>
           </div>
         </div>
@@ -36,5 +38,5 @@
     </div>
   <% end %>
 <% else %>
-  <p>コメントはありません</p>
+  <p>このレビューへのコメントはありません</p>
 <% end %>

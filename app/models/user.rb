@@ -33,7 +33,7 @@ class User < ApplicationRecord
 
   # バリデーション
   with_options presence: true do
-    validates :name, length: { minimum: 1, maximum: 10 }
+    validates :name, length: { minimum: 1, maximum: 10 }, uniqueness: true
     validates :email
   end
 

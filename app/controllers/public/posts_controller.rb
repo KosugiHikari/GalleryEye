@@ -9,7 +9,7 @@ class Public::PostsController < ApplicationController
   def create
     @post = current_user.posts.new(post_params)
     if @post.save
-      flash[:notice] = "投稿が成功しました"
+      flash[:notice] = "レビューを投稿しました"
       redirect_to post_path(@post.id)
     else
       render :new
@@ -57,7 +57,7 @@ class Public::PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
-      flash[:notice] = "投稿内容を編集しました"
+      flash[:notice] = "レビュー内容を編集しました"
       redirect_to post_path(@post.id)
     else
       render :edit
@@ -77,7 +77,7 @@ class Public::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:art_exhibition_name, :gallery_name, :start_date, :end_date, :admission, :address, :shooting_availability, :point, :body, :post_image, :tag_list, :is_draft).merge(holding_area: params[:post][:holding_area].to_i)
+    params.require(:post).permit(:art_exhibition_name, :gallery_name, :start_date, :end_date, :admission, :address, :shooting_availability, :point, :body, :post_image, :tag_list, :is_draft, :holding_area)
   end
 
   # 重複するコードをメソッド化

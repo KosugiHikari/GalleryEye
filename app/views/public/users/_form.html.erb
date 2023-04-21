@@ -1,47 +1,70 @@
-  <%= form_with model: user do |f| %>
-    <div class="ProfileImage">
-      <label for="inputImage">ProfileImage</label>
-      <%= image_tag user.profile_image, class: "card img-square rounded-circle", fallback: "icon_user.png", size: "100x100" %>
-      <%= f.file_field :profile_image, id: "image", accept: "image/*" %>
-    </div>
+<div class="row d-flex justify-content-center">
+  <div class="col-6">
+    <%= form_with model: user do |f| %>
 
-    <!--ゲストユーザーでログインした場合には編集できない-->
-    <% if user.name == "guestuser" %>
-      UserName：<%= user.name %>
-    <% elsif %>
-      <div class="UserName">
-        <label for="inputName">UserName</label>
-        <%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"名前" %>
+      <div class="d-flex justify-content-center mb-3">
+        <%= image_tag user.profile_image, class: "card img-square rounded-circle", fallback: "icon_user.png", size: "100x100" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :profile_image, "プロフィール画像", class: "h5" %>
+        <%= f.file_field :profile_image, id: "image", accept: "image/*" %>
+      </div>
+
+      <!--ゲストユーザーでログインした場合には編集できない-->
+      <% if user.name == "guestuser" %>
+        <div class="form-group">
+          <h5>ユーザーネーム</h5>
+          <%= user.name %>
+        </div>
+      <% elsif %>
+        <div class="form-group">
+          <%= f.label :name, "ユーザーネーム", class: "h5" %>
+          <%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"ユーザーネーム", class: "form-control" %>
+        </div>
+      <% end %>
+
+      <!--性別選択-->
+      <div class="form-group">
+        <div>
+        <%= f.label :sex, "性別", class: "h5" %>
+        </div>
+        <!--男性-->
+        <div>
+        <%= f.radio_button :sex, User.sexes.key(0) %>
+        <%= f.label :sex_men, User.sexes_i18n[:men] %>
+        </div>
+        <!--女性-->
+        <div>
+        <%= f.radio_button :sex, User.sexes.key(1) %>
+        <%= f.label :sex_women, User.sexes_i18n[:women] %>
+        </div>
+        <!--その他-->
+        <div>
+        <%= f.radio_button :sex, User.sexes.key(2) %>
+        <%= f.label :sex_others, User.sexes_i18n[:others] %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :birthdate, "誕生日", class: "h5" %>
+        <%= f.date_field :birthdate, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :introduction, "自己紹介", class: "h5" %>
+        <%= f.text_area :introduction, placeholder:"自己紹介", class: "form-control", rows: "5" %>
+      </div>
+
+      <div class="pl-3 pr-3 pb-3">
+        <%= f.submit "変更を保存", class: "btn btn-outline-primary form-control" %>
       </div>
     <% end %>
 
-    <!--性別選択-->
-    <div class="Sex">
-      <label for="Sex">Sex</label>
-      <!--男性-->
-      <%= f.radio_button :sex, User.sexes.key(0) %>
-      <%= f.label :sex_men, User.sexes_i18n[:men] %>
-      <!--女性-->
-      <%= f.radio_button :sex, User.sexes.key(1) %>
-      <%= f.label :sex_women, User.sexes_i18n[:women] %>
-      <!--その他-->
-      <%= f.radio_button :sex, User.sexes.key(2) %>
-      <%= f.label :sex_others, User.sexes_i18n[:others] %>
+    <div class="pl-3 pr-3 pt-3 border-top">
+      <%= link_to "アカウント登録情報の変更はこちら", edit_user_registration_path, class: "btn btn-outline-secondary form-control" %>
     </div>
-
-    <div class="BirthDate">
-      <label for="BirthDate">BirthDate</label>
-      <%= f.date_field :birthdate %>
-    </div>
-
-    <div class="Introduction">
-      <label for="Introduction">Introduction</label>
-      <%= f.text_field :introduction, placeholder:"自己紹介文" %>
-    </div>
-    <%= f.submit "変更を保存" %>
-  <% end %>
-
-<%= link_to "アカウント情報編集", edit_user_registration_path, class: "user-edit-btn" %>
+  </div>
+</div>
 
 <script>
   $(function() {

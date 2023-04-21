@@ -1,9 +1,9 @@
 <% if post.is_draft == false %>
   <% if post.start_date <= Date.today && Date.today <= post.end_date %>
-    <p class="rounded border border-danger bg-light text-danger p-1">開催中</p>
+    <span class="rounded border border-danger bg-light text-danger p-1 ml-3">開催中</span>
   <% elsif post.start_date > Date.today %>
-    <p class="rounded border border-infoz bg-light text-info p-1">開催予定</p>
+    <span class="rounded border border-infoz bg-light text-info p-1 ml-3">開催予定</span>
   <% else post.end_date < Date.today %>
-    <p class="rounded border border-secondary bg-light text-secondary p-1">会期終了</p>
+    <span class="rounded border border-secondary bg-light text-secondary p-1 ml-3">会期終了</span>
   <% end %>
 <% end %>
