@@ -1,7 +1,15 @@
-<div class="col-7">
-<%= form_with model:[post, comment], local: false do |f| %>
-  <%= render 'errors', post: f.object %>
-  <%= f.text_area :comment, rows: '5', cols:'40', placeholder: "コメントを記入", class: "comment_textarea form-control" %>
-  <div class="d-flex justify-content-center m-3"><%= f.submit "送信する", class: 'btn btn-success' %></div>
-<% end %>
-</div>
+<% if user_signed_in? %>
+  <div class="col-7">
+    <div id="comments_error">
+      <%= render "public/shared/error_messages", resource: @comment %>
+    </div>
+    <%= form_with model:[post, comment], local: false do |f| %>
+      <%= f.text_area :comment, rows: '5', cols:'40', placeholder: "コメントを記入", class: "comment_textarea form-control" %>
+      <div class="d-flex justify-content-center m-3"><%= f.submit "送信する", class: 'btn btn-success' %></div>
+    <% end %>
+  </div>
+<% else %>
+  <%= link_to new_user_registration_path, class: 'text-info' do %>
+    <p>会員登録をして気になるレビューにコメントをしよう！</p>
+  <% end %>
+<%end %>

@@ -1,4 +1,5 @@
 class Public::UsersController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show, :likes]
   before_action :set_user, only: [:show, :confirm, :edit, :update]
 
   def index

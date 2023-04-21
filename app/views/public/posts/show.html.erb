@@ -102,14 +102,17 @@
   </div>
 
   <!--登録されているタグ-->
-  <div class="d-flex align-items-center justify-content-center p-2">
-    <i class="fas fa-tags"></i>
+  <div class="d-flex justify-content-center align-middle mt-3">
     <% if @tags.present? %>
+      <div class="mt-2"><i class="fas fa-tags"></i></div>
       <% @tags.each do |tag| %>
         <%= link_to "##{tag.name}", tags_path(tag: tag.name), class: "btn btn-outline-secondary rounded-pill ml-2" %>
       <% end %>
     <% else %>
-      <p class="ml-2">登録されているタグはありません</p>
+      <div><i class="fas fa-tags"></i></div>
+      <div class="align-middle">
+        <p class="ml-2">登録されているタグはありません</p>
+      </div>
     <% end %>
   </div>
 </div>
@@ -120,7 +123,7 @@
 
     <!--コメントボックス-->
     <div class="d-flex justify-content-center">
-      <%= render 'public/comments/comment_form', post: @post, comment: @comment %>
+      <%= render 'public/comments/comment_form', post: @post, comment: @comment, resource: @comment %>
     </div>
   </div>
 </div>
