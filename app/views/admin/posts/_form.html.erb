@@ -1,9 +1,9 @@
 <%= flash[:error] %>
-<%= render 'errors', post: post %>
+<%= render 'admin/shared/error_messages', resource: post %>
 <div class="container">
     <div class="row d-flex justify-content-center">
       <div class="col-md-8 shadow p-5">
-        <%= form_with model: post, local: true do |f| %>
+        <%= form_with model: post, url:admin_post_path, method: :patch, local: true do |f| %>
           <div class="d-flex justify-content-center mb-3">
             <%= attachment_image_tag post, :post_image, class: "card img-square", fallback: "noimage.png", size: "300x300" %>
           </div>
@@ -152,9 +152,6 @@
               <%= f.submit '保存', class: 'btn btn-secondary form-control' %>
             </div>
           <% end %>
-          <div class="border-top pt-3">
-          <%= link_to "下書き一覧", confirm_user_path(current_user), class: 'btn btn-outline-secondary form-control' %>
-          </div>
         <% end %>
       </div>
     </div>

@@ -1,21 +1,53 @@
 <div class="d-flex flex-wrap">
   <% posts.each do |post| %>
-    <div class="col text-center">
-      <%= link_to post_path(post.id) do %>
-        <%= attachment_image_tag post, :post_image, fallback: "noimage.png", size: "300x300" %>
-      <% end %>
-      <!--美術展名-->
-      <h3><%= post.art_exhibition_name %></h3>
-      <!--美術館名-->
-      <p><%= post.gallery_name %></p>
-      <!--会期-->
-      <p><%= post.start_date %> ~ <%= post.end_date %></p>
-      <!--注目ポイント-->
-      <p><%= post.point %></p>
-      <!--コメント数-->
-      <p><%= link_to "#{post.comments.count}コメント", post_path(post.id) %></p>
-      <!--投稿日時-->
-      <p><%= l post.created_at %></p>
+    <% if post.is_draft == true %>
+      <div class="col-md-5 border m-2 pr-2 pl-2 pb-2">
+        <!--投稿画像-->
+        <div class="image-conteiner text-center">
+          <%= link_to post_path(post.id) do %>
+            <%= attachment_image_tag post, :post_image, fallback: "noimage.png", size: "300x300" %>
+          <% end %>
+        </div>
+
+        <div class="m-1">
+          <div class="d-flex justify-content-between text-secondary">
+            <div class="d-flex align-items-center">
+              <!--美術館名-->
+              <%= post.gallery_name %> |
+              <!--開催地域-->
+              <%= post.holding_area %>
+              </div>
+              <!--開催状況-->
+            <div class="mt-1">
+              <%= render 'public/posts/date', post: post %>
+            </div>
+          </div>
+          <div>
+            <!--美術展名-->
+            <h4>
+              <%= link_to post_path(post.id) do %>
+                <%= post.art_exhibition_name %>
+              <% end %>
+            </h4>
+          </div>
+        </div>
+
+        <div>
+          会期：<%= post.start_date %> ~ <%= post.end_date %>
+        </div>
+        <div class="border-top mt-2 pb-1">
+          <div class="d-flex">
+            <!--投稿日-->
+            <div class="d-flex align-items-center text-secondary m-2">
+              <%= l post.created_at, format: :short %>
+            </div>
+            <!--注目ポイント-->
+            <div class="d-flex align-items-center m-1">
+              <%= post.point %>
+            </div>
+          </div>
+        </div>
       </div>
+    <% end %>
   <% end %>
 </div>

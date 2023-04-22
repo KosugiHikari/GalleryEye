@@ -45,11 +45,13 @@
         </div>
       </div>
 
+      <!--生年月日-->
       <div class="form-group">
         <%= f.label :birthdate, "誕生日", class: "h5" %>
         <%= f.date_field :birthdate, class: "form-control" %>
       </div>
 
+      <!--自己紹介-->
       <div class="form-group">
         <%= f.label :introduction, "自己紹介", class: "h5" %>
         <%= f.text_area :introduction, placeholder:"自己紹介", class: "form-control", rows: "5" %>

@@ -49,15 +49,15 @@ class Post < ApplicationRecord
     validates :point, length: { maximum: 20 }
     validates :body, length: { maximum: 300 }
     validates :holding_area
-    validates :start_date
-    validates :end_date
   end
 
   # 終了日が開始日より前にならないようにするためのバリデーション
   validate :start_end_check
   def start_end_check
     errors.add(:end_date, "は開始日より前の日付は登録できません。") unless
-    self.start_date < self.end_date
+    if self.start_date && self.end_date
+      self.start_date < self.end_date
+    end
   end
 
 
@@ -81,11 +81,11 @@ class Post < ApplicationRecord
   end
 
   def self.ransackable_attributes(auth_object = nil)
-      ["art_exhibition_name","gallery_name","shooting_availability","point","body","holding_area","start_date","end_date"]
+      ["art_exhibition_name","gallery_name","address","shooting_availability","point","body","holding_area","start_date","end_date"]
   end
 
   def self.ransackable_associations(auth_object = nil)
-      ["art_exhibition_name","gallery_name","shooting_availability","point","body","holding_area","start_date","end_date"]
+      ["art_exhibition_name","gallery_name","address","shooting_availability","point","body","holding_area","start_date","end_date"]
   end
 
 end

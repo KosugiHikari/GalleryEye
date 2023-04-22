@@ -1,0 +1,37 @@
+#header {
+  background-color: #203744;
+}
+
+#search-form {
+  display: none;
+}
+
+body {
+  font-family: 'Zen Kaku Gothic Antique', sans-serif;
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+}
+
+.pagination {
+  justify-content: center;
+}
+
+.field_with_errors {
+  display: contents;
+}
+
+#about {
+  background-image: url(../images/backimg.jpg);
+  height: 500px;
+}
+
+#transparenti {
+  background-color: rgba(255, 255, 255, 0.562);
+  height: 500px;
+}
+
+#login,
+#sign_in {
+  background-image: url(../images/public_in.png);
+  background-position: right bottom;
+  background-repeat:repeat-x;
+}

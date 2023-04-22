@@ -1,0 +1,119 @@
+  <div class="row d-flex justify-content-center">
+    <div class="col-5 border p-3">
+      <div class="d-flex justify-content-center mb-3">
+        <%= image_tag user.profile_image, class: "card img-square rounded-circle", fallback: "icon_user.png", size: "100x100" %>
+      </div>
+      <%= form_with model: user, url:admin_user_path, method: :patch do |f| %>
+        <div class="form-group">
+          <%= f.label :profile_image, "プロフィール画像", class: "h5" %>
+          <%= f.file_field :profile_image, id: "image", accept: "image/*" %>
+        </div>
+
+        <div class="form-group">
+          <h5>ユーザーID</h5>
+          <%= user.id %>
+        </div>
+
+        <!--ゲストユーザーの場合には編集できない-->
+        <% if user.name == "guestuser" %>
+          <div class="form-group">
+            <h5>ユーザーネーム</h5>
+            <%= user.name %>
+          </div>
+        <% elsif %>
+          <div class="form-group">
+            <%= f.label :name, "ユーザーネーム", class: "h5" %>
+            <%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"ユーザーネーム", class: "form-control" %>
+          </div>
+        <% end %>
+
+        <!--性別選択-->
+        <div class="form-group">
+          <div>
+          <%= f.label :sex, "性別", class: "h5" %>
+          </div>
+          <!--男性-->
+          <div>
+          <%= f.radio_button :sex, User.sexes.key(0) %>
+          <%= f.label :sex_men, User.sexes_i18n[:men] %>
+          </div>
+          <!--女性-->
+          <div>
+          <%= f.radio_button :sex, User.sexes.key(1) %>
+          <%= f.label :sex_women, User.sexes_i18n[:women] %>
+          </div>
+          <!--その他-->
+          <div>
+          <%= f.radio_button :sex, User.sexes.key(2) %>
+          <%= f.label :sex_others, User.sexes_i18n[:others] %>
+          </div>
+        </div>
+
+        <!--生年月日-->
+        <div class="form-group">
+          <%= f.label :birthdate, "誕生日", class: "h5" %>
+          <%= f.date_field :birthdate, class: "form-control" %>
+        </div>
+
+        <!--自己紹介-->
+        <div class="form-group">
+          <%= f.label :introduction, "自己紹介", class: "h5" %>
+          <%= f.text_area :introduction, placeholder:"自己紹介", class: "form-control", rows: "5" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :birthdate, "誕生日", class: "h5" %>
+          <%= f.date_field :birthdate, class: "form-control" %>
+        </div>
+
+        <!--ゲストユーザーの場合は編集不可-->
+        <% if user.name == "guestuser" %>
+          <% if user.is_deleted == false %>
+            <%= f.label :is_deleted, "会員ステータス", class: "h5" %>
+            <p class="text-success">有効</p>
+          <% elsif %>
+            <%= f.label :is_deleted, "会員ステータス", class: "h5" %>
+            <p class="text-secondary">退会</p>
+          <% end %>
+        <% elsif %>
+          <div class="form-group">
+            <div>
+              <%= f.label :is_deleted, "会員ステータス", class: "h5" %>
+            </div>
+            <div>
+              <%= f.radio_button :is_deleted, false %>
+              <%= f.label :is_deleted, '有効' %>
+            </div>
+            <div>
+              <%= f.radio_button :is_deleted, true %>
+              <%= f.label :is_deleted, '退会' %>
+            </div>
+          </div>
+        <% end %>
+        <%= f.submit '変更を保存', class: "btn btn-success form-control" %>
+      <% end %>
+    </div>
+  </div>
+
+<script>
+  $(function() {
+      // 画像が選択された時に発火
+      $('#image').on('change', function() {
+        // this.files[0]は、選択された画像のこと
+        // selectedFileに、選択された画像を格納を宣言
+        var selectedFile = this.files[0];
+        // FileReaderを起動
+        var fileReader = new FileReader();
+        // selectedFile(選択された画像)をbase64文字列に変換
+        // HTML上で画像を表示するには画像を文字列に変換する必要があるため
+        // .onloadは、処理が成功したら次に行く記述
+        fileReader.onload = function(event) {
+          // 画像ファイルが文字列に変換成功したらイベントが発火
+          var loadedImageUri = event.target.result;
+          // loadedImageUriに、文字列化した画像ファイルを格納
+          $('.img-square').attr('src', loadedImageUri);
+        };
+        fileReader.readAsDataURL(selectedFile);
+      });
+    });
+</script>

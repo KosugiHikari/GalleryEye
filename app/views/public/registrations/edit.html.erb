@@ -1,55 +1,57 @@
-<%= render "public/shared/error_messages", resource: resource %>
-<div class="row d-flex justify-content-center">
-  <div class="col-5">
-    <h4 class="text-center mb-4">アカウント登録情報変更</h4>
+<div class="p-5">
+  <%= render "public/shared/error_messages", resource: resource %>
+  <div class="row d-flex justify-content-center">
+    <div class="col-5">
+      <h4 class="text-center mb-4">アカウント登録情報変更</h4>
 
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
 
-      <!--ゲストユーザーでログインした場合には編集できない-->
-      <% if @user.email == "guest@example.com" %>
-        <div class="form-group">
-          <%= f.label :email, "メールアドレス", class: "h5" %><br />
-          <%= @user.email %>
-        </div>
-      <% elsif %>
-        <div class="form-group">
-          <%= f.label :email, "メールアドレス", class: "h5" %><br />
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
-        </div>
-      <% end %>
-
-      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-      <% end %>
-
-      <div class="form-group">
-        <%= f.label :current_password, "現在のパスワード", class: "h5" %><br />
-        <p class="text-primary"><i class="fas fa-check"></i>　変更をするには現在のパスワードが必要です</p>
-        <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control" %>
-      </div>
-
-      <div class="form-group">
-        <%= f.label :password, "新しいパスワード", class: "h5" %><br />
-        <p class="text-primary"><i class="fas fa-check"></i>　変更をしたくない場合は空欄にしてください</p>
-        <p class="text-primary"><i class="fas fa-check"></i>　<%= @minimum_password_length %> 文字以上の半角英数字で設定してください</p>
-        <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
-        <% if @minimum_password_length %>
+        <!--ゲストユーザーでログインした場合には編集できない-->
+        <% if @user.email == "guest@example.com" %>
+          <div class="form-group">
+            <%= f.label :email, "メールアドレス", class: "h5" %><br />
+            <%= @user.email %>
+          </div>
+        <% elsif %>
+          <div class="form-group">
+            <%= f.label :email, "メールアドレス", class: "h5" %><br />
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+          </div>
         <% end %>
-      </div>
 
-      <div class="form-group">
-        <%= f.label :password_confirmation, "確認用パスワード", class: "h5" %><br />
-        <p class="text-primary"><i class="fas fa-check"></i>　新しいパスワードを入力してください</p>
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
-      </div>
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+        <% end %>
 
-      <div class="actions d-flex justify-content-center">
-        <%= f.submit "変更を保存する", class: "btn btn-outline-secondary pl-5 pr-5" %>
-      </div>
-    <% end %>
+        <div class="form-group">
+          <%= f.label :current_password, "現在のパスワード", class: "h5" %><br />
+          <p class="text-primary"><i class="fas fa-check"></i>　変更をするには現在のパスワードが必要です</p>
+          <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control" %>
+        </div>
 
-    <div class="text-center mt-5">
-      <%= link_to "プロフィール編集へ戻る", :back %>
+        <div class="form-group">
+          <%= f.label :password, "新しいパスワード", class: "h5" %><br />
+          <p class="text-primary"><i class="fas fa-check"></i>　変更をしたくない場合は空欄にしてください</p>
+          <p class="text-primary"><i class="fas fa-check"></i>　<%= @minimum_password_length %> 文字以上の半角英数字で設定してください</p>
+          <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
+          <% if @minimum_password_length %>
+          <% end %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :password_confirmation, "確認用パスワード", class: "h5" %><br />
+          <p class="text-primary"><i class="fas fa-check"></i>　新しいパスワードを入力してください</p>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+        </div>
+
+        <div class="actions d-flex justify-content-center">
+          <%= f.submit "変更を保存する", class: "btn btn-outline-secondary pl-5 pr-5" %>
+        </div>
+      <% end %>
+
+      <div class="text-center mt-5">
+        <%= link_to "プロフィール編集へ戻る", edit_user_path(current_user) %>
+      </div>
     </div>
   </div>
 </div>

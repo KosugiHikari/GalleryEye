@@ -1,4 +1,7 @@
-<% if @post.present? %>
-  <h3 class="text-center">#<%= @tag %></h3>
-  <%= render 'public/posts/index', posts: @post, kind: @name %>
-<% end %>
+<div class="p-5">
+  <% if @post.present? %>
+    <h3 class="text-center">#<%= @tag %></h3>
+    <%= render 'public/posts/index', posts: @post, kind: @name %>
+  <% end %>
+  <%= render 'public/posts/back_btn' %>
+</div>

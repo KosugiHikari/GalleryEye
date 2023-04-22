@@ -1,5 +1,8 @@
-<h2 class="text-center p-3">Edit Review</h2>
-<%= render 'form', post: @post %>
-<div class="d-flex justify-content-center mt-5">
-  <%= link_to 'このレビューを削除する', post_path(@post.id), method: :delete, class: "btn btn-outline-danger", "data-confirm" => "本当に削除しますか？" %>
+<div class="p-5">
+  <h2 class="text-center p-3">Edit Review</h2>
+  <%= render 'form', post: @post %>
+  <div class="d-flex justify-content-center mt-5">
+    <%= link_to 'このレビューを削除する', post_path(@post.id), method: :delete, class: "btn btn-outline-danger", "data-confirm" => "本当に削除しますか？" %>
+  </div>
+  <%= render 'public/posts/back_btn' %>
 </div>

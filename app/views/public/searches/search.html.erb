@@ -1,6 +1,9 @@
-<% if @users.present? %>
-  <h3><%= @keyword %>に関連するユーザー</h3>
-  <%= render 'public/users/index', users: @users %>
-<% else %>
-  <p>関連するユーザーはいません</p>
-<% end %>
+<div class="p-5">
+  <% if @users.present? %>
+    <h3><%= @keyword %>に関連するユーザー</h3>
+    <%= render 'public/users/index', users: @users %>
+  <% else %>
+    <h3>関連するユーザーはいません</h3>
+  <% end %>
+  <%= render 'public/posts/back_btn' %>
+</div>

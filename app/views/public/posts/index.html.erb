@@ -1,4 +1,4 @@
-<div class="conteiner">
+<div class="conteiner p-5">
   <div class="mb-3 bg-info text-center">
     <%= flash[:notice] %>
   </div>
@@ -45,7 +45,7 @@
               <p class="pt-2 pb-2 pl-1 pr-1 text-light">キーワード</p>
             </div>
             <div class="pl-3 pr-3">
-              <%= f.text_field :art_exhibition_name_or_body_cont, placeholder: "キーワードを入力してください", class: "form-control" %>
+              <%= f.text_field :art_exhibition_name_or_gallery_name_or_address_or_point_or_body_cont, placeholder: "キーワードを入力してください", class: "form-control" %>
             </div>
           </div>
           <div class="pl-3 pr-3 pt-2 border-top">
@@ -68,8 +68,8 @@
       <% end %>
       </div>
     </div>
-    <div class="col-8 ml-4">
 
+    <div class="col-8 ml-4">
       <!--タブで投稿の新しい順・古い順・いいねが多い順に切り替え-->
       <ul class="nav nav-tabs">
         <li class="nav-item">

@@ -6,6 +6,8 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <!--画像をassets・javascript両方のフォルダから呼び出せるようにするための記述↓-->
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= favicon_link_tag('favicon.ico') %>
@@ -22,7 +24,7 @@
           <%= render 'admin/searches/search' %>
         <% end %>
       </div>
-      <div class="p-5">
+      <div>
         <%= yield %>
       </div>
     </main>

@@ -1,2 +1,5 @@
-<h3>いいね一覧</h3>
-<%= render 'public/posts/index', posts: @like_posts, kind: @name %>
+<div class="p-5">
+  <h3>いいねしたレビュー</h3>
+  <%= render 'public/posts/index', posts: @like_posts, kind: @name %>
+  <%= render 'public/posts/back_btn' %>
+</div>

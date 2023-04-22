@@ -1,6 +1,9 @@
-<h3>フォロー一覧</h3>
-<% if @users.exists? %>
-  <%= render 'public/users/index', users: @users %>
-<% else %>
-  <p>ユーザーはいません</p>
-<% end %>
+<div class="p-5">
+  <h3>Follow List</h3>
+  <% if @users.exists? %>
+    <%= render 'public/users/index', users: @users %>
+  <% else %>
+    <p>ユーザーはいません</p>
+  <% end %>
+  <%= render 'public/posts/back_btn' %>
+</div>

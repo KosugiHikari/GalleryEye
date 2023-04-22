@@ -1,49 +1,48 @@
-<div class="container">
+<div class="container p-5">
   <div class="mb-3">
     <%= flash[:notice] %>
   </div>
-  <h3 class="mb-3">ユーザー詳細ページ</h3>
-  <div class="row">
-    <div class="col-9">
-      <table class="table text-left">
-        <tbody>
-          <%= image_tag @user.get_profile_image(100,100), class: "rounded-circle" %>
-          <tr>
-            <th>会員ID</th>
-            <td><%= @user.id %></td>
-          </tr>
-          <tr>
-            <th>ユーザーネーム</th>
-            <td><%= @user.name %></td>
-          </tr>
-          <tr>
-            <th>性別</th>
-            <td><%= @user.sex_i18n %></td>
-          </tr>
-          <tr>
-            <th>生年月日</th>
-            <td><%= @user.birthdate %></td>
-          </tr>
-          <tr>
-            <th>自己紹介文</th>
-            <td><%= @user.introduction %></td>
-          </tr>
-          <tr>
-            <th>会員ステータス</th>
-            <td>
-              <% if @user.is_deleted == false %>
-                <strong><p class="text-success">有効</p></strong></td>
-              <% elsif %>
-                <strong><p class="text-secondary">退会</p></strong>
-              <% end %>
-            </td>
-           </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <div class="row d-flex justify-content-start">
-    <div class="col-4">
+  <h1 class="text-center pb-3">User</h1>
+  <div class="row d-flex justify-content-center">
+    <div class="col-5 border p-3">
+      <div class="d-flex justify-content-center pb-3">
+        <%= image_tag @user.get_profile_image(100,100), class: "rounded-circle" %>
+      </div>
+
+      <div class="form-group">
+        <h5>会員ID</h5>
+        <%= @user.id %>
+      </div>
+
+      <div class="form-group">
+        <h5>ユーザーネーム</h5>
+        <%= @user.name %>
+      </div>
+
+      <div class="form-group">
+        <h5>性別</h5>
+        <%= @user.sex_i18n %>
+      </div>
+
+      <div class="form-group">
+        <h5>生年月日</h5>
+        <%= @user.birthdate %>
+      </div>
+
+      <div class="form-group">
+        <h5>自己紹介文</h5>
+        <%= @user.introduction %>
+      </div>
+
+      <div class="form-group">
+        <h5>会員ステータス</h5>
+        <% if @user.is_deleted == false %>
+          <p class="text-success">有効</p>
+        <% elsif %>
+          <p class="text-secondary">退会</p>
+        <% end %>
+      </div>
+
       <div class="form-group">
         <div class="mb-3">
           <%= link_to edit_admin_user_path(@user) do %>
@@ -58,4 +57,5 @@
       </div>
     </div>
   </div>
+  <%= render 'admin/posts/back_btn' %>
 </div>

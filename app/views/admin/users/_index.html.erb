@@ -13,7 +13,9 @@
       <tbody>
         <td class="align-middle"><%= user.id %></td>
         <td class="align-middle">
-          <%= image_tag user.get_profile_image(50,50), class: "rounded-circle" %>
+          <%= link_to admin_user_path(user.id) do %>
+            <%= image_tag user.get_profile_image(50,50), class: "rounded-circle" %>
+          <% end %>
         </td>
         <td class="align-middle">
           <%= link_to admin_user_path(user.id) do %>

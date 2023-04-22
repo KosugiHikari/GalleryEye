@@ -10,7 +10,6 @@ class Public::PostsController < ApplicationController
   def create
     @post = current_user.posts.new(post_params)
     if @post.save
-      flash[:notice] = "レビューを投稿しました"
       redirect_to post_path(@post.id)
     else
       render :new

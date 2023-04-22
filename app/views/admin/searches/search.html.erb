@@ -1,7 +1,10 @@
-<% if @model == 'Post' %>
-  <h3 class="pb-3"><%= @keyword %>に関連するレビュー</h3>
-  <%= render 'admin/posts/index', posts: @posts %>
-<% elsif @model == 'User' %>
-  <h3 class="pb-3"><%= @keyword %>に関連するユーザー</h3>
-  <%= render 'admin/users/index', users: @users %>
-<% end %>
+<div class="p-5">
+  <% if @model == 'Post' %>
+    <h3 class="pb-3"><%= @keyword %>に関連するレビュー</h3>
+    <%= render 'admin/posts/index', posts: @posts %>
+  <% elsif @model == 'User' %>
+    <h3 class="pb-3"><%= @keyword %>に関連するユーザー</h3>
+    <%= render 'admin/users/index', users: @users %>
+  <% end %>
+</div>
+<%= render 'admin/posts/back_btn' %>
