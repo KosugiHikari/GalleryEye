@@ -54,7 +54,7 @@ class Post < ApplicationRecord
   # 終了日が開始日より前にならないようにするためのバリデーション
   validate :start_end_check
   def start_end_check
-    errors.add(:end_date, "は開始日より前の日付は登録できません。") unless
+    errors.add(:end_date, "は開始日より前の日付は登録できません") unless
     if self.start_date && self.end_date
       self.start_date < self.end_date
     end

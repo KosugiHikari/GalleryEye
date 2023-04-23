@@ -19,7 +19,7 @@
       <% elsif %>
         <div class="form-group">
           <%= f.label :name, "ユーザーネーム", class: "h5" %>
-          <%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"ユーザーネーム", class: "form-control" %>
+          <%= f.text_field :name, required: true, autofocus: true, id:"inputName", placeholder:"ユーザーネーム", class: "form-control" %>
         </div>
       <% end %>
 

@@ -10,12 +10,96 @@ ja:
         shooting_not_possible: "撮影不可"
         shooting_allowed: "撮影可"
         unknown: "不明"
-  activerecord:
     attributes:
       post:
         start_date: "開始日"
         end_date: "終了日"
+
+  activerecord:
+    errors:
+      models:
+        post:
+          attributes:
+            art_exhibition_name:
+              blank: "を入力してください"
+              too_long: "は２０文字以内で入力してください"
+            gallery_name:
+              blank: "を入力してください"
+              too_long: "は２０文字以内で入力してください"
+            shooting_availability:
+              blank: "を入力してください"
+            point:
+              blank: "を入力してください"
+              too_long: "は２０文字以内で入力してください"
+            body:
+              blank: "を入力してください"
+              too_long: "は３００文字以内で入力してください"
+            holding_area:
+              blank: "を選択してください"
+        user:
+          attributes:
+            email:
+              blank: "を入力してください"
+              taken: "はすでに登録済みです"
+            password:
+              blank: "を入力してください"
+              too_short: "は６文字以上で設定してください"
+            name:
+              blank: "を入力してください"
+              taken: "はすでに使われています"
+              too_long: "は２０文字以内で設定してください"
+            current_password:
+              blank: "を入力してください"
+              invalid: "に誤りがあります"
+            password_confirmation:
+              confirmation: "に誤りがあります"
+            introduction:
+              too_long: "は５０文字以内で入力してください"
+
+    attributes:
+      post:
+        art_exhibition_name: "美術展名"
+        gallery_name: "美術館名"
+        admission: "入場料"
+        address: "住所"
+        shooting_availability: "撮影可否"
+        point: "注目ポイント"
+        body: "本文"
+        start_date: "開始日"
+        end_date: "終了日"
+        post_image: "投稿画像"
+        holding_area: "開催地域"
+        is_draft: "公開範囲"
+      user:
+        name: "ユーザーネーム"
+        email: "メールアドレス"
+        birthdate: "誕生日"
+        sex: "性別"
+        profile_image: "プロフィール画像"
+        introduction: "自己紹介"
+        is_deleted: "退会ステータス"
+        current_password: "現在のパスワード"
+        password_confirmation: "確認用パスワード"
+
+  errors:
+    messages:
+      not_saved: "入力のエラーがあります"
+
   time:
     formats:
       default: "%Y/%m/%d %H:%M:%S"
       short: "%Y/%m/%d"
+
+  devise:
+    sessions:
+      user:
+        signed_in: "ログインしました"
+        signed_out: "ログアウトしました"
+      admin:
+        signed_in: "管理者ページにログインしました"
+        signed_out: "管理者ページをログアウトしました"
+
+    registrations:
+      user:
+        signed_up: "会員登録が完了しました"
+        updated: "ユーザー情報を変更しました"

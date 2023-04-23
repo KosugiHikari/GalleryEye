@@ -15,7 +15,7 @@
         <% elsif %>
           <div class="form-group">
             <%= f.label :email, "メールアドレス", class: "h5" %><br />
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+            <%= f.email_field :email, required: true, autofocus: true, autocomplete: "email", class: "form-control" %>
           </div>
         <% end %>
 
@@ -26,7 +26,7 @@
         <div class="form-group">
           <%= f.label :current_password, "現在のパスワード", class: "h5" %><br />
           <p class="text-primary"><i class="fas fa-check"></i>　変更をするには現在のパスワードが必要です</p>
-          <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control" %>
+          <%= f.password_field :current_password, required: true, autocomplete: "current-password", class: "form-control" %>
         </div>
 
         <div class="form-group">

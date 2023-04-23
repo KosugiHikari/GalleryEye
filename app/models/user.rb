@@ -33,9 +33,11 @@ class User < ApplicationRecord
 
   # バリデーション
   with_options presence: true do
-    validates :name, length: { minimum: 1, maximum: 10 }, uniqueness: true
+    validates :name, length: { minimum: 1, maximum: 20 }, uniqueness: true
     validates :email
   end
+
+    validates :introduction, length: { maximum: 50 }
 
   # プロフィール画像を表示させるためのメソッド
   def get_profile_image(width, height)

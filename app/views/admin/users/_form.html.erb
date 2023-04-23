@@ -23,7 +23,7 @@
         <% elsif %>
           <div class="form-group">
             <%= f.label :name, "ユーザーネーム", class: "h5" %>
-            <%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"ユーザーネーム", class: "form-control" %>
+            <%= f.text_field :name, required: true, autofocus: true, id:"inputName", placeholder:"ユーザーネーム", class: "form-control" %>
           </div>
         <% end %>
 
@@ -59,11 +59,6 @@
         <div class="form-group">
           <%= f.label :introduction, "自己紹介", class: "h5" %>
           <%= f.text_area :introduction, placeholder:"自己紹介", class: "form-control", rows: "5" %>
-        </div>
-
-        <div class="form-group">
-          <%= f.label :birthdate, "誕生日", class: "h5" %>
-          <%= f.date_field :birthdate, class: "form-control" %>
         </div>
 
         <!--ゲストユーザーの場合は編集不可-->

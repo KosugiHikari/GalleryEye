@@ -1,4 +1,5 @@
 <div class="container p-5">
+  <%= render "public/shared/error_messages", resource: @user %>
   <h1 class="text-center pb-3">Edit User</h1>
   <%= render 'form', user: @user %>
   <%= render 'admin/posts/back_btn' %>
