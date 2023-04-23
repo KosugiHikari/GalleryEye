@@ -103,3 +103,11 @@ ja:
       user:
         signed_up: "会員登録が完了しました"
         updated: "ユーザー情報を変更しました"
+
+    failure:
+      user:
+        invalid: "パスワードに誤りがあります"
+        not_found_in_database: "入力されたユーザー情報が存在しません"
+      admin:
+        invalid: "パスワードに誤りがあります"
+        not_found_in_database: "入力された管理者情報が存在しません"
