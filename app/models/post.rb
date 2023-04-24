@@ -67,26 +67,17 @@ class Post < ApplicationRecord
     likes.exists?(user_id: user.id)
   end
 
-  # 検索分岐（美術展名・美術館名・住所・注目ポイント・本文から検索可能）
-  def self.search(keyword)
-    where(["art_exhibition_name like?", "%#{keyword}%"]).
-    or(where(["gallery_name like?", "%#{keyword}%"])).
-    or(where(["address like?", "%#{keyword}%"])).
-    or(where(["point like?", "%#{keyword}%"])).
-    or(where(["body like?", "%#{keyword}%"]))
-  end
-
   # バリデーションの条件分岐に使用しているメソッド
   def draft?
     is_draft == true
   end
 
   def self.ransackable_attributes(auth_object = nil)
-      ["art_exhibition_name","gallery_name","address","shooting_availability","point","body","holding_area","start_date","end_date"]
+      ["art_exhibition_name","gallery_name","address","shooting_availability","point","body","holding_area","start_date","end_date","is_draft"]
   end
 
   def self.ransackable_associations(auth_object = nil)
-      ["art_exhibition_name","gallery_name","address","shooting_availability","point","body","holding_area","start_date","end_date"]
+      ["art_exhibition_name","gallery_name","address","shooting_availability","point","body","holding_area","start_date","end_date","is_draft"]
   end
 
 end

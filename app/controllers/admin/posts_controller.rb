@@ -1,6 +1,7 @@
 class Admin::PostsController < ApplicationController
   before_action :authenticate_admin!
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_q, only: [:index, :search]
 
   def index
     if params[:user_id]
@@ -34,6 +35,11 @@ class Admin::PostsController < ApplicationController
     redirect_to admin_posts_path
   end
 
+  def search
+    @posts = @q.result(distinct: true).page(params[:page]).per(10)
+    @name = params[:name]
+  end
+
   private
 
   def post_params
@@ -43,6 +49,10 @@ class Admin::PostsController < ApplicationController
   # 重複するコードをメソッド化
   def set_post
     @post = Post.find(params[:id])
+  end
+  
+  def set_q
+    @q = Post.ransack(params[:q])
   end
 
 end

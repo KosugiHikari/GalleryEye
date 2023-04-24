@@ -2,11 +2,12 @@
 	<div class="mb-3">
     <%= flash[:notice] %>
   </div>
+  <%= render 'search', q: @q %>
   <h3>
 		<% if params[:user_id] %>
 			<h3 class="pb-3"><%= @user.name %>さんの投稿履歴一覧</h3>
 		<% else %>
-			<h3 class="pb-3">Posts</h3>
+			<h3 class="pb-3">投稿一覧</h3>
 		<% end %>
 	</h3>
   <div class="row">

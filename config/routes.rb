@@ -74,6 +74,9 @@ Rails.application.routes.draw do
     #posts
     resources :posts, only: [:index, :show, :edit, :update, :destroy] do
       resources :comments, only: [:destroy]
+      collection do
+        get 'search'
+      end
     end
 
     # searches

@@ -1,0 +1,9 @@
+<div class="p-5">
+  <% if @posts.present? %>
+    <h3>検索結果</h3>
+    <%= render 'admin/posts/index', posts: @posts %>
+  <% else %>
+    <p>関連するレビューはありません</p>
+  <% end %>
+  <%= render 'admin/posts/back_btn' %>
+</div>
