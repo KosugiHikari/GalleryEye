@@ -1,83 +1,87 @@
 <div class="d-flex flex-wrap m-3">
   <% if posts.present? %>
   <% posts.each do |post| %>
-    <% if post.is_draft == false %>
-      <div class="col-md-5 border m-2 pr-2 pl-2 pb-2">
-        <!--投稿画像-->
-        <div class="image-conteiner text-center">
-          <%= link_to post_path(post.id) do %>
-            <%= attachment_image_tag post, :post_image, fallback: "noimage.png", size: "300x300" %>
-          <% end %>
-        </div>
-
-        <div class="m-1">
-          <div class="d-flex justify-content-between text-secondary">
-            <div class="d-flex align-items-center">
-              <!--美術館名-->
-              <%= post.gallery_name %> |
-              <!--開催地域-->
-              <%= post.holding_area %>
-            </div>
-            <!--開催状況-->
-            <div class="mt-1">
-              <%= render 'public/posts/date', post: post %>
-            </div>
-          </div>
-            <div>
-              <!--美術展名-->
-              <h4>
-                <%= link_to post_path(post.id) do %>
-                  <%= post.art_exhibition_name %>
-                <% end %>
-              </h4>
-            </div>
-        </div>
-
-        <div>
-          会期：<%= post.start_date %> ~ <%= post.end_date %>
-        </div>
-        <div class="border-top mt-2 pb-1">
-          <div class="d-flex">
-            <!--投稿日-->
-            <div class="d-flex align-items-center text-secondary m-2">
-              <%= l post.created_at, format: :short %>
-            </div>
-            <!--注目ポイント-->
-            <div class="d-flex align-items-center m-1">
-              <%= post.point %>
-            </div>
+    <!--退会しているユーザーの投稿は表示させない-->
+    <% if post.user.is_deleted == false %>
+      <!--下書きの投稿は表示させない-->
+      <% if post.is_draft == false %>
+        <div class="col-md-5 border m-2 pr-2 pl-2 pb-2">
+          <!--投稿画像-->
+          <div class="image-conteiner text-center">
+            <%= link_to post_path(post.id) do %>
+              <%= attachment_image_tag post, :post_image, fallback: "noimage.png", size: "300x300" %>
+            <% end %>
           </div>
 
+          <div class="m-1">
+            <div class="d-flex justify-content-between text-secondary">
+              <div class="d-flex align-items-center">
+                <!--美術館名-->
+                <%= post.gallery_name %> |
+                <!--開催地域-->
+                <%= post.holding_area %>
+              </div>
+              <!--開催状況-->
+              <div class="mt-1">
+                <%= render 'public/posts/date', post: post %>
+              </div>
+            </div>
+              <div>
+                <!--美術展名-->
+                <h4>
+                  <%= link_to post_path(post.id) do %>
+                    <%= post.art_exhibition_name %>
+                  <% end %>
+                </h4>
+              </div>
+          </div>
+
+          <div>
+            会期：<%= post.start_date %> ~ <%= post.end_date %>
+          </div>
+          <div class="border-top mt-2 pb-1">
             <div class="d-flex">
-              <!--投稿したユーザーアイコン・名前-->
-              <div class="text-center mr-3">
-                <%= link_to user_path(post.user) do %>
-                  <%= image_tag post.user.get_profile_image(50,50), class: "rounded-circle", size: "50x50" %>
-                  <%= post.user.name %>
-                <% end %>
+              <!--投稿日-->
+              <div class="d-flex align-items-center text-secondary m-2">
+                <%= l post.created_at, format: :short %>
               </div>
+              <!--注目ポイント-->
+              <div class="d-flex align-items-center m-1">
+                <%= post.point %>
+              </div>
+            </div>
 
-              <!--いいねボタン（ログインユーザーのみ。非ログイン時はいいね数表示）-->
+              <div class="d-flex">
+                <!--投稿したユーザーアイコン・名前-->
+                <div class="text-center mr-3">
+                  <%= link_to user_path(post.user) do %>
+                    <%= image_tag post.user.get_profile_image(50,50), class: "rounded-circle", size: "50x50" %>
+                    <%= post.user.name %>
+                  <% end %>
+                </div>
+
+                <!--いいねボタン（ログインユーザーのみ。非ログイン時はいいね数表示）-->
+                <div class="d-flex align-items-center pr-2 pl-2">
+                  <% if user_signed_in? %>
+                    <div id="like_buttons_<%= kind %>_<%= post.id %>">
+                      <%= render "public/likes/like", post: post, name: kind %>
+                    </div>
+                  <% else %>
+                    <div>
+                      <i class="fas fa-heart" style="color: gray;"></i> <%= post.likes.count %>
+                    </div>
+                  <% end %>
+                </div>
+              <!--コメント数-->
               <div class="d-flex align-items-center pr-2 pl-2">
-                <% if user_signed_in? %>
-                  <div id="like_buttons_<%= kind %>_<%= post.id %>">
-                    <%= render "public/likes/like", post: post, name: kind %>
-                  </div>
-                <% else %>
-                  <div>
-                    <i class="fas fa-heart" style="color: gray;"></i> <%= post.likes.count %>
-                  </div>
+                <%= link_to post_path(post.id) do %>
+                  <i class="fas fa-comment"></i> <%= post.comments.count %>
                 <% end %>
               </div>
-            <!--コメント数-->
-            <div class="d-flex align-items-center pr-2 pl-2">
-              <%= link_to post_path(post.id) do %>
-                <i class="fas fa-comment"></i> <%= post.comments.count %>
-              <% end %>
             </div>
           </div>
         </div>
-      </div>
+      <% end %>
     <% end %>
   <% end %>
 </div>

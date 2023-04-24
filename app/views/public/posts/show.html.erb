@@ -1,14 +1,21 @@
 <div class="p-5">
   <div class="conteiner">
+    <div class="mb-3">
+      <%= flash[:notice] %>
+    </div>
     <!--編集ボタン-->
     <div class="d-flex justify-content-end">
       <% if @post.user == current_user %>
         <%= link_to 'このレビューを編集する', edit_post_path(@post.id), class: "btn btn-outline-dark" %>
       <% end %>
     </div>
-    <div class="mb-3">
-      <%= flash[:notice] %>
+    <% if @post.is_draft == true %>
+    <div class="d-flex justify-content-center">
+      <div class="col-8">
+        <p class="text-center text-dark bg-light rounded py-1">下書き状態になっています。公開をする場合は編集から公開を選択してください。</p>
+      </div>
     </div>
+    <% end %>
     <div class="row">
       <div class="col">
         <div class="d-flex justify-content-center align-items-center">

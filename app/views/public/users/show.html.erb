@@ -10,40 +10,47 @@
       </div>
       <h5><%= @user.name %></h5>
 
-      <!--フォロー・フォロワー-->
-      <%= link_to user_followings_path(@user), class: "text-dark" do %>
-        <!--退会しているユーザーは数に含めない-->
-        <strong><%= @user.followings.where(is_deleted: 'false').count %></strong>フォロー
-      <% end %>
-      <%= link_to user_followers_path(@user), class: "text-dark" do %>
-        <!--退会しているユーザーは数に含めない-->
-        <strong><%= @user.followers.where(is_deleted: 'false').count %></strong>フォロワー
-      <% end %>
-
-      <!--自己紹介文-->
-      <div class="mt-3 mb-3">
-        <%if @user.introduction.nil? %>
-          <%= @user.introduction %>
-        <% else %>
-          <%= safe_join(@user.introduction.split("\n"),tag(:br)) %>
+      <!--退会しているユーザーには表示させない-->
+      <% if @user.is_deleted == false %>
+        <!--フォロー・フォロワー-->
+        <%= link_to user_followings_path(@user), class: "text-dark" do %>
+          <!--退会しているユーザーは数に含めない-->
+          <strong><%= @user.followings.where(is_deleted: 'false').count %></strong>フォロー
         <% end %>
-      </div>
-
-      <!--いいね一覧リンク-->
-      <div class="mt-3 mb-3">
-        <%= link_to "いいね一覧", likes_user_path(@user), class: "btn btn-outline-danger" %>
-      </div>
-
-      <!--フォローボタン-->
-      <div id="follow-<%= @user.id %>">
-        <%= render 'public/relationships/follow', user: @user %>
-      </div>
-
-      <!--プロフィール編集ボタン-->
-      <% if user_signed_in? && @user == current_user %>
-        <%= link_to edit_user_path(@user.id), class: "btn btn-outline-secondary btn-block" do %>
-          <i class="fas fa-user-cog"></i>
+        <%= link_to user_followers_path(@user), class: "text-dark" do %>
+          <!--退会しているユーザーは数に含めない-->
+          <strong><%= @user.followers.where(is_deleted: 'false').count %></strong>フォロワー
         <% end %>
+
+        <!--自己紹介文-->
+        <div class="mt-3 mb-3">
+          <%if @user.introduction.nil? %>
+            <%= @user.introduction %>
+          <% else %>
+            <%= safe_join(@user.introduction.split("\n"),tag(:br)) %>
+          <% end %>
+        </div>
+
+        <!--いいね一覧リンク-->
+        <div class="mt-3 mb-3">
+          <%= link_to likes_user_path(@user), class: "btn btn-outline-danger" do %>
+            <i class="fas fa-heart"></i> いいねしたレビュー
+          <% end %>
+        </div>
+
+        <!--フォローボタン-->
+        <div id="follow-<%= @user.id %>">
+          <%= render 'public/relationships/follow', user: @user %>
+        </div>
+
+        <!--プロフィール編集ボタン-->
+        <% if user_signed_in? && @user == current_user %>
+          <%= link_to edit_user_path(@user.id), class: "btn btn-outline-secondary btn-block" do %>
+            <i class="fas fa-user-cog"></i>
+          <% end %>
+        <% end %>
+      <% else %>
+        <p>このユーザーは退会済みです</p>
       <% end %>
       </div>
     </div>

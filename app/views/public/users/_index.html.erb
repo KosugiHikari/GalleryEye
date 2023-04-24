@@ -8,16 +8,38 @@
             <%= image_tag user.get_profile_image(100,100), class: "rounded-circle", size: "100x100" %>
           <% end %>
         </td>
+        <!--ユーザーネーム-->
         <td class="text-left align-middle">
           <%= link_to user_path(user.id) do %>
             <strong><%= user.name %></strong>
           <% end %>
         </td>
+        <!--フォロー・フォロワー-->
+        <td class="text-left align-middle">
+          <div>
+            <%= link_to user_followings_path(user, user.id), class: "text-dark" do %>
+              <!--退会しているユーザーは数に含めない-->
+              <%= user.followings.where(is_deleted: 'false').count %>フォロー
+            <% end %>
+          </div>
+          <div>
+            <%= link_to user_followers_path(user, user.id), class: "text-dark" do %>
+              <!--退会しているユーザーは数に含めない-->
+              <%= user.followers.where(is_deleted: 'false').count %>フォロワー
+            <% end %>
+          </div>
+        </td>
         <!--フォローボタン-->
         <td id="follow-<%= user.id %>" class="align-middle">
           <%= render 'public/relationships/follow', user: user %>
         </td>
-        <td class="text-left align-middle"><%= user.introduction %></td>
+        <td class="text-left align-middle">
+          <%if user.introduction.nil? %>
+            <%= user.introduction %>
+          <% else %>
+            <%= safe_join(user.introduction.split("\n"),tag(:br)) %>
+          <% end %>
+        </td>
       <% end %>
     </tbody>
   <% end %>

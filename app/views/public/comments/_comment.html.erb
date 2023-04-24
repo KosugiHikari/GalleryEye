@@ -26,12 +26,12 @@
             <% end %>
           </div>
         </div>
-        <div class="col-1">
-          <!--コメントしたユーザーか管理人が削除可能-->
+        <div class="col-1 d-flex justify-content-center">
+          <!--コメントしたユーザーの場合、削除可能-->
           <% if comment.user == current_user %>
-            <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete, remote: true, class: "btn btn-danger", "data-confirm" => "本当に削除しますか？" %>
-          <% elsif admin_signed_in? %>
-            <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete, remote: true, class: "btn btn-danger", "data-confirm" => "本当に削除しますか？" %>
+            <%= link_to post_comment_path(comment.post, comment), method: :delete, remote: true, class: "h5 p-2 text-danger", "data-confirm" => "コメントを削除しますか？" do %>
+              <i class="fas fa-trash-alt"></i>
+            <% end %>
           <% end %>
         </div>
       </div>

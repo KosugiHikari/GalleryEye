@@ -57,7 +57,7 @@ class Public::PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
-      flash[:notice] = "レビュー内容を編集しました"
+      flash[:notice] = "レビュー内容を保存しました"
       redirect_to post_path(@post.id)
     else
       render :edit

@@ -12,4 +12,7 @@
   <div class="row">
     <%= render 'index', posts: @posts %>
   </div>
+	<% if params[:user_id] %>
+    <%= render 'admin/posts/back_btn' %>
+	<% end %>
 </div>

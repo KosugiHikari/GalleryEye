@@ -30,22 +30,22 @@
         <!--性別選択-->
         <div class="form-group">
           <div>
-          <%= f.label :sex, "性別", class: "h5" %>
+            <%= f.label :sex, "性別", class: "h5" %>
           </div>
           <!--男性-->
           <div>
-          <%= f.radio_button :sex, User.sexes.key(0) %>
-          <%= f.label :sex_men, User.sexes_i18n[:men] %>
+            <%= f.radio_button :sex, User.sexes.key(0) %>
+            <%= f.label :sex_men, User.sexes_i18n[:men] %>
           </div>
           <!--女性-->
           <div>
-          <%= f.radio_button :sex, User.sexes.key(1) %>
-          <%= f.label :sex_women, User.sexes_i18n[:women] %>
+            <%= f.radio_button :sex, User.sexes.key(1) %>
+            <%= f.label :sex_women, User.sexes_i18n[:women] %>
           </div>
           <!--その他-->
           <div>
-          <%= f.radio_button :sex, User.sexes.key(2) %>
-          <%= f.label :sex_others, User.sexes_i18n[:others] %>
+            <%= f.radio_button :sex, User.sexes.key(2) %>
+            <%= f.label :sex_others, User.sexes_i18n[:others] %>
           </div>
         </div>
 
@@ -76,12 +76,12 @@
               <%= f.label :is_deleted, "会員ステータス", class: "h5" %>
             </div>
             <div>
-              <%= f.radio_button :is_deleted, false %>
-              <%= f.label :is_deleted, '有効' %>
+              <%= f.radio_button :is_deleted, :false %>
+              <%= f.label :is_deleted, "有効", { value: :false } %>
             </div>
             <div>
-              <%= f.radio_button :is_deleted, true %>
-              <%= f.label :is_deleted, '退会' %>
+              <%= f.radio_button :is_deleted, :true %>
+              <%= f.label :is_deleted, "退会", { value: :true } %>
             </div>
           </div>
         <% end %>

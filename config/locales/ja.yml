@@ -55,6 +55,10 @@ ja:
               confirmation: "に誤りがあります"
             introduction:
               too_long: "は５０文字以内で入力してください"
+        comment:
+          attributes:
+            comment:
+              blank: "を入力してください"
 
     attributes:
       post:
@@ -80,6 +84,8 @@ ja:
         is_deleted: "退会ステータス"
         current_password: "現在のパスワード"
         password_confirmation: "確認用パスワード"
+      comment:
+        comment: "コメント"
 
   errors:
     messages:
