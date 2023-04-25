@@ -56,6 +56,8 @@ class Public::UsersController < ApplicationController
 
   # 重複するコードをメソッド化
   def set_user
+    # password変更画面の際はidと認識させない
+    return redirect_to new_user_password_path if params[:id] == 'password'
     @user = User.find(params[:id])
   end
 end
