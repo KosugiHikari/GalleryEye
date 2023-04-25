@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_21_065930) do
+ActiveRecord::Schema.define(version: 2023_04_25_124425) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -80,22 +80,20 @@ ActiveRecord::Schema.define(version: 2023_04_21_065930) do
     t.string "art_exhibition_name"
     t.string "gallery_name"
     t.integer "admission"
-    t.integer "prefectures"
     t.string "address"
     t.integer "shooting_availability"
     t.string "point"
     t.string "body"
-    t.string "star"
     t.string "image"
     t.string "comment"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.date "start_date"
     t.date "end_date"
-    t.string "post_image_id"
     t.string "post_image"
     t.boolean "is_draft", default: false, null: false
     t.integer "holding_area"
+    t.string "post_image_id"
   end
 
   create_table "relationships", force: :cascade do |t|
