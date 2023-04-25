@@ -41,6 +41,7 @@ ja:
             email:
               blank: "を入力してください"
               taken: "はすでに登録済みです"
+              not_found: "は未登録です"
             password:
               blank: "を入力してください"
               too_short: "は６文字以上で設定してください"
@@ -104,6 +105,9 @@ ja:
       admin:
         signed_in: "管理者ページにログインしました"
         signed_out: "管理者ページをログアウトしました"
+    passwords:
+      user:
+        updated: "パスワードを変更しました"
 
     registrations:
       user:
