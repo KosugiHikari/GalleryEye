@@ -1,0 +1,51 @@
+<h5>ユーザーの絞り込み検索</h5>
+<div class="container bg-light mb-3 p-3">
+  <%= search_form_for @q, url:search_admin_users_path do |f| %>
+    <div class="row">
+      <div class="col-4">
+        <div class="mb-2">
+          <span class="bg-secondary rounded text-light px-3 py-1"><%= f.label :name, "ユーザーネーム" %></span>
+        </div>
+        <div class="pl-3 pr-3">
+          <%= f.text_field :name_cont, placeholder: "キーワードを入力してください", class: "form-control" %>
+        </div>
+        <div class="pt-3">
+          <span class="bg-secondary rounded text-light px-3 py-1"><%= f.label :sex, "性別" %></span>
+        </div>
+        <div class="text-center mt-2 pl-3 pr-3">
+          <%= f.select :sex_eq, User.sexes_i18n.invert.map{|key, value| [key, User.sexes[value]]}, { include_blank: '選択してください' }, class: "text-center form-control" %>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="mb-2">
+          <span class="bg-secondary rounded text-light px-3 py-1"><%= f.label :start_date, "生年月日" %></span>
+        </div>
+        <div class="pl-3 pr-3">
+          <%= f.date_field :birthdate_eq, class: "form-control" %>
+        </div>
+        <div class="pt-3">
+          <span class="bg-secondary rounded text-light px-3 py-1"><%= f.label :introduction, "自己紹介" %></span>
+        </div>
+        <div class="mt-2 pl-3 pr-3">
+          <%= f.text_field :introduction_cont, placeholder: "キーワードを入力してください", class: "form-control" %>
+        </div>
+      </div>
+      <div class="col-4">
+        <div>
+          <span class="bg-secondary rounded text-light px-3 py-1"><%= f.label :is_deleted, "会員ステータス" %></span>
+        </div>
+        <div class="mt-2 pl-3 pr-3 form-group">
+          <%= f.radio_button :is_deleted_eq, :false %>
+          <%= f.label :is_deleted, "有効", { value: :false } %>
+          <%= f.radio_button :is_deleted_eq, :true %>
+          <%= f.label :is_deleted, "退会", { value: :true } %>
+        </div>
+        <div class="pt-5">
+          <%= button_tag type: "submit", class: "btn btn-info form-control" do %>
+            <i class="fas fa-search"></i>検索
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

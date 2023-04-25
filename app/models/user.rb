@@ -28,7 +28,7 @@ class User < ApplicationRecord
   has_many :followings, through: :relationships, source: :followed
   has_many :followers, through: :reverse_of_relationships, source: :follower
 
-  # enum設定
+  # 性別のenum設定
   enum sex: { men:0, women:1, others:2 }
 
   # バリデーション
@@ -73,9 +73,17 @@ class User < ApplicationRecord
     end
   end
 
-  # 検索分岐（ユーザーネームを検索可能）
+  # 検索（ユーザーネームを検索可能）
   def self.search(keyword)
     where(["name like?", "%#{keyword}%"])
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+      ["name","email","birthdate","sex","introduction","is_deleted"]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+      ["name","email","birthdate","sex","introduction","is_deleted"]
   end
 
 end

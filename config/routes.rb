@@ -69,7 +69,11 @@ Rails.application.routes.draw do
     get 'users/:user_id/posts' => 'posts#index', as: 'user_posts'
 
     #users
-    resources :users, only: [:index, :edit, :show, :update]
+    resources :users, only: [:index, :edit, :show, :update] do
+      collection do
+        get 'search'
+      end
+    end
 
     #posts
     resources :posts, only: [:index, :show, :edit, :update, :destroy] do
@@ -78,9 +82,6 @@ Rails.application.routes.draw do
         get 'search'
       end
     end
-
-    # searches
-    get 'search' => 'searches#search'
 
   end
 

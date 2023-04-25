@@ -19,14 +19,7 @@
     </header>
 
     <main>
-      <div>
-        <% if admin_signed_in? %>
-          <%= render 'admin/searches/search' %>
-        <% end %>
-      </div>
-      <div>
-        <%= yield %>
-      </div>
+      <%= yield %>
     </main>
 
     <footer>

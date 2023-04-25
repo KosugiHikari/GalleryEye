@@ -1,0 +1,9 @@
+<div class="p-5">
+  <% if @users.present? %>
+    <h3>検索結果</h3>
+    <%= render 'admin/users/index', users: @users %>
+  <% else %>
+    <p>関連するユーザーはいません</p>
+  <% end %>
+  <%= render 'admin/posts/back_btn' %>
+</div>

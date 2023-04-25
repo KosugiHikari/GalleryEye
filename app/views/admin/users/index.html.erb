@@ -2,6 +2,7 @@
   <div class="mb-3">
     <%= flash[:notice] %>
   </div>
+  <%= render 'search', q: @q %>
   <div class="row">
     <h3 class="pb-3">ユーザー一覧</h3>
     <%= render 'index', users: @users %>

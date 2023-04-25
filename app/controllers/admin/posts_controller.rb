@@ -37,7 +37,6 @@ class Admin::PostsController < ApplicationController
 
   def search
     @posts = @q.result(distinct: true).page(params[:page]).per(10)
-    @name = params[:name]
   end
 
   private
@@ -50,7 +49,7 @@ class Admin::PostsController < ApplicationController
   def set_post
     @post = Post.find(params[:id])
   end
-  
+
   def set_q
     @q = Post.ransack(params[:q])
   end
