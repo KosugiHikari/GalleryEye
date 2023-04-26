@@ -31,7 +31,11 @@
 
       <div class="form-group">
         <h5>自己紹介文</h5>
-        <%= @user.introduction %>
+        <%if @user.introduction.nil? %>
+          <%= @user.introduction %>
+        <% else %>
+          <%= safe_join(@user.introduction.split("\n"),tag(:br)) %>
+        <% end %>
       </div>
 
       <div class="form-group">

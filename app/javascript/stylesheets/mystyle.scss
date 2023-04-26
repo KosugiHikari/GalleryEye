@@ -15,6 +15,7 @@ body {
   justify-content: center;
 }
 
+// エラーメッセージが出てもレイアウト崩れがないようにするため
 .field_with_errors {
   display: contents;
 }
@@ -24,6 +25,7 @@ body {
   height: 500px;
 }
 
+// ABOUT画像への透過フィルター
 #transparenti {
   background-color: rgba(255, 255, 255, 0.562);
   height: 500px;
@@ -34,4 +36,14 @@ body {
   background-image: url(../images/public_in.png);
   background-position: right bottom;
   background-repeat:repeat-x;
+}
+
+// タブの色変更
+.nav-pills .nav-link.active{
+  background-color: #203744;
+}
+
+// タブの文字色変更
+.nav-pills .nav-link{
+  color: #203744;
 }
