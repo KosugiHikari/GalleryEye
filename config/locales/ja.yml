@@ -26,8 +26,12 @@ ja:
             gallery_name:
               blank: "を入力してください"
               too_long: "は２０文字以内で入力してください"
+            start_date:
+              blank: "を選択してください"
+            end_date:
+              blank: "を選択してください"
             shooting_availability:
-              blank: "を入力してください"
+              blank: "を選択してください"
             point:
               blank: "を入力してください"
               too_long: "は２０文字以内で入力してください"
@@ -60,6 +64,7 @@ ja:
           attributes:
             comment:
               blank: "を入力してください"
+              too_long: "は２００文字以内で入力してください"
 
     attributes:
       post:

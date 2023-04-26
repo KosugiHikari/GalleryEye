@@ -34,5 +34,5 @@
 - IDE：Cloud9
 
 ## 使用素材
-<li><a href="https://www.ac-illust.com/">イラストAC</a></li>
-<li><a href="https://www.photo-ac.com/">写真AC</a></li>
+- <a href="https://www.ac-illust.com/">イラストAC</a>
+- <a href="https://www.photo-ac.com/">写真AC</a>
