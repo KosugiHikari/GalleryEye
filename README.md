@@ -24,7 +24,8 @@
 - 自分のおすすめする美術展の情報を発信したいとき
 
 ## 設計書
-
+- <a href="https://drive.google.com/file/d/1JKh7MxSACj-kA8saCX_g_XPohjMlvt-I/view?usp=sharing">ER図</a>
+- <a href="https://docs.google.com/spreadsheets/d/1WAAzbrtv2Nqr6tODFORg_4PJrMjOiiEavmW5m73k8RI/edit?usp=sharing">テーブル定義書</a>
 
 ## 開発環境
 - OS：Linux(CentOS)
