@@ -14,7 +14,7 @@
           <%= user.id %>
         </div>
 
-        <!--ゲストユーザーの場合には編集できない-->
+        <!--ユーザーネーム：ゲストユーザーの場合には編集できない-->
         <% if user.name == "guestuser" %>
           <div class="form-group">
             <h5>ユーザーネーム</h5>
@@ -24,6 +24,19 @@
           <div class="form-group">
             <%= f.label :name, "ユーザーネーム", class: "h5" %>
             <%= f.text_field :name, required: true, autofocus: true, id:"inputName", placeholder:"ユーザーネーム", class: "form-control" %>
+          </div>
+        <% end %>
+
+        <!--メールアドレス：ゲストユーザーの場合には編集できない-->
+        <% if user.name == "guestuser" %>
+          <div class="form-group">
+            <h5>メールアドレス</h5>
+            <%= user.email %>
+          </div>
+        <% elsif %>
+          <div class="form-group">
+            <%= f.label :email, "メールアドレス", class: "h5" %>
+            <%= f.text_field :email, required: true, autofocus: true, id:"inputName", placeholder:"メールアドレス", class: "form-control" %>
           </div>
         <% end %>
 
