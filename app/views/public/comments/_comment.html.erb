@@ -1,5 +1,4 @@
 <% if post.comments.present? %>
-  <div class="m-3"><%= flash[:notice] %></div>
   <% post.comments.each do |comment| %>
     <div class="container border rounded mb-3">
       <div class="row p-3 d-flex flex-column">

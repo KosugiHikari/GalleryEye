@@ -27,9 +27,10 @@
           </div>
         </div>
         <div class="col-1 d-flex justify-content-center">
-          <%= link_to post_comment_path(comment.post, comment), method: :delete, remote: true, class: "h5 p-2 text-danger", "data-confirm" => "コメントを削除しますか？" do %>
+          <%= link_to admin_post_comment_path(comment.post, comment), method: :delete, remote: true, class: "h5 p-2 text-danger", "data-confirm" => "本当に削除しますか？" do %>
             <i class="fas fa-trash-alt"></i>
           <% end %>
+        </div>
       </div>
     </div>
   <% end %>
