@@ -37,7 +37,7 @@ ja:
               too_long: "は２０文字以内で入力してください"
             body:
               blank: "を入力してください"
-              too_long: "は３００文字以内で入力してください"
+              too_long: "は５００文字以内で入力してください"
             holding_area:
               blank: "を選択してください"
         user:
@@ -64,7 +64,7 @@ ja:
           attributes:
             comment:
               blank: "を入力してください"
-              too_long: "は２００文字以内で入力してください"
+              too_long: "は３００文字以内で入力してください"
 
     attributes:
       post:
