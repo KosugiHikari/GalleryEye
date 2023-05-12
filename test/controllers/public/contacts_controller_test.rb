@@ -1,6 +1,6 @@
 require "test_helper"
 
-class MapTest < ActiveSupport::TestCase
+class Public::ContactsControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end
