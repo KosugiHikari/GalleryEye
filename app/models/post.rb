@@ -45,12 +45,12 @@ class Post < ApplicationRecord
   with_options presence: true, unless: :draft? do
     validates :art_exhibition_name, length: { maximum: 20 }
     validates :gallery_name, length: { maximum: 20 }
+    validates :start_date
+    validates :end_date
+    validates :holding_area
     validates :shooting_availability
     validates :point, length: { maximum: 20 }
     validates :body, length: { maximum: 500 }
-    validates :holding_area
-    validates :start_date
-    validates :end_date
   end
 
   # 終了日が開始日より前にならないようにするためのバリデーション

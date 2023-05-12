@@ -70,7 +70,7 @@ class Public::PostsController < ApplicationController
   end
 
   def search
-    @posts = @q.result(distinct: true).page(params[:page]).per(10)
+    @posts = @q.result(distinct: true).order(created_at: :desc).page(params[:page]).per(10)
     @name = params[:name]
   end
 

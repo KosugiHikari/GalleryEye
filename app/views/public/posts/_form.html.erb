@@ -1,6 +1,6 @@
 <%= flash[:error] %>
 <%= render 'errors', post: post %>
-<p class="text-center">公開範囲：下書きを選択した場合は<span class="bg-danger text-light pl-1 pr-1 ml-1">必須</span>項目が空欄でも保存可能です</p>
+<p class="text-center">公開範囲：下書き保存を選択した場合は<span class="bg-danger text-light pl-1 pr-1 ml-1">必須</span>項目が空欄でも保存可能です</p>
 <div class="container">
     <div class="row d-flex justify-content-center">
       <div class="col-md-8 shadow p-5">
@@ -64,10 +64,10 @@
             <p class="text-right">円</p>
           </div>
 
-          <!--エリア選択-->
+          <!--開催地域選択-->
           <div class="form-group">
             <div class="d-flex flex-row">
-              <%= f.label :holding_area, "エリア選択", class: "h5" %>
+              <%= f.label :holding_area, "開催地域選択", class: "h5" %>
               <p class="bg-danger text-light pl-1 pr-1 ml-1">必須</p>
             </div>
             <!--Post.holding_areasで支払日のenumをハッシュの形で取得-->
