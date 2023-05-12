@@ -70,8 +70,8 @@
               <%= f.label :holding_area, "開催地域選択", class: "h5" %>
               <p class="bg-danger text-light pl-1 pr-1 ml-1">必須</p>
             </div>
-            <!--Post.holding_areasで支払日のenumをハッシュの形で取得-->
-            <!--keysで取得したハッシュのキーを配列の形で取得。map メソッドで新たに配列を生成。-->
+            <!--Post.holding_areasで開催地域のenumをハッシュの形で取得-->
+            <!--keysで取得したハッシュのキーを配列の形で取得。mapメソッドで新たに配列を生成。-->
             <!--第二引数（with_index）で要素の添字を変数 i として取得。変数 i (数値)がvalueに渡される。-->
             <!--t("enum.post.holding_area.#{k}")→ja.ymlの表記の通りに翻訳するというメソッド-->
             <%= f.select :holding_area, Post.holding_areas.keys.map.with_index { |k| [t("enum.post.holding_area.#{k}"), k] }, { include_blank: "選択してください" }, class: "prefecture-select form-control" %>

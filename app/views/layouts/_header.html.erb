@@ -56,14 +56,17 @@
     <!--固定表示リンク但し管理者側は非表示-->
     <% unless admin_signed_in? %>
       <div class="row text-center">
-        <div class="col-5">
-          <h5><%= link_to 'REVIEW', root_path, class: 'nav-link  text-light' %></h5>
+        <div class="col">
+          <h5><%= link_to 'Review', root_path, class: 'nav-link  text-light' %></h5>
         </div>
         <div class="col">
-          <h5><%= link_to 'USERS', users_path, class: 'nav-link  text-light' %></h5>
+          <h5><%= link_to 'Users', users_path, class: 'nav-link  text-light' %></h5>
         </div>
-        <div class="col-5">
-          <h5><%= link_to 'ABOUT', about_path, class: 'nav-link  text-light' %></h5>
+        <div class="col">
+          <h5><%= link_to 'About', about_path, class: 'nav-link  text-light' %></h5>
+        </div>
+        <div class="col">
+          <h5><%= link_to 'Contact', new_contacts_path, class: 'nav-link  text-light' %></h5>
         </div>
       </div>
     <% end %>

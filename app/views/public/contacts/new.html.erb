@@ -1,28 +1,49 @@
 <div class="p-5">
   <h1 class="text-center p-3">Contact</h1>
-  <%= render "public/shared/error_messages", resource: resource %>
-<%= form_with(model: @contact, local: true) do |f| %>
-<div class="correct-msg-main">
-        <div class="contact-form">
-            <div class="correct-text-field">
-              <%= f.label "お名前" %>
-              <%= f.text_field :name, placeholder: "お名前", class: "input-form" %>
-            </div>
-            <div class="correct-text-field">
-              <%= f.label "お問合せ内容" %>
-              <%= f.text_area :content, placeholder: "お問合せ内容を入力してください", class: "input-form" %>
-            </div>
-            <div class="send-btn-contents">
-              <div class="register-btn">
-                <%= f.button type: "submit", class:"register-red-btn", style:'border-style: none;' do %> 
-                  送信 <i class="fas fa-paper-plane"></i>
-                <% end %>
+  <%= render "public/shared/error_messages", resource: @contact %>
+    <div class="row d-flex justify-content-center">
+        <div class="col-6">
+          <%= form_with model: @contact, url: confirm_contacts_path, local: true, method: :post do |f| %>
+            <div class="contact-form">
+              <div class="correct-text-field pt-3">
+                <div class="d-flex flex-row">
+                  <%= f.label "お名前" %>
+                  <p class="bg-danger text-light pl-1 pr-1 ml-1">必須</p>
+                </div>
+                <%= f.text_field :name, placeholder: "お名前", required: true, class: "form-control" %>
               </div>
-              <div class="register-btn">
-                <%= link_to "もどる", root_path, class:"register-red-btn", style:"background-color: #aaa" %>
+              <div class="correct-text-field pt-3">
+                <div class="d-flex flex-row">
+                  <%= f.label "メールアドレス" %>
+                  <p class="bg-danger text-light pl-1 pr-1 ml-1">必須</p>
+                </div>
+                <%= f.text_field :email, placeholder: "メールアドレス", required: true, class: "form-control" %>
+              </div>
+              <div class="correct-text-field pt-3">
+                <div class="d-flex flex-row">
+                  <%= f.label "ご用件" %>
+                  <p class="bg-danger text-light pl-1 pr-1 ml-1">必須</p>
+                </div>
+                <!--Contact.subjectsで要件のenumをハッシュの形で取得-->
+                <!--keysで取得したハッシュのキーを配列の形で取得。mapメソッドで新たに配列を生成。-->
+                <!--第二引数（with_index）で要素の添字を変数 i として取得。変数 i (数値)がvalueに渡される。-->
+                <!--t("enum.contact.subject.#{k}")→ja.ymlの表記の通りに翻訳するというメソッド-->
+                <%= f.select :subject, Contact.subjects.keys.map.with_index { |k| [t("enum.contact.subject.#{k}"), k] }, { include_blank: "選択してください" }, required: true, class: "prefecture-select form-control" %>
+              </div>
+              <div class="correct-text-field pt-3">
+                <div class="d-flex flex-row">
+                  <%= f.label "お問合せ内容" %>
+                  <p class="bg-danger text-light pl-1 pr-1 ml-1">必須</p>
+                </div>
+                <%= f.text_area :message, placeholder: "お問合せ内容を入力してください", required: true, class: "form-control", rows: "5" %>
+              </div>
+              <div class="send-btn-contents">
+                <div class="register-btn pt-3">
+                  <%= f.submit "送信内容を確認する", class: "btn btn-primary form-control" %>
+                </div>
               </div>
             </div>
+          <% end %>
         </div>
-        </div>
-<% end %>
+    </div>
 </div>

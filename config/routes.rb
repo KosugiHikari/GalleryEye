@@ -52,6 +52,12 @@ Rails.application.routes.draw do
     # searches
     get 'search' => 'searches#search'
 
+    # contacts
+    resource :contacts, only: [:new, :create] do
+      post :confirm
+      post :back
+    end
+
   end
 
 
