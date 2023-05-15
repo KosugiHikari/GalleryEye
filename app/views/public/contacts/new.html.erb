@@ -3,7 +3,7 @@
   <%= render "public/shared/error_messages", resource: @contact %>
     <div class="row d-flex justify-content-center">
         <div class="col-6">
-          <%= form_with model: @contact, url: confirm_contacts_path, local: true, method: :post do |f| %>
+          <%= form_with model: @contact, local: true, method: :post do |f| %>
             <div class="contact-form">
               <div class="correct-text-field pt-3">
                 <div class="d-flex flex-row">
@@ -39,7 +39,7 @@
               </div>
               <div class="send-btn-contents">
                 <div class="register-btn pt-3">
-                  <%= f.submit "送信内容を確認する", class: "btn btn-primary form-control" %>
+                  <%= f.submit "送信", class: "btn btn-primary form-control" %>
                 </div>
               </div>
             </div>

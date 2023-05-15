@@ -1,5 +1,5 @@
 class Public::ContactsController < ApplicationController
-  before_action :set_contact, only: [:confirm, :back, :create]
+  before_action :set_contact, only: [:back, :create]
 
   def new
     @contact = Contact.new
@@ -7,21 +7,23 @@ class Public::ContactsController < ApplicationController
 
   # 確認画面
   def confirm
-    if @contact.invalid?
-      render :new
+    if params[:contact].nil?
+      redirect_to new_contacts_path
+    else
+      set_contact
     end
   end
 
   # 入力内容に誤りがあった場合、入力内容を保持したまま前のページに戻る
   def back
-    render :new
+    redirect_to new_contacts_path
   end
 
   def create
     if @contact.save
       ContactMailer.contact_mail(@contact).deliver
       ContactMailer.send_mail(@contact).deliver_now
-      redirect_to root_path, notice: 'お問い合わせ内容を送信しました'
+      redirect_to root_path, notice: 'お問い合わせを承りました。ご入力いただいたメールアドレス宛にお問い合わせ内容確認のメールを送信しておりますので、合わせてご確認ください。'
     else
       render :new
     end

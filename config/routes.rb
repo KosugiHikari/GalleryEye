@@ -55,7 +55,9 @@ Rails.application.routes.draw do
     # contacts
     resource :contacts, only: [:new, :create] do
       post :confirm
+      get :confirm
       post :back
+      get :back
     end
 
   end
