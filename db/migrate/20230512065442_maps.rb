@@ -1,5 +1,5 @@
 class Maps < ActiveRecord::Migration[6.1]
   def change
-    drop_table :maps
+    #drop_table :maps
   end
 end
