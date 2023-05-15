@@ -20,9 +20,10 @@ users = User.create!(
 
 posts = Post.create!(
   [
-    {art_exhibition_name: '日本画展', gallery_name: '都立美術館', start_date: '2023-01-01', end_date: '2023-04-30', admission: 1000, holding_area: 13, address: '東京都中央区明石町695-7', shooting_availability: 1, tag_list: '東京,美術館', point: '有名作品以外も多数', body: 'とにかく行ってほしい', user_id: users[0].id },
-    {art_exhibition_name: 'ガラス工芸品展', gallery_name: '県立美術館', start_date: '2023-05-01', end_date: '2023-08-31', admission: 800, holding_area: 12, address: '千葉県千葉市中央区南町2-232-19', shooting_availability: 2, tag_list: '美術館,千葉,ガラス工芸品', point: '芸術的な作品', body: 'おすすめです', user_id: users[1].id },
-    {art_exhibition_name: '世界の名画展', gallery_name: '都立美術館', start_date: '2023-06-01', end_date: '2023-09-30', admission: 900, holding_area: 13, address: '東京都中央区明石町695-7', shooting_availability: 1, tag_list: '東京,美術館,名画', point: '圧倒されます', body: '興味がない人にも行ってほしい', user_id: users[2].id }
+    # File.open("#{Rails.root}/db/fixtures/sample-post1.jpg")はrefile用の画像挿入の記述方法
+    {post_image: File.open("#{Rails.root}/db/fixtures/sample-post1.jpg"), art_exhibition_name: '日本画展', gallery_name: '都立美術館', start_date: '2023-01-01', end_date: '2023-04-30', admission: 1000, holding_area: 13, address: '東京都中央区明石町695-7', shooting_availability: 1, tag_list: '東京,美術館', point: '有名作品以外も多数', body: 'とにかく行ってほしい', user_id: users[0].id },
+    {post_image: File.open("#{Rails.root}/db/fixtures/sample-post2.jpg"), art_exhibition_name: 'ガラス工芸品展', gallery_name: '県立美術館', start_date: '2023-05-01', end_date: '2023-08-31', admission: 800, holding_area: 12, address: '千葉県千葉市中央区南町2-232-19', shooting_availability: 2, tag_list: '美術館,千葉,ガラス工芸品', point: '芸術的な作品', body: 'おすすめです', user_id: users[1].id },
+    {post_image: File.open("#{Rails.root}/db/fixtures/sample-post3.jpg"), art_exhibition_name: '世界の名画展', gallery_name: '都立美術館', start_date: '2023-06-01', end_date: '2023-09-30', admission: 900, holding_area: 13, address: '東京都中央区明石町695-7', shooting_availability: 1, tag_list: '東京,美術館,名画', point: '圧倒されます', body: '興味がない人にも行ってほしい', user_id: users[2].id }
   ]
 )
 
