@@ -74,7 +74,7 @@
       <div class="d-flex justify-content-center border pb-3 mb-3">
         <!--日本地図から該当レビューへ遷移-->
         <!--deployするときに実行するassets:precompileによって本番環境ではパスが変更となるため、railsのasset_path関数を使うことでdigestを勝手に付与してくれる-->
-        <img src="<%= asset_path "map.png" %>" usemap="#ImageMap" alt="日本地図" />
+        <%= image_tag asset_path("map.png", alt: ""), usemap:"#ImageMap" %>
         <map name="ImageMap">
           <area shape="rect" coords="624,53,752,175" href="/posts/search?q%5Bholding_area_eq%5D=1%5D=&button=" alt="北海道" />
           <area shape="rect" coords="625,185,723,218" href="/posts/search?q%5Bholding_area_eq%5D=2%5D=&button=" alt="青森県" />
