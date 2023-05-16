@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-3 p-2">
       <div class="text-center">
-        <h4>絞り込み検索</h4>
+        <h4>レビューの絞り込み検索</h4>
       </div>
       <div class="border border-secondary">
         <%= search_form_for @q, url:search_posts_path do |f| %>
@@ -68,6 +68,63 @@
     </div>
 
     <div class="col-8 ml-4">
+
+      <h4>開催地域からレビューを検索</h4>
+      <p>都道府県名をクリックすると開催地域に該当するレビューを検索できます</p>
+      <div class="d-flex justify-content-center border pb-3 mb-3">
+        <!--日本地図から該当レビューへ遷移-->
+        <img src="assets/map.png" usemap="#ImageMap" alt="日本地図" />
+        <map name="ImageMap">
+          <area shape="rect" coords="624,53,752,175" href="/posts/search?q%5Bholding_area_eq%5D=1%5D=&button=" alt="北海道" />
+          <area shape="rect" coords="625,185,723,218" href="/posts/search?q%5Bholding_area_eq%5D=2%5D=&button=" alt="青森県" />
+          <area shape="rect" coords="674,223,723,257" href="/posts/search?q%5Bholding_area_eq%5D=3%5D=&button=" alt="岩手県" />
+          <area shape="rect" coords="675,261,721,295" href="/posts/search?q%5Bholding_area_eq%5D=4%5D=&button=" alt="宮城県" />
+          <area shape="rect" coords="623,222,673,257" href="/posts/search?q%5Bholding_area_eq%5D=5%5D=&button=" alt="秋田県" />
+          <area shape="rect" coords="625,259,675,294" href="/posts/search?q%5Bholding_area_eq%5D=6%5D=&button=" alt="山形県" />
+          <area shape="rect" coords="626,298,721,333" href="/posts/search?q%5Bholding_area_eq%5D=7%5D=&button=" alt="福島県" />
+          <area shape="rect" coords="674,374,722,408" href="/posts/search?q%5Bholding_area_eq%5D=8%5D=&button=" alt="茨城県" />
+          <area shape="rect" coords="674,336,722,370" href="/posts/search?q%5Bholding_area_eq%5D=9%5D=&button=" alt="栃木県" />
+          <area shape="rect" coords="624,336,672,370" href="/posts/search?q%5Bholding_area_eq%5D=10%5D=&button=" alt="群馬県" />
+          <area shape="rect" coords="624,374,672,408" href="/posts/search?q%5Bholding_area_eq%5D=11%5D=&button=" alt="埼玉県" />
+          <area shape="rect" coords="674,410,721,486" href="/posts/search?q%5Bholding_area_eq%5D=12%5D=&button=" alt="千葉県" />
+          <area shape="rect" coords="625,413,672,447" href="/posts/search?q%5Bholding_area_eq%5D=13%5D=&button=" alt="東京都" />
+          <area shape="rect" coords="625,450,672,484" href="/posts/search?q%5Bholding_area_eq%5D=14%5D=&button=" alt="神奈川県" />
+          <area shape="rect" coords="574,297,621,331" href="/posts/search?q%5Bholding_area_eq%5D=15%5D=&button=" alt="新潟県" />
+          <area shape="rect" coords="525,298,572,332" href="/posts/search?q%5Bholding_area_eq%5D=16%5D=&button=" alt="富山県" />
+          <area shape="rect" coords="474,298,521,332" href="/posts/search?q%5Bholding_area_eq%5D=17%5D=&button=" alt="石川県" />
+          <area shape="rect" coords="473,336,520,370" href="/posts/search?q%5Bholding_area_eq%5D=18%5D=&button=" alt="福井県" />
+          <area shape="rect" coords="573,412,620,446" href="/posts/search?q%5Bholding_area_eq%5D=19%5D=&button=" alt="山梨県" />
+          <area shape="rect" coords="576,336,622,409" href="/posts/search?q%5Bholding_area_eq%5D=20%5D=&button=" alt="長野県" />
+          <area shape="rect" coords="526,334,572,407" href="/posts/search?q%5Bholding_area_eq%5D=21%5D=&button=" alt="岐阜県" />
+          <area shape="rect" coords="576,451,620,485" href="/posts/search?q%5Bholding_area_eq%5D=22%5D=&button=" alt="静岡県" />
+          <area shape="rect" coords="527,412,571,446" href="/posts/search?q%5Bholding_area_eq%5D=23%5D=&button=" alt="愛知県" />
+          <area shape="rect" coords="477,412,521,446" href="/posts/search?q%5Bholding_area_eq%5D=24%5D=&button=" alt="三重県" />
+          <area shape="rect" coords="476,374,520,408" href="/posts/search?q%5Bholding_area_eq%5D=25%5D=&button=" alt="滋賀県" />
+          <area shape="rect" coords="427,374,471,408" href="/posts/search?q%5Bholding_area_eq%5D=26%5D=&button=" alt="京都府" />
+          <area shape="rect" coords="377,413,421,447" href="/posts/search?q%5Bholding_area_eq%5D=27%5D=&button=" alt="大阪府" />
+          <area shape="rect" coords="376,374,420,408" href="/posts/search?q%5Bholding_area_eq%5D=28%5D=&button=" alt="兵庫県" />
+          <area shape="rect" coords="426,413,470,447" href="/posts/search?q%5Bholding_area_eq%5D=29%5D=&button=" alt="奈良県" />
+          <area shape="rect" coords="377,451,471,485" href="/posts/search?q%5Bholding_area_eq%5D=30%5D=&button=" alt="和歌山県" />
+          <area shape="rect" coords="325,374,372,409" href="/posts/search?q%5Bholding_area_eq%5D=31%5D=&button=" alt="鳥取県" />
+          <area shape="rect" coords="275,374,322,409" href="/posts/search?q%5Bholding_area_eq%5D=32%5D=&button=" alt="島根県" />
+          <area shape="rect" coords="325,413,372,448" href="/posts/search?q%5Bholding_area_eq%5D=33%5D=&button=" alt="岡山県" />
+          <area shape="rect" coords="275,412,322,447" href="/posts/search?q%5Bholding_area_eq%5D=34%5D=&button=" alt="広島県" />
+          <area shape="rect" coords="225,373,272,450" href="/posts/search?q%5Bholding_area_eq%5D=35%5D=&button=" alt="山口県" />
+          <area shape="rect" coords="294,504,337,538" href="/posts/search?q%5Bholding_area_eq%5D=36%5D=&button=" alt="徳島県" />
+          <area shape="rect" coords="294,464,337,498" href="/posts/search?q%5Bholding_area_eq%5D=37%5D=&button=" alt="香川県" />
+          <area shape="rect" coords="245,464,288,498" href="/posts/search?q%5Bholding_area_eq%5D=38%5D=&button=" alt="愛媛県" />
+          <area shape="rect" coords="245,503,288,537" href="/posts/search?q%5Bholding_area_eq%5D=39%5D=&button=" alt="高知県" />
+          <area shape="rect" coords="113,374,156,408" href="/posts/search?q%5Bholding_area_eq%5D=40%5D=&button=" alt="福岡県" />
+          <area shape="rect" coords="61,373,107,411" href="/posts/search?q%5Bholding_area_eq%5D=41%5D=&button=" alt="佐賀県" />
+          <area shape="rect" coords="61,412,107,450" href="/posts/search?q%5Bholding_area_eq%5D=42%5D=&button=" alt="長崎県" />
+          <area shape="rect" coords="111,412,157,449" href="/posts/search?q%5Bholding_area_eq%5D=43%5D=&button=" alt="熊本県" />
+          <area shape="rect" coords="162,374,208,411" href="/posts/search?q%5Bholding_area_eq%5D=44%5D=&button=" alt="大分県" />
+          <area shape="rect" coords="162,413,209,486" href="/posts/search?q%5Bholding_area_eq%5D=45%5D=&button=" alt="宮崎県" />
+          <area shape="rect" coords="61,452,156,486" href="/posts/search?q%5Bholding_area_eq%5D=46%5D=&button=" alt="鹿児島県" />
+          <area shape="rect" coords="60,515,109,551" href="/posts/search?q%5Bholding_area_eq%5D=47%5D=&button=" alt="沖縄県" />
+        </map>
+      </div>
+
       <!--タブで投稿の新しい順・古い順・いいねが多い順に切り替え-->
       <ul class="nav nav-tabs nav-pills">
         <li class="nav-item">
