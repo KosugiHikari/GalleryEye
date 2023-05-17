@@ -47,3 +47,8 @@ body {
 .nav-pills .nav-link{
   color: #203744;
 }
+
+// マップフォーカス時のアウトラインの色
+.map area:focus {
+  outline-color: #000080;
+}
