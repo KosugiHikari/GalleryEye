@@ -1,7 +1,6 @@
 class Post < ApplicationRecord
 
-  #has_one_attached :post_image
-
+  # refileによる画像投稿
   attachment :post_image
 
   belongs_to :user, optional: true
