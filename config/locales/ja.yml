@@ -40,6 +40,8 @@ ja:
               too_long: "は５００文字以内で入力してください"
             holding_area:
               blank: "を選択してください"
+            admission:
+              greater_than_or_equal_to: "は0円以上を入力してください"
         user:
           attributes:
             email:
@@ -123,6 +125,7 @@ ja:
       user:
         invalid: "パスワードに誤りがあります"
         not_found_in_database: "入力されたユーザー情報が存在しません"
+        unauthenticated: "アクセスに失敗しました。ログイン後、再度アクセスをしてください。"
       admin:
         invalid: "パスワードに誤りがあります"
         not_found_in_database: "入力された管理者情報が存在しません"

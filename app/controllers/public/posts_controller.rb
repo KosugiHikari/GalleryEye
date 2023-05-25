@@ -50,9 +50,18 @@ class Public::PostsController < ApplicationController
     @comment = Comment.new
     # 投稿に紐付くタグの表示↓
     @tags = @post.tag_counts_on(:tags)
+
+    if @post.is_draft? && @post.user != current_user
+      redirect_to root_path, notice: 'このページにはアクセスできません'
+    end
   end
 
   def edit
+    if @post.user == current_user
+      render "edit"
+    else
+      redirect_to root_path, notice: 'このページにはアクセスできません'
+    end
   end
 
   def update

@@ -62,6 +62,8 @@
             <p class="text-primary"><i class="fas fa-check"></i>　半角数字を入力してください</p>
             <%= f.number_field :admission, placeholder: "入場料", class: "form-control" %>
             <p class="text-right">円</p>
+            <!--フォーム下に表示されるエラーメッセージ-->
+            <%= render 'error_messages', model: post, attribute: :admission %>
           </div>
 
           <!--開催地域選択-->

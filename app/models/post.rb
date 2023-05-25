@@ -62,6 +62,7 @@ class Post < ApplicationRecord
     end
   end
 
+  validates :admission, numericality: { greater_than_or_equal_to: 0 }
 
   # ログイン中のユーザーがその投稿に対していいねをしているかを判断するメソッド
   def liked?(user)

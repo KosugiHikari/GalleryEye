@@ -17,6 +17,9 @@ class Public::UsersController < ApplicationController
   end
 
   def edit
+    if @user = current_user
+      render "edit"
+    end
   end
 
   def update
